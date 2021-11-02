@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public float maxSpeed = 5;
-    public float acceleration = 1;
-    public float deceleration = 1;
     public float mouseSensitivity = .1f;
     public Camera playerCamera;
 
@@ -22,44 +19,61 @@ public class Player : Entity
         return inputMaster.Player.MouseMovement.ReadValue<Vector2>();
     }
 
-    protected override void Awake()
+	public override void MouseRotate(Vector2 mouseMovement)
 	{
+        rotation.y = Mathf.Clamp(rotation.y - mouseMovement.y, -90, 90);
+		base.MouseRotate(mouseMovement);
+    }
+
+	public override void CalculateRotation()
+	{
+		base.CalculateRotation();
+        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(rotation.y, 0, 0));
+    }
+
+	protected override void Awake()
+	{
+        base.Awake();
         inputMaster = new InputMaster();
-        rigidBody = GetComponent<Rigidbody>();
+        RegisterJump();
 	}
 
 	protected override void OnEnable()
 	{
+        base.OnEnable();
         inputMaster.Enable();
         LockMouse();
-
     }
 
 	protected override void OnDisable()
 	{
+        base.OnDisable();
         inputMaster.Disable();
         UnlockMouse();
     }
 
     protected override void Start()
     {
-        
+        base.Start();
     }
 
     protected override void Update()
     {
+        base.Update();
         MoveEntity();
     }
 
     protected override void MoveEntity()
 	{
         Vector2 movement = GetPlayerMovement();
-
-        rigidBody.AddForce(new Vector3(movement.x, 0, movement.y), ForceMode.Acceleration);
-
         Vector2 mouseMovement = GetMouseMovement() * mouseSensitivity;
 
-        playerCamera.transform.localRotation = playerCamera.transform.localRotation * Quaternion.AngleAxis(-mouseMovement.y, Vector3.right);
-        transform.rotation = transform.rotation * Quaternion.AngleAxis(mouseMovement.x, transform.up);
+        Move(movement);
+        MouseRotate(mouseMovement);
     }
+
+    protected virtual void RegisterJump()
+	{
+        inputMaster.Player.Jump.performed += _ => Jump();
+	}
 }
