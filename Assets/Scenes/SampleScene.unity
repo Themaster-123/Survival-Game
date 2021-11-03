@@ -254,11 +254,13 @@ MonoBehaviour:
   acceleration: 8
   deceleration: 8
   jumpStrength: 5
+  jumpCooldown: 0.1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
   groundedCheckDistance: 0.1
   enttiyCollider: {fileID: 461834953}
+  rotation: {x: 0, y: 0}
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}
 --- !u!1 &705507993

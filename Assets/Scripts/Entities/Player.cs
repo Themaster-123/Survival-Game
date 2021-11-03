@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
     public float mouseSensitivity = .1f;
+    [Header("Misc Settings")]
     public Camera playerCamera;
 
     protected InputMaster inputMaster;
@@ -21,21 +23,19 @@ public class Player : Entity
 
 	public override void MouseRotate(Vector2 mouseMovement)
 	{
-        rotation.y = Mathf.Clamp(rotation.y - mouseMovement.y, -90, 90);
 		base.MouseRotate(mouseMovement);
     }
 
-	public override void CalculateRotation()
+
+    public override void CalculateRotation()
 	{
-		base.CalculateRotation();
-        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(rotation.y, 0, 0));
+        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(rotation.y, rotation.x, 0));
     }
 
 	protected override void Awake()
 	{
         base.Awake();
         inputMaster = new InputMaster();
-        RegisterJump();
 	}
 
 	protected override void OnEnable()
@@ -61,6 +61,7 @@ public class Player : Entity
     {
         base.Update();
         MoveEntity();
+        CheckIsHoldingJump();
     }
 
     protected override void MoveEntity()
@@ -72,8 +73,12 @@ public class Player : Entity
         MouseRotate(mouseMovement);
     }
 
-    protected virtual void RegisterJump()
+    // jumps if the player is holding jump
+    protected virtual void CheckIsHoldingJump()
 	{
-        inputMaster.Player.Jump.performed += _ => Jump();
+        if (inputMaster.Player.Jump.ReadValue<float>() > .5f)
+		{
+            Jump();
+		}
 	}
 }
