@@ -2,8 +2,10 @@
 #pragma kernel CSMain
 
 #include "Packages/jp.keijiro.noiseshader/Shader/ClassicNoise2D.hlsl"
-#include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
 #include "Packages/jp.keijiro.noiseshader/Shader/ClassicNoise3D.hlsl"
+#include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
+#include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise3D.hlsl"
+#include "Assets/Compute Shaders/Noise/noise4D.hlsl"
 
 struct Voxel 
 {
@@ -20,6 +22,7 @@ float3 Size;
 uint Octaves;
 float Lacunarity;
 float Persistence;
+float Seed;
 float4 _Time;
 
 #define ITERATION (1u << 0)
@@ -34,11 +37,11 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     uint index = id.x + Resolution * (id.y + Resolution * id.z);
 
     for (uint i = 0; i < Octaves; i++) {
-        val += (ClassicNoise(float3(id.xyz) / Resolution * Size * freq + Offset)) * persis;
+        val += (snoise(float4(float3(id.xyz) / Resolution * Size * freq + Offset, Seed))) * persis;
 
         freq *= Lacunarity;
         persis *= Persistence;
     }
 
-    Result[index] = val / 2.0f + .5f;
+    Result[index] = val;
 }

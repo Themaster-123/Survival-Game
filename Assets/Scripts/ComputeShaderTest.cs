@@ -13,6 +13,7 @@ public class ComputeShaderTest : MonoBehaviour
     public uint octaves;
     public float lacunarity;
     public float persistence;
+    public float seed;
 
     protected float[] voxelData;
     ComputeBuffer voxelDataBuffer;
@@ -98,6 +99,7 @@ public class ComputeShaderTest : MonoBehaviour
         shader.SetInt("Octaves", (int)octaves);
         shader.SetFloat("Lacunarity", lacunarity);
         shader.SetFloat("Persistence", persistence);
+        shader.SetFloat("Seed", seed);
         shader.Dispatch(0, resolution, resolution, resolution);
     }
 
@@ -107,7 +109,7 @@ public class ComputeShaderTest : MonoBehaviour
 
         for (int i = 0; i < voxelData.Length; i++)
         {
-            byte value = (byte)(Mathf.Clamp(voxelData[i], 0, 1) * 255);
+            byte value = (byte)((Mathf.Clamp(voxelData[i], -1, 1) / 2.0f + .5f) * 255);
             colors[i] = new Color32(value, value, value, 255);
         }
         texture3d.SetPixels32(colors);
