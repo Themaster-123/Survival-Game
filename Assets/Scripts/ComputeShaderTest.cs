@@ -10,6 +10,9 @@ public class ComputeShaderTest : MonoBehaviour
     public int resolution;
     public Vector3 offset;
     public Vector3 size = new Vector3(1, 1, 1);
+    public uint octaves;
+    public float lacunarity;
+    public float persistence;
 
     protected float[] voxelData;
     ComputeBuffer voxelDataBuffer;
@@ -59,15 +62,26 @@ public class ComputeShaderTest : MonoBehaviour
 
     }
 
-    // creates the buffer if VoxelData length changed and set the buffer data to voxel data array
-    protected virtual void UpdateBuffer()
+	protected void OnValidate()
 	{
+        octaves = System.Math.Max(octaves, 1);
+	}
+
+	// creates the buffer if VoxelData length changed and set the buffer data to voxel data array
+	protected virtual void UpdateBuffer()
+	{
+        if (voxelData == null)
+        {
+            InitiateVoxels();
+        }
+
         if (voxelDataBuffer == null || voxelData.Length != voxelDataBuffer.count)
 		{
             if (voxelDataBuffer != null)
 			{
                 voxelDataBuffer.Dispose();
             }
+
             voxelDataBuffer = new ComputeBuffer(voxelData.Length, sizeof(float));
         }
         voxelDataBuffer.SetData(voxelData);
@@ -81,6 +95,9 @@ public class ComputeShaderTest : MonoBehaviour
         shader.SetVector("_Time", Shader.GetGlobalVector("_Time"));
         shader.SetVector("Offset", offset);
         shader.SetVector("Size", size);
+        shader.SetInt("Octaves", (int)octaves);
+        shader.SetFloat("Lacunarity", lacunarity);
+        shader.SetFloat("Persistence", persistence);
         shader.Dispatch(0, resolution, resolution, resolution);
     }
 
@@ -90,7 +107,7 @@ public class ComputeShaderTest : MonoBehaviour
 
         for (int i = 0; i < voxelData.Length; i++)
         {
-            byte value = (byte)(voxelData[i] * 255);
+            byte value = (byte)(Mathf.Clamp(voxelData[i], 0, 1) * 255);
             colors[i] = new Color32(value, value, value, 255);
         }
         texture3d.SetPixels32(colors);

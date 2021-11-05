@@ -17,9 +17,9 @@ RWStructuredBuffer<float> Result;
 uint Resolution;
 float3 Offset;
 float3 Size;
-uint octaves;
-float lacunarity;
-float persistence;
+uint Octaves;
+float Lacunarity;
+float Persistence;
 float4 _Time;
 
 #define ITERATION (1u << 0)
@@ -28,10 +28,17 @@ float4 _Time;
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
     float val = 0;
+    float persis = 1;
+    float freq = 1;
 
     uint index = id.x + Resolution * (id.y + Resolution * id.z);
 
-    val = abs(ClassicNoise(float3(id.xyz) / Resolution * Size + Offset));
+    for (uint i = 0; i < Octaves; i++) {
+        val += (ClassicNoise(float3(id.xyz) / Resolution * Size * freq + Offset)) * persis;
 
-    Result[index] = val;
+        freq *= Lacunarity;
+        persis *= Persistence;
+    }
+
+    Result[index] = val / 2.0f + .5f;
 }
