@@ -17,6 +17,9 @@ RWStructuredBuffer<float> Result;
 uint Resolution;
 float3 Offset;
 float3 Size;
+uint octaves;
+float lacunarity;
+float persistence;
 float4 _Time;
 
 #define ITERATION (1u << 0)

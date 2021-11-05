@@ -71,9 +71,9 @@ public class Entity : MonoBehaviour
 
         Vector3 accel = velocityChange;
 
-        accel = Vector3.ClampMagnitude(accel, maxAccel);
+        accel = Vector3.ClampMagnitude(accel, maxAccel * Time.deltaTime);
 
-        rigidBody.AddForce(accel, ForceMode.Acceleration);
+        rigidBody.AddForce(accel, ForceMode.VelocityChange);
     }
 
     // rotates the entity using mouse movements

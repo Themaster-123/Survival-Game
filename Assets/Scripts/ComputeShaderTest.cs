@@ -31,6 +31,7 @@ public class ComputeShaderTest : MonoBehaviour
         if (texture3d == null)
         {
             texture3d = new Texture3D(resolution, resolution, resolution, TextureFormat.RGBA32, false);
+            texture3d.filterMode = FilterMode.Point;
         }
 
         UpdateBuffer();
