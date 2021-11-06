@@ -1,21 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
+using System;
 
-public class ComputeShaderTest : MonoBehaviour
+public class GpuNoise : MonoBehaviour
 {
+    [SerializeField, HideInInspector]
     public ComputeShader shader;
     public Texture3D texture3d;
     [Header("Settings")]
-    public int resolution;
+    public int resolution = 32;
     public Vector3 offset;
     public Vector3 size = new Vector3(1, 1, 1);
-    public uint octaves;
-    public float lacunarity;
-    public float persistence;
+    public uint octaves = 4;
+    public float lacunarity = 2;
+    public float persistence = .5f;
     public float seed;
 
-    protected float[] voxelData;
+    [NonSerialized]
+    public float[] voxelData;
     ComputeBuffer voxelDataBuffer;
 
 
@@ -45,6 +49,7 @@ public class ComputeShaderTest : MonoBehaviour
         voxelDataBuffer.GetData(voxelData);
 
         SetVoxelDataTexture();
+
     }
 
     protected virtual void Start()
@@ -58,11 +63,6 @@ public class ComputeShaderTest : MonoBehaviour
         voxelDataBuffer.Dispose();
 	}
 
-	protected virtual void Update()
-    {
-
-    }
-
 	protected void OnValidate()
 	{
         octaves = System.Math.Max(octaves, 1);
@@ -73,6 +73,7 @@ public class ComputeShaderTest : MonoBehaviour
 	{
         if (voxelData == null)
         {
+            
             InitiateVoxels();
         }
 
@@ -103,13 +104,14 @@ public class ComputeShaderTest : MonoBehaviour
         shader.Dispatch(0, resolution, resolution, resolution);
     }
 
+    // updates the 3d texture
     protected virtual void SetVoxelDataTexture()
 	{
         Color32[] colors = new Color32[resolution * resolution * resolution];
 
         for (int i = 0; i < voxelData.Length; i++)
         {
-            byte value = (byte)((Mathf.Clamp(voxelData[i], -1, 1) / 2.0f + .5f) * 255);
+            byte value = (byte)((Mathf.Clamp(voxelData[i], -1, 1) / 2 + .5f) * 255);
             colors[i] = new Color32(value, value, value, 255);
         }
         texture3d.SetPixels32(colors);
