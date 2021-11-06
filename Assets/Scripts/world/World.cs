@@ -15,7 +15,7 @@ public class World : MonoBehaviour
             GameObject chunkObject = new GameObject(chunkPosition.ToString());
             chunkObject.transform.parent = transform;
             Chunk chunk = chunkObject.AddComponent<Chunk>();
-            chunk.InitiateChunk(chunkPosition);
+            chunk.InitiateChunk(chunkPosition, this);
             chunks.Add(chunkPosition, chunk);
 		}
 	}
