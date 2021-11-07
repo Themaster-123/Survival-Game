@@ -382,18 +382,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 833675758}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6644c674feba343ab15b4c48997f6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 535de484c862309458650fff724dfa17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shader: {fileID: 7200000, guid: 83399396d095de94d9bc094382edf60d, type: 3}
   texture3d: {fileID: 0}
-  resolution: 32
-  offset: {x: 0, y: 0, z: 0}
-  size: {x: 4, y: 4, z: 4}
-  octaves: 4
-  lacunarity: 2
-  persistence: 0.5
-  seed: 0
+  settings: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
 --- !u!4 &833675760
 Transform:
   m_ObjectHideFlags: 0

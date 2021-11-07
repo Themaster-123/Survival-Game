@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60ee4567fea81548ab605fa73153365, type: 3}
   m_Name: World Noise Settings
   m_EditorClassIdentifier: 
+  noiseShader: {fileID: 7200000, guid: 83399396d095de94d9bc094382edf60d, type: 3}
   resolution: 32
   offset: {x: 0, y: 0, z: 0}
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 4, y: 4, z: 4}
   octaves: 4
   lacunarity: 2
   persistence: 0.5
