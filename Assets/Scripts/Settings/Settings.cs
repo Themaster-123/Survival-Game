@@ -6,7 +6,7 @@ public class Settings : MonoBehaviour
 {
 	public static Settings Instance { get; protected set; }
 
-	public int ChunkLoadDistance;
+	public uint ChunkLoadDistance;
 
 	protected void Awake()
 	{

@@ -14,9 +14,11 @@ public class Entity : MonoBehaviour
     public LayerMask groundLayers;
     public float groundedCheckDistance = .03f;
     public CapsuleCollider enttiyCollider;
-
     [HideInInspector]
     public Vector2 rotation;
+
+    [Header("Misc")]
+    public World world;
 
     protected Rigidbody rigidBody;
     protected float jumpTime;
@@ -108,6 +110,41 @@ public class Entity : MonoBehaviour
         return transform.rotation * Quaternion.Euler(rotation.y, rotation.x, 0);
 	}
 
+    // converts position to Chunk Position
+    public virtual Vector3Int GetChunkPosition()
+	{
+        Vector3Int chunkPosition = Vector3Int.zero;
+
+        if (transform.position.x > 0)
+        {
+            chunkPosition.x = (int)(transform.position.x / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.x = (int)Mathf.Floor(transform.position.x / world.worldSettings.ChunkSize);
+        }
+
+        if (transform.position.y > 0)
+        {
+            chunkPosition.y = (int)(transform.position.y / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.y = (int)Mathf.Floor(transform.position.y / world.worldSettings.ChunkSize);
+        }
+
+        if (transform.position.z > 0)
+        {
+            chunkPosition.z = (int)(transform.position.z / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.z = (int)Mathf.Floor(transform.position.z / world.worldSettings.ChunkSize);
+        }
+
+        return chunkPosition;
+    }
+
     protected virtual void Awake()
     {
         GetComponents();
@@ -116,10 +153,12 @@ public class Entity : MonoBehaviour
     protected virtual void OnEnable()
     {
         jumpTime = Time.time;
+        AddEntityToWorld();
     }
 
     protected virtual void OnDisable()
     {
+        RemoveEntityFromWorld();
     }
 
 
@@ -139,5 +178,16 @@ public class Entity : MonoBehaviour
     protected virtual void GetComponents()
 	{
         rigidBody = GetComponent<Rigidbody>();
+    }
+
+    // adds the entity to entites list in the current world
+    protected virtual void AddEntityToWorld()
+	{
+        world.AddEntity(this);
+	}
+
+    protected virtual void RemoveEntityFromWorld()
+    {
+        world.RemoveEntity(this);
     }
 }

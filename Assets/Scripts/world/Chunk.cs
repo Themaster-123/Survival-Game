@@ -9,6 +9,7 @@ public class Chunk : MonoBehaviour
     public Vector3Int position;
     public World world;
 
+    protected MeshCollider meshCollider;
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
 
@@ -61,14 +62,15 @@ public class Chunk : MonoBehaviour
     protected virtual void GetComponents()
 	{
         meshFilter = GetComponent<MeshFilter>();
+        meshCollider = GetComponent<MeshCollider>();
 	}
 
 	// creates mesh off of voxel data
 	protected virtual void CreateMesh()
 	{
         Mesh chunkMesh = new Mesh();
-        print(meshFilter);
         meshFilter.mesh = chunkMesh;
+        meshCollider.sharedMesh = chunkMesh;
 
 		MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution + 1), .5f, voxels, out Vector3[] vertices, out int[] triangles);
 

@@ -81,4 +81,16 @@ public class Player : Entity
             Jump();
 		}
 	}
+
+	protected override void AddEntityToWorld()
+	{
+		base.AddEntityToWorld();
+        world.AddPlayer(this);
+	}
+
+	protected override void RemoveEntityFromWorld()
+	{
+		base.RemoveEntityFromWorld();
+        world.RemovePlayer(this);
+	}
 }
