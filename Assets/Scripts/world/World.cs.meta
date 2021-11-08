@@ -3,7 +3,10 @@ guid: 18d1b3c99f0ed194d9df16f4236860d0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - noiseSettings: {instanceID: 0}
+  - worldSettings: {instanceID: 0}
+  - chunkPrefab: {fileID: 8631612681894592453, guid: e38662d10b0d5ae429bc4af56b005317, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

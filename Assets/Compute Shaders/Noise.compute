@@ -37,7 +37,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     uint index = id.x + Resolution * (id.y + Resolution * id.z);
 
     for (uint i = 0; i < Octaves; i++) {
-        val += (snoise(float4(float3(id.xyz) / Resolution * Size * freq + Offset, Seed))) * persis;
+        val += (snoise(float4(((float3(id.xyz) + Offset) / Resolution) * Size * freq, Seed))) * persis;
 
         freq *= Lacunarity;
         persis *= Persistence;

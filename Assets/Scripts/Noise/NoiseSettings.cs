@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-
-[CreateAssetMenu(fileName = "Noise Settings", menuName = "Survival Game/Noise Settings")]
-public class NoiseSettings : ScriptableObject
+[Serializable]
+public struct NoiseSettings
 {
-    public ComputeShader noiseShader;
-    public int resolution = 32;
+    public NoiseSettingsObject settingsObject;
+    public int resolution;
     public Vector3 offset;
-    public Vector3 size = new Vector3(1, 1, 1);
-    public uint octaves = 4;
-    public float lacunarity = 2;
-    public float persistence = .5f;
+    public Vector3 size;
     public float seed;
 
-    protected void OnValidate()
-    {
-        octaves = System.Math.Max(octaves, 1);
-    }
+    public NoiseSettings(NoiseSettingsObject settingsObject, int resolution, Vector3 offset, Vector3 size, float seed)
+	{
+        this.settingsObject = settingsObject;
+        this.resolution = resolution;
+        this.offset = offset;
+        this.size = size;
+        this.seed = seed;
+	}
 }

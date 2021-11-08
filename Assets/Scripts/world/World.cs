@@ -6,15 +6,20 @@ using System;
 [AddComponentMenu("Survival Game/World/World")]
 public class World : MonoBehaviour
 {
+    public WorldSettings worldSettings;
+    public NoiseSettings noiseSettings;
+    public GameObject chunkPrefab;
+
     protected Dictionary<Vector3Int, Chunk> chunks = new Dictionary<Vector3Int, Chunk>();
 
     public void LoadChunk(Vector3Int chunkPosition)
 	{
         if (!IsChunkLoaded(chunkPosition))
 		{
-            GameObject chunkObject = new GameObject(chunkPosition.ToString());
+            GameObject chunkObject = Instantiate(chunkPrefab);
             chunkObject.transform.parent = transform;
-            Chunk chunk = chunkObject.AddComponent<Chunk>();
+            chunkObject.name = chunkPosition.ToString();
+            Chunk chunk = chunkObject.GetComponent<Chunk>();
             chunk.InitiateChunk(chunkPosition, this);
             chunks.Add(chunkPosition, chunk);
 		}
@@ -32,12 +37,19 @@ public class World : MonoBehaviour
         LoadChunk(new Vector3Int(1, 0, 0));
         LoadChunk(new Vector3Int(0, 0, 1));
         LoadChunk(new Vector3Int(1, 0, 1));
+        LoadChunk(new Vector3Int(2, 0, 2));
+        LoadChunk(new Vector3Int(3, 0, 2));
+        LoadChunk(new Vector3Int(2, 0, 3));
+        LoadChunk(new Vector3Int(3, 0, 2));
+        LoadChunk(new Vector3Int(4, 0, 2));
+        LoadChunk(new Vector3Int(5, 0, 4));
+        LoadChunk(new Vector3Int(4, 0, 5));
+        LoadChunk(new Vector3Int(5, 0, 4));
 
     }
 
-    // Update is called once per frame
-    protected void Update()
-    {
-        
-    }
+	protected virtual void OnValidate()
+	{
+        noiseSettings.resolution = worldSettings.ChunkResolution + 1;
+	}
 }

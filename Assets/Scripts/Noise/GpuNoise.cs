@@ -6,7 +6,6 @@ using System;
 
 public class GpuNoise
 {
-
     public static float[] GenerateNoise(NoiseSettings settings)
 	{
         float[] voxelData = InitiateVoxels(settings);
@@ -42,15 +41,15 @@ public class GpuNoise
     // dispatches the compute shader
     protected static void DispatchShader(NoiseSettings settings, in float[] voxelData, in ComputeBuffer voxelDataBuffer)
 	{
-        settings.noiseShader.SetBuffer(0, "Result", voxelDataBuffer);
-        settings.noiseShader.SetInt("Resolution", settings.resolution);
-        settings.noiseShader.SetVector("_Time", Shader.GetGlobalVector("_Time"));
-        settings.noiseShader.SetVector("Offset", settings.offset);
-        settings.noiseShader.SetVector("Size", settings.size);
-        settings.noiseShader.SetInt("Octaves", (int)settings.octaves);
-        settings.noiseShader.SetFloat("Lacunarity", settings.lacunarity);
-        settings.noiseShader.SetFloat("Persistence", settings.persistence);
-        settings.noiseShader.SetFloat("Seed", settings.seed);
-        settings.noiseShader.Dispatch(0, settings.resolution, settings.resolution, settings.resolution);
+        settings.settingsObject.noiseShader.SetBuffer(0, "Result", voxelDataBuffer);
+        settings.settingsObject.noiseShader.SetInt("Resolution", settings.resolution);
+        settings.settingsObject.noiseShader.SetVector("_Time", Shader.GetGlobalVector("_Time"));
+        settings.settingsObject.noiseShader.SetVector("Offset", settings.offset);
+        settings.settingsObject.noiseShader.SetVector("Size", settings.size);
+        settings.settingsObject.noiseShader.SetInt("Octaves", (int)settings.settingsObject.octaves);
+        settings.settingsObject.noiseShader.SetFloat("Lacunarity", settings.settingsObject.lacunarity);
+        settings.settingsObject.noiseShader.SetFloat("Persistence", settings.settingsObject.persistence);
+        settings.settingsObject.noiseShader.SetFloat("Seed", settings.seed);
+        settings.settingsObject.noiseShader.Dispatch(0, settings.resolution, settings.resolution, settings.resolution);
     }
 }

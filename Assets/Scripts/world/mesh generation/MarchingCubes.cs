@@ -296,7 +296,7 @@ public class MarchingCubes
 {0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1} };
 
-    static void GenerateMesh(Vector3Int resolution, Vector3 size, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
+    public static void GenerateMesh(Vector3Int resolution, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
 	{
 		Voxel getVoxel(Vector3Int position, in Voxel[] voxels)
 		{
@@ -314,7 +314,7 @@ public class MarchingCubes
 				{
 					Vector3Int position = new Vector3Int(x, y, z);
 
-					TriangulateCell(size, isoLevel, 
+					TriangulateCell(isoLevel, 
 						getVoxel(position + new Vector3Int(1, 0, 0), voxels), 
 						getVoxel(position + new Vector3Int(1, 0, 1), voxels), 
 						getVoxel(position + new Vector3Int(0, 0, 1), voxels),
@@ -331,7 +331,7 @@ public class MarchingCubes
 		triangles = trianglesList.ToArray();
 	}
 
-	static void TriangulateCell(Vector3 size, float isoLevel, in Voxel voxel0, in Voxel voxel1, in Voxel voxel2, in Voxel voxel3, in Voxel voxel4, in Voxel voxel5, in Voxel voxel6, in Voxel voxel7, List<Vector3> vertices, 
+	protected static void TriangulateCell(float isoLevel, in Voxel voxel0, in Voxel voxel1, in Voxel voxel2, in Voxel voxel3, in Voxel voxel4, in Voxel voxel5, in Voxel voxel6, in Voxel voxel7, List<Vector3> vertices, 
 		List<int> triangles)
 	{
 		int cubeIndex = 0;
@@ -373,7 +373,7 @@ public class MarchingCubes
 		}
 	}
 
-	static Vector3 InterpolateVertexPosition(in Voxel voxel0, in Voxel voxel1, float isoLevel)
+	protected static Vector3 InterpolateVertexPosition(in Voxel voxel0, in Voxel voxel1, float isoLevel)
 	{
 		Vector3 pos = Vector3.zero;
 
