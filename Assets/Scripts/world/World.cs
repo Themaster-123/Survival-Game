@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Jobs;
+using Unity.Burst;
+using Unity.Collections;
 
 [AddComponentMenu("Survival Game/World/World")]
 public class World : MonoBehaviour
@@ -76,7 +79,6 @@ public class World : MonoBehaviour
 	{
 		foreach (Player player in Players)
 		{
-			print(player.GetChunkPosition());
 			LoadClosestUnloadedChunk(player.GetChunkPosition());
 		}
 	}
@@ -155,5 +157,16 @@ public class World : MonoBehaviour
 
 		return traversedChunks;
 
+	}
+
+	[BurstCompile(CompileSynchronously = true)]
+	protected struct WorldGenerationJob : IJob
+	{
+		[WriteOnly] NativeHashMap<int, ChunkData> chunks;
+		public void Execute()
+		{
+
+			
+		}
 	}
 }

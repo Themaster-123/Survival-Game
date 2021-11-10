@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: World Noise Settings
   m_EditorClassIdentifier: 
   noiseShader: {fileID: 7200000, guid: 83399396d095de94d9bc094382edf60d, type: 3}
-  octaves: 4
+  octaves: 1
   lacunarity: 2
   persistence: 0.5

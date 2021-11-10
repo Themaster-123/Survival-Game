@@ -389,7 +389,7 @@ MonoBehaviour:
   texture3d: {fileID: 0}
   settings:
     settingsObject: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
-    resolution: 32
+    resolution: 256
     offset: {x: 0, y: 0, z: 0}
     size: {x: 1, y: 1, z: 1}
     seed: 0
