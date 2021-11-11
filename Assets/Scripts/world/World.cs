@@ -51,6 +51,11 @@ public class World : MonoBehaviour
             chunk.InitiateChunk(chunkPosition, this);
             chunks.Add(chunkPosition, chunk);
 		}
+	} 
+
+	public void LoadChunk(Vector3Int chunkPosition, Voxel[] voxels, Vector3[] vertices, int[] triangles)
+	{
+
 	}
 
     public bool IsChunkLoaded(Vector3Int chunkPosition)
@@ -159,14 +164,52 @@ public class World : MonoBehaviour
 
 	}
 
-	[BurstCompile(CompileSynchronously = true)]
-	protected struct WorldGenerationJob : IJob
+	//[BurstCompile(CompileSynchronously = true)]
+	protected struct WorldChunkStripJob : IJobParallelFor
 	{
-		[WriteOnly] NativeHashMap<int, ChunkData> chunks;
-		public void Execute()
-		{
+		public WorldSettings worldSettings;
+		public NoiseSettings noiseSettings;
+		[WriteOnly] public NativeHashMap<Vector3, ChunkData> chunks;
+		[ReadOnly] public NativeArray<Vector3Int> chunksToLoad;
 
-			
+		public void Execute(int i)
+		{
+			ChunkData chunkData = new ChunkData();
+			NoiseSettings settings = noiseSettings;
+			settings.offset += (Vector3)chunksToLoad[i] * worldSettings.ChunkResolution;
+
+			float[] voxelData = GpuNoise.GenerateNoise(settings);
+
+			chunkData.voxels = UpdateVoxels(voxelData);
+
+			MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution + 1), .5f, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
+
+			chunks.Add(chunksToLoad[i], chunkData);
+		}
+
+		private Voxel[] UpdateVoxels(in float[] voxelData)
+		{
+			Voxel[] voxels = new Voxel[voxelData.Length];
+
+			// i do this to fix the seam problem
+			int increasedResolution = worldSettings.ChunkResolution + 1;
+
+			for (int x = 0; x < increasedResolution; x++)
+			{
+				for (int y = 0; y < increasedResolution; y++)
+				{
+					for (int z = 0; z < increasedResolution; z++)
+					{
+						int index = x + increasedResolution * (y + increasedResolution * z);
+						Voxel voxel;
+						voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
+						voxel.value = voxelData[index];
+						voxels[index] = voxel;
+					}
+				}
+			}
+
+			return voxels;
 		}
 	}
 }

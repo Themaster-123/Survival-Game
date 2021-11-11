@@ -21,21 +21,11 @@ public class Chunk : MonoBehaviour
         NoiseSettings settings = world.noiseSettings;
         settings.offset += (Vector3)position * world.worldSettings.ChunkResolution;
 
-        float time = Time.realtimeSinceStartup;
-
         float[] voxelData = GpuNoise.GenerateNoise(settings);
 
         UpdateVoxels(voxelData);
 
-        print(Time.realtimeSinceStartup - time);
-
-
-        time = Time.realtimeSinceStartup;
-
         CreateMesh();
-
-        print(Time.realtimeSinceStartup - time);
-
 
         transform.position = (Vector3)position * world.worldSettings.ChunkSize;
     } 
