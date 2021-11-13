@@ -10,11 +10,13 @@ public struct ChunkData
     public Vector3[] vertices;
     public int[] triangles;
     public Voxel[] voxels;
+    public Vector3Int position;
 
-    public ChunkData(Vector3[] vertices, int[] triangles, Voxel[] voxels)
+    public ChunkData(in Vector3[] vertices, in int[] triangles, in Voxel[] voxels, Vector3Int position)
 	{
         this.vertices = vertices;
         this.triangles = triangles;
         this.voxels = voxels;
+        this.position = position;
 	}
 }

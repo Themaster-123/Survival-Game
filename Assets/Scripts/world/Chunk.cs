@@ -13,7 +13,7 @@ public class Chunk : MonoBehaviour
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
 
-    public void InitiateChunk(Vector3Int position, in World world)
+    public virtual void InitiateChunk(Vector3Int position, in World world)
 	{
         this.position = position;
         this.world = world;
@@ -27,8 +27,19 @@ public class Chunk : MonoBehaviour
 
         CreateMesh();
 
-        transform.position = (Vector3)position * world.worldSettings.ChunkSize;
+        UpdateTransform();
     } 
+
+    public virtual void InitiateChunk(Vector3Int position, in Voxel[] voxels, in Vector3[] vertices, in int[] triangles, in World world)
+	{
+        this.position = position;
+        this.world = world;
+        this.voxels = voxels;
+
+        UpdateMesh(vertices, triangles);
+
+        UpdateTransform();
+	}
 
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
@@ -83,5 +94,10 @@ public class Chunk : MonoBehaviour
         meshFilter.mesh.vertices = vertices;
         meshFilter.mesh.triangles = triangles;
         meshFilter.mesh.RecalculateNormals();
+    }
+
+    protected virtual void UpdateTransform()
+	{
+        transform.position = (Vector3)position * world.worldSettings.ChunkSize;
     }
 }

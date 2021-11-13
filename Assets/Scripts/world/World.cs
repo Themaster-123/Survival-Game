@@ -20,45 +20,47 @@ public class World : MonoBehaviour
 
 	protected Dictionary<Vector3Int, Chunk> chunks = new Dictionary<Vector3Int, Chunk>();
 
-	public void AddPlayer(Player player)
+	public virtual void AddPlayer(Player player)
 	{
 		Players.Add(player);
 	}
 
-	public void RemovePlayer(Player player)
+	public virtual void RemovePlayer(Player player)
 	{
 		Players.Remove(player);
 	}
 
-	public void AddEntity(Entity entity)
+	public virtual void AddEntity(Entity entity)
 	{
 		Entities.Add(entity);
 	}
 
-	public void RemoveEntity(Entity entity)
+	public virtual void RemoveEntity(Entity entity)
 	{
 		Entities.Remove(entity);
 	}
 
-	public void LoadChunk(Vector3Int chunkPosition)
+	public virtual void LoadChunk(Vector3Int chunkPosition)
 	{
         if (!IsChunkLoaded(chunkPosition))
 		{
-            GameObject chunkObject = Instantiate(chunkPrefab);
-            chunkObject.transform.parent = transform;
-            chunkObject.name = chunkPosition.ToString();
-            Chunk chunk = chunkObject.GetComponent<Chunk>();
+			Chunk chunk = CreateChunk(chunkPosition);
             chunk.InitiateChunk(chunkPosition, this);
             chunks.Add(chunkPosition, chunk);
 		}
-	} 
-
-	public void LoadChunk(Vector3Int chunkPosition, Voxel[] voxels, Vector3[] vertices, int[] triangles)
-	{
-
 	}
 
-    public bool IsChunkLoaded(Vector3Int chunkPosition)
+	public virtual void LoadChunk(Vector3Int chunkPosition, Voxel[] voxels, Vector3[] vertices, int[] triangles)
+	{
+		if (!IsChunkLoaded(chunkPosition))
+		{
+			Chunk chunk = CreateChunk(chunkPosition);
+			chunk.InitiateChunk(chunkPosition, voxels, vertices, triangles, this);
+			chunks.Add(chunkPosition, chunk);
+		}
+	}
+
+    public virtual bool IsChunkLoaded(Vector3Int chunkPosition)
 	{
         return chunks.ContainsKey(chunkPosition);
 	}
@@ -96,14 +98,53 @@ public class World : MonoBehaviour
 			closestChunks = GetClosestChunks(Settings.Instance.ChunkLoadDistance);
 		}
 
+		List<Vector3Int> chunksList = new List<Vector3Int>();
+
 		for (int i = 0; i < closestChunks.Length; i++)
 		{
 			Vector3Int chunkPosition = closestChunks[i] + position;
-			if (!IsChunkLoaded(chunkPosition))
+			for (int j = (int)-Settings.Instance.ChunkLoadDistance; j <= Settings.Instance.ChunkLoadDistance; j++)
 			{
-				LoadChunk(chunkPosition);
+				Vector3Int vertChunkPosition = chunkPosition + new Vector3Int(0, i, 0);
+				if (!IsChunkLoaded(vertChunkPosition))
+				{
+					chunksList.Add(vertChunkPosition);
+				}
+			}
+
+			if (chunksList.Count != 0)
+			{
 				break;
 			}
+		}
+
+		if (chunksList.Count != 0)
+		{
+			NativeArray<Vector3Int> chunksToLoad = new NativeArray<Vector3Int>(chunksList.Count, Allocator.TempJob);
+			NativeArray<ChunkData> result = new NativeArray<ChunkData>(chunksList.Count, Allocator.TempJob);
+
+			for (int i = 0; i < chunksList.Count; i++)
+			{
+				chunksToLoad[i] = chunksList[i];
+			}
+
+			WorldChunkStripJob jobData = new WorldChunkStripJob();
+			jobData.worldSettings = worldSettings;
+			jobData.noiseSettings = noiseSettings;
+			jobData.chunksToLoad = chunksToLoad;
+			jobData.result = result;
+
+			JobHandle handle = jobData.Schedule(result.Length, 1);
+			handle.Complete();
+
+			for (int i = 0; i < chunksToLoad.Length; i++)
+			{
+				ChunkData data = result[i];
+				LoadChunk(data.position, data.voxels, data.vertices, data.triangles);
+			}
+
+			chunksToLoad.Dispose();
+			result.Dispose();
 		}
 	}
 
@@ -111,6 +152,14 @@ public class World : MonoBehaviour
 	{
 		Players = new List<Player>();
 		Entities = new List<Entity>();
+	}
+
+	protected virtual Chunk CreateChunk(Vector3Int chunkPosition)
+	{
+		GameObject chunkObject = Instantiate(chunkPrefab);
+		chunkObject.transform.parent = transform;
+		chunkObject.name = chunkPosition.ToString();
+		return chunkObject.GetComponent<Chunk>();
 	}
 
     // gets closest chunk to load
@@ -136,7 +185,7 @@ public class World : MonoBehaviour
 
 			traversedChunks[traversedIndex] = offsetPos;
 
-			for (int j = 1; j <= chunkLoadDistance; j++)
+/*			for (int j = 1; j <= chunkLoadDistance; j++)
 			{
 				traversedIndex++;
 				traversedChunks[traversedIndex] = offsetPos + new Vector3Int(0, -j, 0);
@@ -145,7 +194,7 @@ public class World : MonoBehaviour
 			{
 				traversedIndex++;
 				traversedChunks[traversedIndex] = offsetPos + new Vector3Int(0, j, 0);
-			}
+			}*/
 
 			if (amountMoved == moveAmount)
 			{
@@ -169,7 +218,7 @@ public class World : MonoBehaviour
 	{
 		public WorldSettings worldSettings;
 		public NoiseSettings noiseSettings;
-		[WriteOnly] public NativeHashMap<Vector3, ChunkData> chunks;
+		[WriteOnly] public NativeArray<ChunkData> result;
 		[ReadOnly] public NativeArray<Vector3Int> chunksToLoad;
 
 		public void Execute(int i)
@@ -180,11 +229,13 @@ public class World : MonoBehaviour
 
 			float[] voxelData = GpuNoise.GenerateNoise(settings);
 
+			chunkData.position = chunksToLoad[i];
+
 			chunkData.voxels = UpdateVoxels(voxelData);
 
 			MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution + 1), .5f, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
 
-			chunks.Add(chunksToLoad[i], chunkData);
+			result[i] = chunkData;
 		}
 
 		private Voxel[] UpdateVoxels(in float[] voxelData)
