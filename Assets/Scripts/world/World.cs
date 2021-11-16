@@ -19,6 +19,7 @@ public class World : MonoBehaviour
 	protected Thread worldLoadThread;
 	protected Mutex playerListMutex;
 	protected List<ChunkData> chunkData;
+	protected List<Vector3Int> playerChunkPositions;
 
 	public List<Player> Players { get; protected set; }
 	public List<Entity> Entities { get; protected set; }
@@ -27,17 +28,19 @@ public class World : MonoBehaviour
 
 	public void AddPlayer(Player player)
 	{
-		lock(Players)
+		Players.Add(player);
+		lock (playerChunkPositions)
 		{
-			Players.Add(player);
+			playerChunkPositions.Add(player.GetChunkPosition());
 		}
 	}
 
 	public void RemovePlayer(Player player)
 	{
-		lock (Players)
+		Players.Remove(player);
+		lock (playerChunkPositions)
 		{
-			Players.Remove(player);
+			playerChunkPositions.Remove(player.GetChunkPosition());
 		}
 	}
 
@@ -66,7 +69,10 @@ public class World : MonoBehaviour
 
     public bool IsChunkLoaded(Vector3Int chunkPosition)
 	{
-        return chunks.ContainsKey(chunkPosition);
+		lock (chunks)
+		{
+			return chunks.ContainsKey(chunkPosition);
+		}
 	}
 
 	protected virtual void Awake()
@@ -96,7 +102,7 @@ public class World : MonoBehaviour
 
 	protected virtual void StartWorldLoadLoop()
 	{
-		worldLoadThread = new Thread(new ThreadStart(() => WorldLoadLoop()));
+		worldLoadThread = new Thread(new ThreadStart(WorldLoadLoop));
 		worldLoadThread.Start();
 		worldLoadThread.Name = "WORLD THREAD GO BRRR";
 	}
@@ -138,6 +144,7 @@ public class World : MonoBehaviour
 	{
 		Players = new List<Player>();
 		Entities = new List<Entity>();
+		playerChunkPositions = new List<Vector3Int>();
 	}
 
     // gets closest chunk to load
@@ -194,28 +201,31 @@ public class World : MonoBehaviour
 	// multithreaded world loading loop
 	protected void WorldLoadLoop()
 	{
-		uint oldSize = Settings.Instance.GetChunkLoadDistance();
-		int playerSize;
-		lock (Players)
+		while (true)
 		{
-			playerSize = Players.Count;
-		}
-		Vector3Int[] closestChunks = GetClosestChunks(oldSize);
-
-		for (int j = 0; j < playerSize; j++)
-		{
-			Vector3Int playerChunksPos;
-			lock(Players)
+			uint oldSize = Settings.Instance.GetChunkLoadDistance();
+			int playerSize;
+			lock (Players)
 			{
-				if (j >= Players.Count)
-				{
-					break;
-				}
-				playerChunksPos = Players[j].GetChunkPosition();
+				playerSize = Players.Count;
 			}
-			for (int i = 0; i < closestChunks.Length; i++)
-			{
+			Vector3Int[] closestChunks = GetClosestChunks(oldSize);
 
+			for (int j = 0; j < playerSize; j++)
+			{
+				Vector3Int playerChunksPos;
+				lock (Players)
+				{
+					if (j >= Players.Count)
+					{
+						break;
+					}
+					playerChunksPos = Players[j].GetChunkPosition();
+				}
+				for (int i = 0; i < closestChunks.Length; i++)
+				{
+					Vector3Int chunkPosition = closestChunks[i] + playerChunksPos;
+				}
 			}
 		}
 	}

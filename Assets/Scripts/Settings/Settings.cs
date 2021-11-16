@@ -24,6 +24,7 @@ public class Settings : MonoBehaviour
 		if (Instance == null)
 		{
 			Instance = this;
+			settingsMutex = new Mutex();
 			DontDestroyOnLoad(gameObject);
 		} else
 		{
