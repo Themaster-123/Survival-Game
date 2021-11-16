@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Threading;
 using Unity.Jobs;
 using Unity.Burst;
 using Unity.Collections;
@@ -15,6 +16,10 @@ public class World : MonoBehaviour
     public NoiseSettings noiseSettings;
     public GameObject chunkPrefab;
 
+	protected Thread worldLoadThread;
+	protected Mutex playerListMutex;
+	protected List<ChunkData> chunkData;
+
 	public List<Player> Players { get; protected set; }
 	public List<Entity> Entities { get; protected set; }
 
@@ -22,12 +27,18 @@ public class World : MonoBehaviour
 
 	public void AddPlayer(Player player)
 	{
-		Players.Add(player);
+		lock(Players)
+		{
+			Players.Add(player);
+		}
 	}
 
 	public void RemovePlayer(Player player)
 	{
-		Players.Remove(player);
+		lock (Players)
+		{
+			Players.Remove(player);
+		}
 	}
 
 	public void AddEntity(Entity entity)
@@ -63,15 +74,36 @@ public class World : MonoBehaviour
 		InitializeLists();
 	}
 
-    // Start is called before the first frame update
 	protected virtual void Update()
 	{
 		LoadChunksNearPlayers();
 	}
 
+	protected virtual void OnEnable()
+	{
+		StartWorldLoadLoop();
+	}
+
+	protected virtual void OnDisable()
+	{
+		DestroyWorldLoadLoop();
+	}
+
 	protected virtual void OnValidate()
 	{
         noiseSettings.resolution = worldSettings.ChunkResolution + 1;
+	}
+
+	protected virtual void StartWorldLoadLoop()
+	{
+		worldLoadThread = new Thread(new ThreadStart(() => WorldLoadLoop()));
+		worldLoadThread.Start();
+		worldLoadThread.Name = "WORLD THREAD GO BRRR";
+	}
+
+	protected virtual void DestroyWorldLoadLoop()
+	{
+		worldLoadThread.Abort();
 	}
 
 	// loops through all players and loads chunks
@@ -157,6 +189,35 @@ public class World : MonoBehaviour
 
 		return traversedChunks;
 
+	}
+
+	// multithreaded world loading loop
+	protected void WorldLoadLoop()
+	{
+		uint oldSize = Settings.Instance.GetChunkLoadDistance();
+		int playerSize;
+		lock (Players)
+		{
+			playerSize = Players.Count;
+		}
+		Vector3Int[] closestChunks = GetClosestChunks(oldSize);
+
+		for (int j = 0; j < playerSize; j++)
+		{
+			Vector3Int playerChunksPos;
+			lock(Players)
+			{
+				if (j >= Players.Count)
+				{
+					break;
+				}
+				playerChunksPos = Players[j].GetChunkPosition();
+			}
+			for (int i = 0; i < closestChunks.Length; i++)
+			{
+
+			}
+		}
 	}
 
 	[BurstCompile(CompileSynchronously = true)]

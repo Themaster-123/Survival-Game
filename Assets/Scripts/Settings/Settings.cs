@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Settings : MonoBehaviour
 {
@@ -8,7 +9,17 @@ public class Settings : MonoBehaviour
 
 	public uint ChunkLoadDistance;
 
-	protected void Awake()
+	protected Mutex settingsMutex;
+
+	public uint GetChunkLoadDistance()
+	{
+		settingsMutex.WaitOne();
+		uint returnValue = ChunkLoadDistance;
+		settingsMutex.ReleaseMutex();
+		return returnValue;
+	}
+
+	protected void Awake() 
 	{
 		if (Instance == null)
 		{
