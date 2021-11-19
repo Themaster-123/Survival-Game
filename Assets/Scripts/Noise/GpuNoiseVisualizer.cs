@@ -6,8 +6,10 @@ public class GpuNoiseVisualizer : MonoBehaviour
 {
     public Texture3D texture3d;
     public NoiseSettings settings;
+    protected string nodeTree;
+    protected FastNoise noise;
 
-	[ContextMenu("Generate Noise")]
+    [ContextMenu("Generate Noise")]
     public virtual void GenerateNoise()
     {
         if (texture3d == null)

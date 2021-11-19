@@ -37,31 +37,24 @@ public class Chunk : MonoBehaviour
         //print(Time.realtimeSinceStartup - time);
 
 
-        transform.position = (Vector3)position * world.worldSettings.ChunkSize;
-    } 
+        UpdateTransform();
+    }
+
+    public virtual void InitiateChunk(Vector3Int position, in Voxel[] voxels, in Vector3[] vertices, in int[] triangles, in World world)
+    {
+        this.position = position;
+        this.world = world;
+        this.voxels = voxels;
+
+        UpdateMesh(vertices, triangles);
+
+        UpdateTransform();
+    }
 
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
 	{
-        voxels = new Voxel[voxelData.Length];
-
-        // i do this to fix the seam problem
-        int increasedResolution = world.worldSettings.ChunkResolution + 1;
-
-        for (int x = 0; x < increasedResolution; x++)
-		{
-            for (int y = 0; y < increasedResolution; y++)
-            {
-                for (int z = 0; z < increasedResolution; z++)
-                {
-                    int index = x + increasedResolution * (y + increasedResolution * z);
-                    Voxel voxel;
-                    voxel.position = new Vector3(x, y, z) / world.worldSettings.ChunkResolution * world.worldSettings.ChunkSize;
-                    voxel.value = voxelData[index];
-                    voxels[index] = voxel;
-                }
-            }
-        }
+        voxels = GetVoxelsFromNoiseData(voxelData, world.worldSettings);
     }
 
 	protected virtual void Awake()
@@ -93,5 +86,35 @@ public class Chunk : MonoBehaviour
         meshFilter.mesh.vertices = vertices;
         meshFilter.mesh.triangles = triangles;
         meshFilter.mesh.RecalculateNormals();
+    }
+
+    protected virtual void UpdateTransform()
+    {
+        transform.position = (Vector3)position * world.worldSettings.ChunkSize;
+    }
+
+    public static Voxel[] GetVoxelsFromNoiseData(in float[] voxelData, in WorldSettings worldSettings)
+	{
+        Voxel[] voxels = new Voxel[voxelData.Length];
+
+        // i do this to fix the seam problem
+        int increasedResolution = worldSettings.ChunkResolution + 1;
+
+        for (int x = 0; x < increasedResolution; x++)
+        {
+            for (int y = 0; y < increasedResolution; y++)
+            {
+                for (int z = 0; z < increasedResolution; z++)
+                {
+                    int index = x + increasedResolution * (y + increasedResolution * z);
+                    Voxel voxel;
+                    voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
+                    voxel.value = voxelData[index];
+                    voxels[index] = voxel;
+                }
+            }
+        }
+
+        return voxels;
     }
 }

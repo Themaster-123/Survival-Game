@@ -16,10 +16,13 @@ public class World : MonoBehaviour
     public NoiseSettings noiseSettings;
     public GameObject chunkPrefab;
 
+	[SerializeField]
+	protected string nodeTree;
 	protected Thread worldLoadThread;
 	protected Mutex playerListMutex;
-	protected List<ChunkData> chunkData;
+	protected Dictionary<Vector3Int, ChunkData> chunkDataList;
 	protected List<Vector3Int> playerChunkPositions;
+	protected FastNoise noise;
 
 	public List<Player> Players { get; protected set; }
 	public List<Entity> Entities { get; protected set; }
@@ -58,16 +61,26 @@ public class World : MonoBehaviour
 	{
         if (!IsChunkLoaded(chunkPosition))
 		{
-            GameObject chunkObject = Instantiate(chunkPrefab);
-            chunkObject.transform.parent = transform;
-            chunkObject.name = chunkPosition.ToString();
-            Chunk chunk = chunkObject.GetComponent<Chunk>();
-            chunk.InitiateChunk(chunkPosition, this);
-            chunks.Add(chunkPosition, chunk);
+			Chunk chunk = CreateChunk(chunkPosition);
+			chunk.InitiateChunk(chunkPosition, this);
+			lock (chunks)
+			{
+				chunks.Add(chunkPosition, chunk);
+			}
 		}
 	}
 
-    public bool IsChunkLoaded(Vector3Int chunkPosition)
+	public virtual void LoadChunk(Vector3Int chunkPosition, in Voxel[] voxels, in Vector3[] vertices, in int[] triangles)
+	{
+		if (!IsChunkLoaded(chunkPosition))
+		{
+			Chunk chunk = CreateChunk(chunkPosition);
+			chunk.InitiateChunk(chunkPosition, voxels, vertices, triangles, this);
+			chunks.Add(chunkPosition, chunk);
+		}
+	}
+
+	public bool IsChunkLoaded(Vector3Int chunkPosition)
 	{
 		lock (chunks)
 		{
@@ -78,11 +91,13 @@ public class World : MonoBehaviour
 	protected virtual void Awake()
 	{
 		InitializeLists();
+		CreateNoise();
 	}
 
 	protected virtual void Update()
 	{
-		LoadChunksNearPlayers();
+		//LoadChunksNearPlayers();
+		GetChunksFromChunkData();
 	}
 
 	protected virtual void OnEnable()
@@ -140,15 +155,41 @@ public class World : MonoBehaviour
 		}
 	}
 
+	protected virtual void GetChunksFromChunkData()
+	{
+		lock (chunkDataList)
+		{
+			foreach (KeyValuePair<Vector3Int, ChunkData> data in chunkDataList)
+			{
+				LoadChunk(data.Value.position, data.Value.voxels, data.Value.vertices, data.Value.triangles);
+			}
+			chunkDataList.Clear();
+		}
+	}
+
 	protected virtual void InitializeLists()
 	{
 		Players = new List<Player>();
 		Entities = new List<Entity>();
+		chunkDataList = new Dictionary<Vector3Int, ChunkData>();
 		playerChunkPositions = new List<Vector3Int>();
 	}
 
-    // gets closest chunk to load
-    public static Vector3Int[] GetClosestChunks(uint chunkLoadDistance)
+	protected virtual void CreateNoise()
+	{
+		noise = FastNoise.FromEncodedNodeTree(nodeTree);
+	}
+
+	protected virtual Chunk CreateChunk(Vector3Int chunkPosition)
+	{
+		GameObject chunkObject = Instantiate(chunkPrefab);
+		chunkObject.transform.parent = transform;
+		chunkObject.name = chunkPosition.ToString();
+		return chunkObject.GetComponent<Chunk>();
+	}
+
+	// gets closest chunk to load
+	public static Vector3Int[] GetClosestChunks(uint chunkLoadDistance)
 	{
 		uint realSize = (chunkLoadDistance * 2) + 1;
 		uint sizeSqrd = (realSize * realSize);
@@ -205,26 +246,55 @@ public class World : MonoBehaviour
 		{
 			uint oldSize = Settings.Instance.GetChunkLoadDistance();
 			int playerSize;
-			lock (Players)
+			lock (playerChunkPositions)
 			{
-				playerSize = Players.Count;
+				playerSize = playerChunkPositions.Count;
 			}
 			Vector3Int[] closestChunks = GetClosestChunks(oldSize);
 
 			for (int j = 0; j < playerSize; j++)
 			{
 				Vector3Int playerChunksPos;
-				lock (Players)
+				lock (playerChunkPositions)
 				{
-					if (j >= Players.Count)
+					if (j >= playerChunkPositions.Count)
 					{
 						break;
 					}
-					playerChunksPos = Players[j].GetChunkPosition();
+					playerChunksPos = playerChunkPositions[j];
 				}
 				for (int i = 0; i < closestChunks.Length; i++)
 				{
 					Vector3Int chunkPosition = closestChunks[i] + playerChunksPos;
+
+					bool loaded = false;
+
+					lock (chunkDataList)
+					{
+						loaded = IsChunkLoaded(chunkPosition) || chunkDataList.ContainsKey(chunkPosition);
+					}
+
+					if (!loaded)
+					{
+						ChunkData chunkData = new ChunkData();
+						NoiseSettings settings = noiseSettings;
+						settings.offset += chunkPosition * worldSettings.ChunkResolution;
+
+						float[] voxelData = new float[settings.resolution * settings.resolution * settings.resolution];
+						FastNoise.OutputMinMax minMax = noise.GenUniformGrid3D(voxelData, (int)settings.offset.x, (int)settings.offset.y, (int)settings.offset.z, settings.resolution, settings.resolution, settings.resolution, settings.size.x, (int)settings.seed);
+
+						chunkData.position = chunkPosition;
+
+						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings);
+
+						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution + 1), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
+						print(minMax.min + " " + minMax.max);
+						lock (chunkDataList)
+						{
+							chunkDataList.Add(chunkPosition, chunkData);
+						}
+						break;
+					}
 				}
 			}
 		}
@@ -236,8 +306,6 @@ public class World : MonoBehaviour
 		[WriteOnly] NativeHashMap<int, ChunkData> chunks;
 		public void Execute()
 		{
-
-			
 		}
 	}
 }
