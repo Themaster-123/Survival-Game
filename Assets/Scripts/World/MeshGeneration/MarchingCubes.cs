@@ -364,8 +364,8 @@ public class MarchingCubes
 		for (int i = 0; indexTable[cubeIndex, i] != -1; i += 3)
 		{
 			triangles.Add(vertices.Count);
-			triangles.Add(vertices.Count + 2);
 			triangles.Add(vertices.Count + 1);
+			triangles.Add(vertices.Count + 2);
 
 			vertices.Add(verticesArray[indexTable[cubeIndex, i]]);
 			vertices.Add(verticesArray[indexTable[cubeIndex, i + 1]]);

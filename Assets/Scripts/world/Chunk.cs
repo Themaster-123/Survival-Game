@@ -47,7 +47,7 @@ public class Chunk : MonoBehaviour
         this.voxels = voxels;
 
         UpdateMesh(vertices, triangles);
-
+        
         UpdateTransform();
     }
 
@@ -86,6 +86,8 @@ public class Chunk : MonoBehaviour
         meshFilter.mesh.vertices = vertices;
         meshFilter.mesh.triangles = triangles;
         meshFilter.mesh.RecalculateNormals();
+
+        meshCollider.sharedMesh = meshFilter.mesh;
     }
 
     protected virtual void UpdateTransform()

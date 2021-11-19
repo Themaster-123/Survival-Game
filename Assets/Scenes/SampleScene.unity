@@ -391,8 +391,9 @@ MonoBehaviour:
     settingsObject: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
     resolution: 256
     offset: {x: 0, y: 0, z: 0}
-    size: {x: 1, y: 1, z: 1}
+    size: {x: 0.01, y: 0.01, z: 0.01}
     seed: 0
+  nodeTree: DQAFAAAAAAAAQAgAAAAAAD8AAAAAAA==
 --- !u!4 &833675760
 Transform:
   m_ObjectHideFlags: 0
@@ -664,10 +665,10 @@ MonoBehaviour:
     settingsObject: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
     resolution: 33
     offset: {x: 0, y: 0, z: 0}
-    size: {x: 1, y: 1, z: 1}
-    seed: 0
+    size: {x: 0.01, y: 0.01, z: 0.01}
+    seed: 3
   chunkPrefab: {fileID: 8631612681894592453, guid: e38662d10b0d5ae429bc4af56b005317, type: 3}
-  nodeTree: BwA=
+  nodeTree: EQACAAAAAAAgQBAAAAAAQBkAEwDD9Sg/DQAEAAAAAAAgQAkAAGZmJj8AAAAAPwEEAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM3MTD4AMzMzPwAAAAA/
 --- !u!4 &1626338179
 Transform:
   m_ObjectHideFlags: 0
