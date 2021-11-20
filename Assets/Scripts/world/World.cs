@@ -19,7 +19,6 @@ public class World : MonoBehaviour
 	[SerializeField]
 	protected string nodeTree;
 	protected Thread worldLoadThread;
-	protected Mutex playerListMutex;
 	protected Dictionary<Vector3Int, ChunkData> chunkDataList;
 	protected Vector3Int[] playerChunkPositions;
 	protected FastNoise noise;
@@ -37,6 +36,7 @@ public class World : MonoBehaviour
 	public virtual void RemovePlayer(Player player)
 	{
 		Players.Remove(player);
+
 	}
 
 	public virtual void AddEntity(Entity entity)
@@ -347,7 +347,7 @@ public class World : MonoBehaviour
 						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings);
 
 						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution + 1), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
-						print(minMax.min + " " + minMax.max);
+
 						lock (chunkDataList)
 						{
 							chunkDataList.Add(chunkPosition, chunkData);

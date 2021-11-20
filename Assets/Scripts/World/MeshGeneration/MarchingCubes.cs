@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using Unity.Jobs;
 using Unity.Burst;
@@ -299,7 +301,7 @@ public class MarchingCubes
 {0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1} };
 
-    public static void GenerateMesh(Vector3Int resolution, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
+    public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
 	{
 		Voxel getVoxel(Vector3Int position, in Voxel[] voxels)
 		{
@@ -309,22 +311,22 @@ public class MarchingCubes
 		List<Vector3> verticesList = new List<Vector3>();
 		List<int> trianglesList = new List<int>();
 
-        for (int x = 0; x < resolution.x - 1; x++)
+		for (int x = 0; x < resolution.x - 1; x++)
 		{
-			for (int y = 0; y < resolution.x - 1; y++)
+			for (int y = 0; y < resolution.y - 1; y++)
 			{
-				for (int z = 0; z < resolution.x - 1; z++)
+				for (int z = 0; z < resolution.z - 1; z++)
 				{
 					Vector3Int position = new Vector3Int(x, y, z);
 
-					TriangulateCell(isoLevel, 
-						getVoxel(position + new Vector3Int(1, 0, 0), voxels), 
-						getVoxel(position + new Vector3Int(1, 0, 1), voxels), 
+					TriangulateCell(isoLevel,
+						getVoxel(position + new Vector3Int(1, 0, 0), voxels),
+						getVoxel(position + new Vector3Int(1, 0, 1), voxels),
 						getVoxel(position + new Vector3Int(0, 0, 1), voxels),
-						getVoxel(position + new Vector3Int(0, 0, 0), voxels), 
-						getVoxel(position + new Vector3Int(1, 1, 0), voxels), 
-						getVoxel(position + new Vector3Int(1, 1, 1), voxels), 
-						getVoxel(position + new Vector3Int(0, 1, 1), voxels), 
+						getVoxel(position + new Vector3Int(0, 0, 0), voxels),
+						getVoxel(position + new Vector3Int(1, 1, 0), voxels),
+						getVoxel(position + new Vector3Int(1, 1, 1), voxels),
+						getVoxel(position + new Vector3Int(0, 1, 1), voxels),
 						getVoxel(position + new Vector3Int(0, 1, 0), voxels), verticesList, trianglesList);
 				}
 			}
@@ -332,10 +334,80 @@ public class MarchingCubes
 
 		vertices = verticesList.ToArray();
 		triangles = trianglesList.ToArray();
+		/*NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(voxels.Length, Allocator.TempJob);
+		NativeList<CellData> resultsNativeArray = new NativeList<CellData>(Allocator.TempJob);
+
+		for (int i = 0; i < voxels.Length; i++)
+		{
+			voxelsNativeArray[i] = voxels[i];
+		}
+
+		MarchingCubesJob marchingCubesJob = new MarchingCubesJob();
+		marchingCubesJob.isoLevel = isoLevel;
+		marchingCubesJob.resolution = resolution;
+		marchingCubesJob.voxels = voxelsNativeArray;
+		marchingCubesJob.results = resultsNativeArray;
+
+		JobHandle handle = marchingCubesJob.Schedule((resolution.x - 1) * (resolution.y - 1) * (resolution.z - 1), 1);
+
+		handle.Complete();
+
+		vertices = new Vector3[resultsNativeArray.Capacity * 3];
+		triangles = new int[resultsNativeArray.Capacity * 3];
+
+		for (int i = 0; i < resultsNativeArray.Length; i++)
+		{
+			int listIndex = i * 3;
+
+			CellData cellData = resultsNativeArray[i];
+			vertices[listIndex] = cellData.vertex1;
+			vertices[listIndex + 1] = cellData.vertex2;
+			vertices[listIndex + 2] = cellData.vertex3;
+
+			triangles[listIndex] = cellData.triangle1;
+			triangles[listIndex + 1] = cellData.triangle2;
+			triangles[listIndex + 2] = cellData.triangle3;
+		}
+
+		
+		voxelsNativeArray.Dispose();
+		resultsNativeArray.Dispose();*/
+
+		/*Voxel GetVoxel(Vector3Int position, in Voxel[] voxels)
+		{
+			return voxels[(position.z * resolution.x * resolution.y) + (position.y * resolution.x) + position.x];
+		}
+
+		List<Vector3> verticesList = new List<Vector3>();
+		List<int> trianglesList = new List<int>();
+		Mutex marchingMutex = new Mutex();
+		for (int i = 0; i < (resolution.x - 1) * (resolution.x - 1) * (resolution.x - 1); i++)
+		{
+			Vector3Int position = Vector3Int.zero;
+			Vector3Int res = resolution - Vector3Int.one;
+
+			position.z = i / (res.x * res.y);
+			int index2 = i - (position.z * res.x * res.y);
+			position.y = index2 / res.x;
+			position.x = index2 % res.x;
+
+			TriangulateCell(isoLevel,
+				GetVoxel(position + new Vector3Int(1, 0, 0), voxels),
+				GetVoxel(position + new Vector3Int(1, 0, 1), voxels),
+				GetVoxel(position + new Vector3Int(0, 0, 1), voxels),
+				GetVoxel(position + new Vector3Int(0, 0, 0), voxels),
+				GetVoxel(position + new Vector3Int(1, 1, 0), voxels),
+				GetVoxel(position + new Vector3Int(1, 1, 1), voxels),
+				GetVoxel(position + new Vector3Int(0, 1, 1), voxels),
+				GetVoxel(position + new Vector3Int(0, 1, 0), voxels), verticesList, trianglesList);
+		}
+
+		vertices = verticesList.ToArray();
+		triangles = trianglesList.ToArray();*/
 	}
 
-	protected static void TriangulateCell(float isoLevel, in Voxel voxel0, in Voxel voxel1, in Voxel voxel2, in Voxel voxel3, in Voxel voxel4, in Voxel voxel5, in Voxel voxel6, in Voxel voxel7, List<Vector3> vertices, 
-		List<int> triangles)
+	protected static void TriangulateCell(float isoLevel, in Voxel voxel0, in Voxel voxel1, in Voxel voxel2, in Voxel voxel3, in Voxel voxel4, in Voxel voxel5, in Voxel voxel6, in Voxel voxel7, in List<Vector3> vertices, 
+		in List<int> triangles)
 	{
 		int cubeIndex = 0;
 		Vector3[] verticesArray = new Vector3[12];
@@ -366,6 +438,7 @@ public class MarchingCubes
 
 		for (int i = 0; indexTable[cubeIndex, i] != -1; i += 3)
 		{
+		
 			triangles.Add(vertices.Count);
 			triangles.Add(vertices.Count + 1);
 			triangles.Add(vertices.Count + 2);
@@ -374,6 +447,7 @@ public class MarchingCubes
 			vertices.Add(verticesArray[indexTable[cubeIndex, i + 1]]);
 			vertices.Add(verticesArray[indexTable[cubeIndex, i + 2]]);
 		}
+
 	}
 
 	protected static Vector3 InterpolateVertexPosition(in Voxel voxel0, in Voxel voxel1, float isoLevel)
@@ -412,7 +486,7 @@ public class MarchingCubes
 
 			Vector3Int position = GetPosition(index);
 
-			TriangulateCell(isoLevel,
+			/*TriangulateCell(isoLevel,
 				GetVoxel(position + new Vector3Int(1, 0, 0)),
 				GetVoxel(position + new Vector3Int(1, 0, 1)),
 				GetVoxel(position + new Vector3Int(0, 0, 1)),
@@ -420,7 +494,7 @@ public class MarchingCubes
 				GetVoxel(position + new Vector3Int(1, 1, 0)),
 				GetVoxel(position + new Vector3Int(1, 1, 1)),
 				GetVoxel(position + new Vector3Int(0, 1, 1)),
-				GetVoxel(position + new Vector3Int(0, 1, 0)), vertices, triangles);
+				GetVoxel(position + new Vector3Int(0, 1, 0)), vertices, triangles);*/
 
 			for (int i = 0; i < triangles.Count; i += 3)
 			{
