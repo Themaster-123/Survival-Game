@@ -21,7 +21,7 @@ public class World : MonoBehaviour
 	protected Thread worldLoadThread;
 	protected Mutex playerListMutex;
 	protected Dictionary<Vector3Int, ChunkData> chunkDataList;
-	protected List<Vector3Int> playerChunkPositions;
+	protected Vector3Int[] playerChunkPositions;
 	protected FastNoise noise;
 
 	public List<Player> Players { get; protected set; }
@@ -29,35 +29,27 @@ public class World : MonoBehaviour
 
 	protected Dictionary<Vector3Int, Chunk> chunks = new Dictionary<Vector3Int, Chunk>();
 
-	public void AddPlayer(Player player)
+	public virtual void AddPlayer(Player player)
 	{
 		Players.Add(player);
-		lock (playerChunkPositions)
-		{
-			playerChunkPositions.Add(player.GetChunkPosition());
-		}
 	}
 
-	public void RemovePlayer(Player player)
+	public virtual void RemovePlayer(Player player)
 	{
 		Players.Remove(player);
-		lock (playerChunkPositions)
-		{
-			playerChunkPositions.Remove(player.GetChunkPosition());
-		}
 	}
 
-	public void AddEntity(Entity entity)
+	public virtual void AddEntity(Entity entity)
 	{
 		Entities.Add(entity);
 	}
 
-	public void RemoveEntity(Entity entity)
+	public virtual void RemoveEntity(Entity entity)
 	{
 		Entities.Remove(entity);
 	}
 
-	public void LoadChunk(Vector3Int chunkPosition)
+	public virtual void LoadChunk(Vector3Int chunkPosition)
 	{
         if (!IsChunkLoaded(chunkPosition))
 		{
@@ -76,11 +68,26 @@ public class World : MonoBehaviour
 		{
 			Chunk chunk = CreateChunk(chunkPosition);
 			chunk.InitiateChunk(chunkPosition, voxels, vertices, triangles, this);
-			chunks.Add(chunkPosition, chunk);
+			lock (chunks)
+			{
+				chunks.Add(chunkPosition, chunk);
+			}
 		}
 	}
 
-	public bool IsChunkLoaded(Vector3Int chunkPosition)
+	public virtual void UnloadChunk(Vector3Int chunkPosition)
+	{
+		if (IsChunkLoaded(chunkPosition))
+		{
+			Destroy(chunks[chunkPosition].gameObject);
+			lock (chunks)
+			{
+				chunks.Remove(chunkPosition);
+			}
+		}
+	}
+
+	public virtual bool IsChunkLoaded(Vector3Int chunkPosition)
 	{
 		lock (chunks)
 		{
@@ -97,7 +104,9 @@ public class World : MonoBehaviour
 	protected virtual void Update()
 	{
 		//LoadChunksNearPlayers();
+		UpdatePlayerChunkPosition();
 		GetChunksFromChunkData();
+		UnloadFarAwayChunks();
 	}
 
 	protected virtual void OnEnable()
@@ -172,7 +181,7 @@ public class World : MonoBehaviour
 		Players = new List<Player>();
 		Entities = new List<Entity>();
 		chunkDataList = new Dictionary<Vector3Int, ChunkData>();
-		playerChunkPositions = new List<Vector3Int>();
+		playerChunkPositions = new Vector3Int[0];
 	}
 
 	protected virtual void CreateNoise()
@@ -186,6 +195,46 @@ public class World : MonoBehaviour
 		chunkObject.transform.parent = transform;
 		chunkObject.name = chunkPosition.ToString();
 		return chunkObject.GetComponent<Chunk>();
+	}
+
+	protected virtual void UpdatePlayerChunkPosition()
+	{
+		lock (playerChunkPositions)
+		{
+			playerChunkPositions = new Vector3Int[Players.Count];
+			for (int i = 0; i < Players.Count; i++)
+			{
+				playerChunkPositions[i] = Players[i].GetChunkPosition();
+			}
+		}
+	}
+
+	protected virtual void UnloadFarAwayChunks()
+	{
+		List<Vector3Int> chunksToUnload = new List<Vector3Int>();
+
+		foreach (Vector3Int chunkPos in chunks.Keys) {
+			uint minDistance = uint.MaxValue;
+
+			foreach (Player player in Players)
+			{
+				uint tempDistance = ChunkPositionUtilities.Distance(player.GetChunkPosition(), chunkPos);
+				if (minDistance > tempDistance)
+				{
+					minDistance = tempDistance;
+				}
+			}
+
+			if (minDistance > Settings.Instance.ChunkLoadDistance)
+			{
+				chunksToUnload.Add(chunkPos);
+			}
+		}
+
+		for (int i = 0; i < chunksToUnload.Count; i++)
+		{
+			UnloadChunk(chunksToUnload[i]);
+		}
 	}
 
 	// gets closest chunk to load
@@ -242,22 +291,32 @@ public class World : MonoBehaviour
 	// multithreaded world loading loop
 	protected void WorldLoadLoop()
 	{
+		uint prevSize = 0;
+		Vector3Int[] closestChunks = new Vector3Int[0];
+
 		while (true)
 		{
-			uint oldSize = Settings.Instance.GetChunkLoadDistance();
+			uint size = Settings.Instance.GetChunkLoadDistance();
+
+
+			if (prevSize != size)
+			{
+				prevSize = size;
+				closestChunks = GetClosestChunks(size);
+			}
+
 			int playerSize;
 			lock (playerChunkPositions)
 			{
-				playerSize = playerChunkPositions.Count;
+				playerSize = playerChunkPositions.Length;
 			}
-			Vector3Int[] closestChunks = GetClosestChunks(oldSize);
 
 			for (int j = 0; j < playerSize; j++)
 			{
 				Vector3Int playerChunksPos;
 				lock (playerChunkPositions)
 				{
-					if (j >= playerChunkPositions.Count)
+					if (j >= playerChunkPositions.Length)
 					{
 						break;
 					}

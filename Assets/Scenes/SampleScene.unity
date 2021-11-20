@@ -215,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461834952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 28.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -236,7 +236,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &461834958
 MonoBehaviour:
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd56f75e94bad247b8b14cf626227dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChunkLoadDistance: 4
+  ChunkLoadDistance: 8
 --- !u!1 &1626338177
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
     size: {x: 0.01, y: 0.01, z: 0.01}
     seed: 3
   chunkPrefab: {fileID: 8631612681894592453, guid: e38662d10b0d5ae429bc4af56b005317, type: 3}
-  nodeTree: EQACAAAAAAAgQBAAAAAAQBkAEwDD9Sg/DQAEAAAAAAAgQAkAAGZmJj8AAAAAPwEEAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM3MTD4AMzMzPwAAAAA/
+  nodeTree: JgAZAAQAAAAAAOxRGEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBwABGwAIAABI4VpA
 --- !u!4 &1626338179
 Transform:
   m_ObjectHideFlags: 0
