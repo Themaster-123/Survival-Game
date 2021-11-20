@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Jobs;
+using Unity.Burst;
+using Unity.Collections;
 
 public class MarchingCubes
 {
@@ -389,5 +392,63 @@ public class MarchingCubes
 		pos.z = voxel0.position.z + mu * (voxel1.position.z - voxel0.position.z);
 
 		return pos;
+	}
+
+	protected struct MarchingCubesJob : IJobParallelFor
+	{
+		[ReadOnly] 
+		public NativeArray<Voxel> voxels;
+		[WriteOnly]
+		public NativeList<CellData> results;
+
+		public float isoLevel;
+
+		public Vector3Int resolution;
+
+		public void Execute(int index)
+		{
+			List<Vector3> vertices = new List<Vector3>();
+			List<int> triangles = new List<int>();
+
+			Vector3Int position = GetPosition(index);
+
+			TriangulateCell(isoLevel,
+				GetVoxel(position + new Vector3Int(1, 0, 0)),
+				GetVoxel(position + new Vector3Int(1, 0, 1)),
+				GetVoxel(position + new Vector3Int(0, 0, 1)),
+				GetVoxel(position + new Vector3Int(0, 0, 0)),
+				GetVoxel(position + new Vector3Int(1, 1, 0)),
+				GetVoxel(position + new Vector3Int(1, 1, 1)),
+				GetVoxel(position + new Vector3Int(0, 1, 1)),
+				GetVoxel(position + new Vector3Int(0, 1, 0)), vertices, triangles);
+
+			for (int i = 0; i < triangles.Count; i += 3)
+			{
+				CellData cellData = new CellData();
+				cellData.vertex1 = vertices[i];
+				cellData.vertex2 = vertices[i + 1];
+				cellData.vertex3 = vertices[i + 2];
+				cellData.triangle1 = triangles[i];
+				cellData.triangle2 = triangles[i + 1];
+				cellData.triangle3 = triangles[i + 2];
+
+				results.Add(cellData);
+			}
+		}
+
+		Voxel GetVoxel(Vector3Int position)
+		{
+			return voxels[(position.z * resolution.x * resolution.y) + (position.y * resolution.x) + position.x];
+		}
+
+		Vector3Int GetPosition(int index)
+		{
+			Vector3Int pos = Vector3Int.zero;
+			pos.z = index / (resolution.x * resolution.y);
+			int index2 = index - (pos.z * resolution.x * resolution.y);
+			pos.y = index2 / resolution.x;
+			pos.x = index2 % resolution.x;
+			return pos;
+		}
 	}
 }
