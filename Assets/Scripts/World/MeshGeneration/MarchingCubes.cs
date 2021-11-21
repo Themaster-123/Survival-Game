@@ -6,6 +6,7 @@ using UnityEngine;
 using Unity.Jobs;
 using Unity.Burst;
 using Unity.Collections;
+using UnityEngine.Profiling;
 
 public class MarchingCubes
 {
@@ -303,6 +304,8 @@ public class MarchingCubes
 
     public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
 	{
+		Profiler.BeginSample("Marching Cubes");
+
 		Voxel getVoxel(Vector3Int position, in Voxel[] voxels)
 		{
 			return voxels[(position.z * resolution.x * resolution.y) + (position.y * resolution.x) + position.x];
@@ -334,6 +337,8 @@ public class MarchingCubes
 
 		vertices = verticesList.ToArray();
 		triangles = trianglesList.ToArray();
+		Profiler.EndSample();
+
 		/*NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(voxels.Length, Allocator.TempJob);
 		NativeList<CellData> resultsNativeArray = new NativeList<CellData>(Allocator.TempJob);
 
@@ -373,6 +378,8 @@ public class MarchingCubes
 		voxelsNativeArray.Dispose();
 		resultsNativeArray.Dispose();*/
 
+
+
 		/*Voxel GetVoxel(Vector3Int position, in Voxel[] voxels)
 		{
 			return voxels[(position.z * resolution.x * resolution.y) + (position.y * resolution.x) + position.x];
@@ -381,10 +388,11 @@ public class MarchingCubes
 		List<Vector3> verticesList = new List<Vector3>();
 		List<int> trianglesList = new List<int>();
 		Mutex marchingMutex = new Mutex();
+		Vector3Int res = resolution - Vector3Int.one;
+
 		for (int i = 0; i < (resolution.x - 1) * (resolution.x - 1) * (resolution.x - 1); i++)
 		{
 			Vector3Int position = Vector3Int.zero;
-			Vector3Int res = resolution - Vector3Int.one;
 
 			position.z = i / (res.x * res.y);
 			int index2 = i - (position.z * res.x * res.y);
@@ -404,6 +412,9 @@ public class MarchingCubes
 
 		vertices = verticesList.ToArray();
 		triangles = trianglesList.ToArray();*/
+
+
+
 	}
 
 	protected static void TriangulateCell(float isoLevel, in Voxel voxel0, in Voxel voxel1, in Voxel voxel2, in Voxel voxel3, in Voxel voxel4, in Voxel voxel5, in Voxel voxel6, in Voxel voxel7, in List<Vector3> vertices, 
