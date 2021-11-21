@@ -17,6 +17,12 @@ public class Entity : MonoBehaviour
     [HideInInspector]
     public Vector2 rotation;
 
+    [Header("Interaction")]
+    public Vector3 headPosition;
+    public float maxInteractionDistance = 5;
+    public LayerMask interactionMask;
+    public LayerMask terrainLayers;
+
     [Header("Misc")]
     public World world;
 
@@ -97,6 +103,11 @@ public class Entity : MonoBehaviour
 	{
         return transform.TransformDirection(Quaternion.AngleAxis(rotation.x, Vector3.up) * Vector3.forward);
 	}
+
+    public virtual Vector3 GetDirection()
+	{
+        return transform.TransformDirection(GetEntityRotation() * Vector3.forward);
+    }
 
     // gets the rotation based off of the rotation variable
     public virtual Quaternion GetHorizontalEntityRotation()
@@ -190,4 +201,24 @@ public class Entity : MonoBehaviour
     {
         world.RemoveEntity(this);
     }
+
+    protected virtual RaycastHit RaycastFromHead()
+	{
+        Vector3 origin = transform.TransformPoint(GetHorizontalEntityRotation() * headPosition);
+        Vector3 direction = GetDirection();
+
+		Physics.Raycast(origin, direction, out RaycastHit hit, maxInteractionDistance, interactionMask, QueryTriggerInteraction.Ignore);
+
+		return hit;
+	}
+
+    protected virtual void AttemptDig()
+	{
+        RaycastHit hit = RaycastFromHead();
+
+        if (hit.collider.gameObject.layer == terrainLayers)
+		{
+
+		}
+	}
 }
