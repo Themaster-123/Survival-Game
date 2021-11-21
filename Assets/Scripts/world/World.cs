@@ -127,8 +127,8 @@ public class World : MonoBehaviour
 	protected virtual void StartWorldLoadLoop()
 	{
 		worldLoadThread = new Thread(new ThreadStart(WorldLoadLoop));
-		worldLoadThread.Start();
 		worldLoadThread.Name = "WORLD THREAD GO BRRR";
+		worldLoadThread.Start();
 	}
 
 	protected virtual void DestroyWorldLoadLoop()
