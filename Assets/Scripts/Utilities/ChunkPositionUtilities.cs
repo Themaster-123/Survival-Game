@@ -18,4 +18,38 @@ public static class ChunkPositionUtilities
 
 		return (uint)distance;
 	}
+
+	public static Vector3Int ToChunkPosition(Vector3 pos, World world)
+	{
+        Vector3Int chunkPosition = Vector3Int.zero;
+
+        if (pos.x > 0)
+        {
+            chunkPosition.x = (int)(pos.x / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.x = (int)Mathf.Floor(pos.x / world.worldSettings.ChunkSize);
+        }
+
+        if (pos.y > 0)
+        {
+            chunkPosition.y = (int)(pos.y / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.y = (int)Mathf.Floor(pos.y / world.worldSettings.ChunkSize);
+        }
+
+        if (pos.z > 0)
+        {
+            chunkPosition.z = (int)(pos.z / world.worldSettings.ChunkSize);
+        }
+        else
+        {
+            chunkPosition.z = (int)Mathf.Floor(pos.z / world.worldSettings.ChunkSize);
+        }
+
+        return chunkPosition;
+    }
 }
