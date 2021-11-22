@@ -87,12 +87,55 @@ public class World : MonoBehaviour
 		}
 	}
 
+	public virtual Chunk GetChunk(Vector3Int chunkposition)
+	{
+		lock (chunks)
+		{
+			if (IsChunkLoaded(chunkposition))
+			{
+				return chunks[chunkposition];
+			}
+		}
+
+		return null;
+	}
+
 	public virtual bool IsChunkLoaded(Vector3Int chunkPosition)
 	{
 		lock (chunks)
 		{
 			return chunks.ContainsKey(chunkPosition);
 		}
+	}
+
+	public virtual void SetVoxel(Voxel voxel, Vector3Int pos)
+	{
+		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
+		if (IsChunkLoaded(chunkPos))
+		{
+			Chunk chunk = chunks[chunkPos];
+
+			chunks[chunkPos].SetVoxel(GetLocalVoxelPos(pos), voxel);
+		}
+	}
+
+	public virtual Voxel GetVoxel(Vector3Int pos)
+	{
+		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
+		if (IsChunkLoaded(chunkPos))
+		{
+			return chunks[chunkPos].GetVoxel(GetLocalVoxelPos(pos));
+		}
+
+		return new Voxel();
+	}
+	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
+	{
+		position.x %= worldSettings.ChunkResolution;
+		position.y %= worldSettings.ChunkResolution;
+		position.z %= worldSettings.ChunkResolution;
+
+		return position;
 	}
 
 	protected virtual void Awake()
@@ -121,8 +164,9 @@ public class World : MonoBehaviour
 
 	protected virtual void OnValidate()
 	{
-        noiseSettings.resolution = worldSettings.ChunkResolution + 1;
+        noiseSettings.resolution = worldSettings.ChunkResolution;
 	}
+
 
 	protected virtual void StartWorldLoadLoop()
 	{
@@ -344,9 +388,9 @@ public class World : MonoBehaviour
 
 						chunkData.position = chunkPosition;
 
-						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings);
+						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings, chunkPosition, this);
 
-						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution + 1), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
+						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
 
 						lock (chunkDataList)
 						{
