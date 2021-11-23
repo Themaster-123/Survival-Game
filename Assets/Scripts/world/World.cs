@@ -113,8 +113,6 @@ public class World : MonoBehaviour
 		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
 		if (IsChunkLoaded(chunkPos))
 		{
-			Chunk chunk = chunks[chunkPos];
-
 			chunks[chunkPos].SetVoxel(GetLocalVoxelPos(pos), voxel);
 		}
 	}
@@ -122,13 +120,19 @@ public class World : MonoBehaviour
 	public virtual Voxel GetVoxel(Vector3Int pos)
 	{
 		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
+		return GetVoxelAtChunk(GetLocalVoxelPos(pos), chunkPos);
+	}
+
+	public virtual Voxel GetVoxelAtChunk(Vector3Int pos, Vector3Int chunkPos)
+	{
 		if (IsChunkLoaded(chunkPos))
 		{
-			return chunks[chunkPos].GetVoxel(GetLocalVoxelPos(pos));
+			return chunks[chunkPos].GetVoxel(pos);
 		}
 
 		return new Voxel();
 	}
+
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
 	{
 		position.x %= worldSettings.ChunkResolution;
@@ -388,7 +392,7 @@ public class World : MonoBehaviour
 
 						chunkData.position = chunkPosition;
 
-						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings, chunkPosition, this);
+						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings, Vector3Int.one * worldSettings.ChunkResolution);
 
 						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
 
