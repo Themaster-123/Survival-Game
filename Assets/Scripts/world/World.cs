@@ -129,8 +129,14 @@ public class World : MonoBehaviour
 		{
 			return chunks[chunkPos].GetVoxel(pos);
 		}
+		else
+		{
+			float[] data = new float[1];
 
-		return new Voxel();
+			GenerateNoise(data, (Vector3Int.FloorToInt(noiseSettings.offset) + chunkPos * noiseSettings.resolution) + pos, Vector3Int.one);
+
+			return new Voxel((Vector3)pos / worldSettings.ChunkResolution * worldSettings.ChunkSize, data[0]);
+		}
 	}
 
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
@@ -140,6 +146,11 @@ public class World : MonoBehaviour
 		position.z %= worldSettings.ChunkResolution;
 
 		return position;
+	}
+
+	public virtual FastNoise.OutputMinMax GenerateNoise(in float[] voxelData, Vector3Int offset, Vector3Int resolution)
+	{
+		return noise.GenUniformGrid3D(voxelData, offset.x, offset.y, offset.z, resolution.x, resolution.y, resolution.z, noiseSettings.size.x, (int)noiseSettings.seed);
 	}
 
 	protected virtual void Awake()
@@ -384,17 +395,16 @@ public class World : MonoBehaviour
 					if (!loaded)
 					{
 						ChunkData chunkData = new ChunkData();
-						NoiseSettings settings = noiseSettings;
-						settings.offset += chunkPosition * worldSettings.ChunkResolution;
+						Vector3Int offset = Vector3Int.FloorToInt(noiseSettings.offset + (chunkPosition * worldSettings.ChunkResolution));
 
-						float[] voxelData = new float[settings.resolution * settings.resolution * settings.resolution];
-						FastNoise.OutputMinMax minMax = noise.GenUniformGrid3D(voxelData, (int)settings.offset.x, (int)settings.offset.y, (int)settings.offset.z, settings.resolution, settings.resolution, settings.resolution, settings.size.x, (int)settings.seed);
+						float[] voxelData = new float[noiseSettings.resolution * noiseSettings.resolution * noiseSettings.resolution];
+						FastNoise.OutputMinMax minMax = GenerateNoise(voxelData, offset, Vector3Int.one * noiseSettings.resolution);
 
 						chunkData.position = chunkPosition;
 
 						chunkData.voxels = Chunk.GetVoxelsFromNoiseData(voxelData, worldSettings, Vector3Int.one * worldSettings.ChunkResolution);
 
-						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles);
+						MarchingCubes.GenerateMesh(Vector3Int.one * (worldSettings.ChunkResolution), 0, chunkData.voxels, out chunkData.vertices, out chunkData.triangles, chunkPosition, this);
 
 						lock (chunkDataList)
 						{

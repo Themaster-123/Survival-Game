@@ -302,23 +302,54 @@ public class MarchingCubes
 {0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
 {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1} };
 
-    public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
+    public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
 	{
 		Profiler.BeginSample("Marching Cubes");
 
+/*		Chunk[] neighbors = Chunk.GetConnectionChunkNeighbors(chunkPosition, world);
+
+		for (int i = 0; i < neighbors.Length; i++)
+		{
+			Chunk neighborChunk = neighbors[i];
+			Vector3Int direction = neighborChunk.position - chunkPosition;
+			resolution += direction;
+		}
+*/
 		Voxel getVoxel(Vector3Int position, in Voxel[] voxels)
 		{
+			// does this to fix the seams
+			Vector3Int neighborChunk = Vector3Int.zero;
+			Vector3Int localPosition = position;
+
+			for (int i = 0; i < 3; i++)
+			{
+				if (position[i] >= resolution[i])
+				{
+					neighborChunk[i] = 1;
+					localPosition[i] %= resolution[i];
+				}
+			}
+
+			if (neighborChunk != Vector3Int.zero)
+			{
+				neighborChunk = chunkPosition + neighborChunk;
+				//MonoBehaviour.print(chunkPosition + " " + neighborChunk + " " + position + " " + localPosition);
+				Voxel voxel = world.GetVoxelAtChunk(localPosition, neighborChunk);
+				voxel.position = (Vector3)position / world.worldSettings.ChunkResolution * world.worldSettings.ChunkSize;
+				return voxel;
+			}
+
 			return voxels[(position.z * resolution.x * resolution.y) + (position.y * resolution.x) + position.x];
 		}
 
 		List<Vector3> verticesList = new List<Vector3>();
 		List<int> trianglesList = new List<int>();
 
-		for (int x = 0; x < resolution.x - 1; x++)
+		for (int x = 0; x < resolution.x; x++)
 		{
-			for (int y = 0; y < resolution.y - 1; y++)
+			for (int y = 0; y < resolution.y; y++)
 			{
-				for (int z = 0; z < resolution.z - 1; z++)
+				for (int z = 0; z < resolution.z; z++)
 				{
 					Vector3Int position = new Vector3Int(x, y, z);
 
