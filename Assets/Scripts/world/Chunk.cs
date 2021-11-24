@@ -9,7 +9,6 @@ public class Chunk : MonoBehaviour
     public Vector3Int position;
     public World world;
 
-    protected Vector3Int meshNeighbors;
     protected MeshCollider meshCollider;
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
@@ -17,7 +16,7 @@ public class Chunk : MonoBehaviour
     public Voxel GetVoxel(Vector3Int position)
 	{
         int index = GetVoxelIndex(position);
-
+       // print(position + " " + world.worldSettings.ChunkResolution + " " + voxels.Length + " " + index);
         return voxels[index];
 	}
 
@@ -69,7 +68,7 @@ public class Chunk : MonoBehaviour
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
 	{
-        voxels = GetVoxelsFromNoiseData(voxelData, world.worldSettings, position, world);
+        voxels = GetVoxelsFromNoiseData(voxelData, world.worldSettings, Vector3Int.one * world.worldSettings.ChunkResolution);
     }
 
 	protected virtual void Awake()
@@ -79,7 +78,7 @@ public class Chunk : MonoBehaviour
 
     protected virtual int GetVoxelIndex(Vector3Int pos)
     {
-        return (position.z * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution) + (position.y * world.worldSettings.ChunkResolution) + position.x;
+        return (pos.z * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution) + (pos.y * world.worldSettings.ChunkResolution) + pos.x;
     }
 
     protected virtual void GetComponents()
@@ -95,7 +94,7 @@ public class Chunk : MonoBehaviour
         meshFilter.mesh = chunkMesh;
         meshCollider.sharedMesh = chunkMesh;
 
-		MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles);
+		MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles, position, world);
 
 		UpdateMesh(vertices, triangles);
 	}
@@ -115,9 +114,10 @@ public class Chunk : MonoBehaviour
         transform.position = (Vector3)position * world.worldSettings.ChunkSize;
     }
 
-    protected static  Chunk[] GetChunkNeighbors(Vector3Int position, World world)
+    // gets chunk up forward and right neighbors
+    public static Chunk[] GetConnectionChunkNeighbors(Vector3Int position, World world)
 	{
-        Vector3Int[] neighbors = { Vector3Int.forward, -Vector3Int.forward, Vector3Int.up, -Vector3Int.up, Vector3Int.right, -Vector3Int.right };
+        Vector3Int[] neighbors = { Vector3Int.forward, Vector3Int.up, Vector3Int.right};
 
         List<Chunk> chunkNeighbors = new List<Chunk>();
 
@@ -136,31 +136,17 @@ public class Chunk : MonoBehaviour
         return chunkNeighbors.ToArray();
 	}
 
-    public static Voxel[] GetVoxelsFromNoiseData(in float[] voxelData, in WorldSettings worldSettings, Vector3Int position, World world)
+    public static Voxel[] GetVoxelsFromNoiseData(in float[] voxelData, in WorldSettings worldSettings, Vector3Int resolution)
 	{
         Voxel[] voxels = new Voxel[voxelData.Length];
 
-        Chunk[] neighbors = GetChunkNeighbors(position, world);
-
-        Vector3Int res = Vector3Int.one * worldSettings.ChunkResolution;
-
-        // i do this to fix the seam problem
-        for (int i = 0; i < neighbors.Length; i++)
+        for (int x = 0; x < resolution.x; x++)
         {
-            Chunk neighborChunk = neighbors[i];
-            Vector3Int direction = position - neighborChunk.position;
-            direction.x = Mathf.Abs(direction.x);
-            direction.y = Mathf.Abs(direction.y);
-            direction.z = Mathf.Abs(direction.z);
-        }
-
-        for (int x = 0; x < res.x; x++)
-        {
-            for (int y = 0; y < res.y; y++)
+            for (int y = 0; y < resolution.y; y++)
             {
-                for (int z = 0; z < res.z; z++)
+                for (int z = 0; z < resolution.z; z++)
                 {
-                    int index = x + res.y * (y + res.x * z);
+                    int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
                     voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxel.value = voxelData[index];
