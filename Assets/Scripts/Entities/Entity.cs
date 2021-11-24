@@ -124,36 +124,7 @@ public class Entity : MonoBehaviour
     // converts position to Chunk Position
     public virtual Vector3Int GetChunkPosition()
 	{
-        Vector3Int chunkPosition = Vector3Int.zero;
-
-        if (transform.position.x > 0)
-        {
-            chunkPosition.x = (int)(transform.position.x / world.worldSettings.ChunkSize);
-        }
-        else
-        {
-            chunkPosition.x = (int)Mathf.Floor(transform.position.x / world.worldSettings.ChunkSize);
-        }
-
-        if (transform.position.y > 0)
-        {
-            chunkPosition.y = (int)(transform.position.y / world.worldSettings.ChunkSize);
-        }
-        else
-        {
-            chunkPosition.y = (int)Mathf.Floor(transform.position.y / world.worldSettings.ChunkSize);
-        }
-
-        if (transform.position.z > 0)
-        {
-            chunkPosition.z = (int)(transform.position.z / world.worldSettings.ChunkSize);
-        }
-        else
-        {
-            chunkPosition.z = (int)Mathf.Floor(transform.position.z / world.worldSettings.ChunkSize);
-        }
-
-        return chunkPosition;
+        return ChunkPositionUtilities.ToChunkPosition(transform.position, world);
     }
 
     protected virtual void Awake()

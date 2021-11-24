@@ -261,6 +261,14 @@ MonoBehaviour:
   groundedCheckDistance: 0.1
   enttiyCollider: {fileID: 461834953}
   rotation: {x: 0, y: 0}
+  headPosition: {x: 0, y: 0.5, z: 0}
+  maxInteractionDistance: 5
+  interactionMask:
+    serializedVersion: 2
+    m_Bits: 64
+  terrainLayers:
+    serializedVersion: 2
+    m_Bits: 64
   world: {fileID: 1626338178}
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}
