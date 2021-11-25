@@ -23,6 +23,7 @@ public class Chunk : MonoBehaviour
     public void SetVoxel(Vector3Int position, Voxel voxel)
 	{
         int index = GetVoxelIndex(position);
+        voxel.position = voxels[index].position;
         voxels[index] = voxel;
         voxelChanged = true;
     }
