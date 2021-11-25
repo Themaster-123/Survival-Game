@@ -16,7 +16,6 @@ public class Chunk : MonoBehaviour
     public Voxel GetVoxel(Vector3Int position)
 	{
         int index = GetVoxelIndex(position);
-       // print(position + " " + world.worldSettings.ChunkResolution + " " + voxels.Length + " " + index);
         return voxels[index];
 	}
 
@@ -65,6 +64,14 @@ public class Chunk : MonoBehaviour
         UpdateTransform();
     }
 
+    // regenerates the chunk's mesh
+    public virtual void UpdateChunk()
+	{
+        MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles, position, world);
+
+        UpdateMesh(vertices, triangles);
+    }
+
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
 	{
@@ -74,6 +81,11 @@ public class Chunk : MonoBehaviour
 	protected virtual void Awake()
 	{
         GetComponents();
+	}
+
+    protected virtual void LateUpdate()
+	{
+        UpdateChunk();
 	}
 
     protected virtual int GetVoxelIndex(Vector3Int pos)
@@ -94,9 +106,7 @@ public class Chunk : MonoBehaviour
         meshFilter.mesh = chunkMesh;
         meshCollider.sharedMesh = chunkMesh;
 
-		MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles, position, world);
-
-		UpdateMesh(vertices, triangles);
+        UpdateChunk();
 	}
 
     protected virtual void UpdateMesh(in Vector3[] vertices, in int[] triangles)
@@ -148,7 +158,6 @@ public class Chunk : MonoBehaviour
                 {
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
-                    voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxel.value = voxelData[index];
                     voxels[index] = voxel;
                 }
