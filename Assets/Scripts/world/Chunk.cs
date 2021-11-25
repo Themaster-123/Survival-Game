@@ -12,6 +12,7 @@ public class Chunk : MonoBehaviour
     protected MeshCollider meshCollider;
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
+    protected bool voxelChanged = false;
 
     public Voxel GetVoxel(Vector3Int position)
 	{
@@ -22,8 +23,8 @@ public class Chunk : MonoBehaviour
     public void SetVoxel(Vector3Int position, Voxel voxel)
 	{
         int index = GetVoxelIndex(position);
-
         voxels[index] = voxel;
+        voxelChanged = true;
     }
 
     public void InitiateChunk(Vector3Int position, in World world)
@@ -34,21 +35,11 @@ public class Chunk : MonoBehaviour
         NoiseSettings settings = world.noiseSettings;
         settings.offset += (Vector3)position * world.worldSettings.ChunkResolution;
 
-        //float time = Time.realtimeSinceStartup;
-
         float[] voxelData = GpuNoise.GenerateNoise(settings);
 
         UpdateVoxels(voxelData);
 
-        //print(Time.realtimeSinceStartup - time);
-
-
-       // time = Time.realtimeSinceStartup;
-
         CreateMesh();
-
-        //print(Time.realtimeSinceStartup - time);
-
 
         UpdateTransform();
     }
@@ -67,10 +58,22 @@ public class Chunk : MonoBehaviour
     // regenerates the chunk's mesh
     public virtual void UpdateChunk()
 	{
+        UpdateVoxelsPositions();
+
         MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles, position, world);
 
         UpdateMesh(vertices, triangles);
     }
+
+    // updates the chunk if any voxels changed
+    public virtual void UpdateChunkIfChange()
+	{
+        if (voxelChanged)
+		{
+            voxelChanged = false;
+            UpdateChunk();
+		}
+	}
 
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
@@ -78,15 +81,30 @@ public class Chunk : MonoBehaviour
         voxels = GetVoxelsFromNoiseData(voxelData, world.worldSettings, Vector3Int.one * world.worldSettings.ChunkResolution);
     }
 
-	protected virtual void Awake()
+    protected virtual void UpdateVoxelsPositions()
+    {
+        for (int x = 0; x < world.worldSettings.ChunkResolution; x++)
+        {
+            for (int y = 0; y < world.worldSettings.ChunkResolution; y++)
+            {
+                for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
+                {
+                    int index = (z * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution) + (y * world.worldSettings.ChunkResolution) + x;
+                    voxels[index].position = new Vector3(x, y, z) / world.worldSettings.ChunkResolution * world.worldSettings.ChunkSize;
+                }
+            }
+        }
+    }
+
+    protected virtual void Awake()
 	{
         GetComponents();
 	}
 
     protected virtual void LateUpdate()
 	{
-        UpdateChunk();
-	}
+        UpdateChunkIfChange();
+    }
 
     protected virtual int GetVoxelIndex(Vector3Int pos)
     {
