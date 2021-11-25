@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Stencil
 {
-	public virtual void SetVoxel(float value, Vector3Int pos, World world)
+	public virtual void SetVoxel(Voxel voxel, Vector3Int pos, World world)
 	{
-
+		world.SetVoxel(voxel, pos);
 	}
 }
