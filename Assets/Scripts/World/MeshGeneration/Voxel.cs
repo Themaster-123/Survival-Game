@@ -11,4 +11,10 @@ public struct Voxel
 		this.position = position;
 		this.value = value;
 	}
+
+	public Voxel(float value)
+	{
+		this.position = Vector3.zero;
+		this.value = value;
+	}
 }
