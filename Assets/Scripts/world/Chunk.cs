@@ -159,6 +159,7 @@ public class Chunk : MonoBehaviour
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
                     voxel.value = voxelData[index];
+                    voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxels[index] = voxel;
                 }
             }
