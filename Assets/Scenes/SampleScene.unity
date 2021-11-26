@@ -266,7 +266,7 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
-  terrainLayers:
+  terrainMask:
     serializedVersion: 2
     m_Bits: 64
   world: {fileID: 1626338178}
@@ -671,7 +671,7 @@ MonoBehaviour:
   worldSettings: {fileID: 11400000, guid: 8eb4cfdeab6254f4ca53837289c5f722, type: 2}
   noiseSettings:
     settingsObject: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
-    resolution: 33
+    resolution: 32
     offset: {x: 0, y: 0, z: 0}
     size: {x: 0.01, y: 0.01, z: 0.01}
     seed: 3

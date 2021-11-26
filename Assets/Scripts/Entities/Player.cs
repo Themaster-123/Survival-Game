@@ -55,6 +55,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        RegisterInteractInput();
     }
 
     protected override void Update()
@@ -82,6 +83,11 @@ public class Player : Entity
 		}
 	}
 
+    protected virtual void RegisterInteractInput()
+	{
+        inputMaster.Player.Interact.performed += context => OnInteract();
+    }
+
 	protected override void AddEntityToWorld()
 	{
 		base.AddEntityToWorld();
@@ -92,5 +98,10 @@ public class Player : Entity
 	{
 		base.RemoveEntityFromWorld();
         world.RemovePlayer(this);
+	}
+
+    protected virtual void OnInteract()
+	{
+        AttemptDig();
 	}
 }

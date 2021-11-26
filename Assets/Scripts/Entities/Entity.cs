@@ -21,7 +21,8 @@ public class Entity : MonoBehaviour
     public Vector3 headPosition;
     public float maxInteractionDistance = 5;
     public LayerMask interactionMask;
-    public LayerMask terrainLayers;
+    public LayerMask terrainMask;
+    public SquareStencil stencil;
 
     [Header("Misc")]
     public World world;
@@ -173,23 +174,36 @@ public class Entity : MonoBehaviour
         world.RemoveEntity(this);
     }
 
-    protected virtual RaycastHit RaycastFromHead()
+    protected virtual RaycastHit RaycastFromHead(LayerMask mask)
 	{
         Vector3 origin = transform.TransformPoint(GetHorizontalEntityRotation() * headPosition);
         Vector3 direction = GetDirection();
 
-		Physics.Raycast(origin, direction, out RaycastHit hit, maxInteractionDistance, interactionMask, QueryTriggerInteraction.Ignore);
+		Physics.Raycast(origin, direction, out RaycastHit hit, maxInteractionDistance, mask, QueryTriggerInteraction.Ignore);
 
 		return hit;
 	}
 
+    protected virtual RaycastHit RaycastFromHead()
+    {
+        return RaycastFromHead(interactionMask);
+    }
+
     protected virtual void AttemptDig()
 	{
-        RaycastHit hit = RaycastFromHead();
+        RaycastHit hit = RaycastFromHead(terrainMask);
 
-        if (hit.collider.gameObject.layer == terrainLayers)
+        if (hit.collider != null)
 		{
-
+            Dig(hit.point);
 		}
+	}
+
+    // digs into terrain with the shape of the stencil
+    protected virtual void Dig(Vector3 position)
+	{
+        Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, world);
+        print(voxelPosition);
+        stencil.SetVoxel(new Voxel(0), voxelPosition, world);
 	}
 }

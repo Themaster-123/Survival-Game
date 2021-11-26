@@ -52,4 +52,9 @@ public static class ChunkPositionUtilities
 
         return chunkPosition;
     }
+
+    public static Vector3Int VoxelToChunkPosition(Vector3Int pos, World world)
+	{
+        return pos / world.worldSettings.ChunkResolution;
+	}
 }

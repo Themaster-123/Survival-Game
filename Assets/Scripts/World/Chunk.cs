@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 [AddComponentMenu("Survival Game/World/Chunk")]
 public class Chunk : MonoBehaviour
@@ -22,6 +22,7 @@ public class Chunk : MonoBehaviour
 
     public void SetVoxel(Vector3Int position, Voxel voxel)
 	{
+        print(position);
         int index = GetVoxelIndex(position);
         voxel.position = voxels[index].position;
         voxels[index] = voxel;
@@ -61,7 +62,7 @@ public class Chunk : MonoBehaviour
 	{
         //UpdateVoxelsPositions();
 
-        MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), .5f, voxels, out Vector3[] vertices, out int[] triangles, position, world);
+        MarchingCubes.GenerateMesh(Vector3Int.one * (world.worldSettings.ChunkResolution), 0, voxels, out Vector3[] vertices, out int[] triangles, position, world);
 
         UpdateMesh(vertices, triangles);
     }

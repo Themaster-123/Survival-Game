@@ -110,7 +110,7 @@ public class World : MonoBehaviour
 
 	public virtual void SetVoxel(Voxel voxel, Vector3Int pos)
 	{
-		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
+		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
 		if (IsChunkLoaded(chunkPos))
 		{
 			chunks[chunkPos].SetVoxel(GetLocalVoxelPos(pos), voxel);
@@ -119,7 +119,7 @@ public class World : MonoBehaviour
 
 	public virtual Voxel GetVoxel(Vector3Int pos)
 	{
-		Vector3Int chunkPos = ChunkPositionUtilities.ToChunkPosition(pos, this);
+		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
 		return GetVoxelAtChunk(GetLocalVoxelPos(pos), chunkPos);
 	}
 
@@ -141,9 +141,9 @@ public class World : MonoBehaviour
 
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
 	{
-		position.x %= worldSettings.ChunkResolution;
-		position.y %= worldSettings.ChunkResolution;
-		position.z %= worldSettings.ChunkResolution;
+		position.x = MathUtilities.Mod(position.x, worldSettings.ChunkResolution);
+		position.y = MathUtilities.Mod(position.y, worldSettings.ChunkResolution);
+		position.z = MathUtilities.Mod(position.z, worldSettings.ChunkResolution);
 
 		return position;
 	}
