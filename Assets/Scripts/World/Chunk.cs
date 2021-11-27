@@ -12,7 +12,7 @@ public class Chunk : MonoBehaviour
     protected MeshCollider meshCollider;
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
-    protected bool voxelChanged = false;
+    protected bool voxelsChanged = false;
 
     public Voxel GetVoxel(Vector3Int position)
 	{
@@ -22,11 +22,12 @@ public class Chunk : MonoBehaviour
 
     public void SetVoxel(Vector3Int position, Voxel voxel)
 	{
-        print(position);
+       // print(position);
         int index = GetVoxelIndex(position);
         voxel.position = voxels[index].position;
+        print(voxel.value);
         voxels[index] = voxel;
-        voxelChanged = true;
+        voxelsChanged = true;
     }
 
     public void InitiateChunk(Vector3Int position, in World world)
@@ -57,6 +58,11 @@ public class Chunk : MonoBehaviour
         UpdateTransform();
     }
 
+    public virtual void ReloadModel()
+	{
+        voxelsChanged = true;
+	}
+
     // regenerates the chunk's mesh
     public virtual void UpdateChunk()
 	{
@@ -66,16 +72,6 @@ public class Chunk : MonoBehaviour
 
         UpdateMesh(vertices, triangles);
     }
-
-    // updates the chunk if any voxels changed
-    public virtual void UpdateChunkIfChange()
-	{
-        if (voxelChanged)
-		{
-            voxelChanged = false;
-            UpdateChunk();
-		}
-	}
 
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
@@ -103,10 +99,29 @@ public class Chunk : MonoBehaviour
         GetComponents();
 	}
 
+    protected virtual void Update()
+	{
+	}
+
     protected virtual void LateUpdate()
 	{
-        UpdateChunkIfChange();
+        UpdateChunkIfChanged();
     }
+
+    // updates the chunk if any voxels changed
+    protected virtual void UpdateChunkIfChanged()
+    {
+        if (voxelsChanged)
+        {
+            voxelsChanged = false;
+            UpdateChunk();
+        }
+    }
+
+    protected virtual void CheckIfNeighbersChanged()
+	{
+
+	}
 
     protected virtual int GetVoxelIndex(Vector3Int pos)
     {
@@ -147,7 +162,7 @@ public class Chunk : MonoBehaviour
     // gets chunk up forward and right neighbors
     public static Chunk[] GetConnectionChunkNeighbors(Vector3Int position, World world)
 	{
-        Vector3Int[] neighbors = { Vector3Int.forward, Vector3Int.up, Vector3Int.right};
+        Vector3Int[] neighbors = { Vector3Int.forward, Vector3Int.up, Vector3Int.right, Vector3Int.left, Vector3Int.down, Vector3Int.back};
 
         List<Chunk> chunkNeighbors = new List<Chunk>();
 
