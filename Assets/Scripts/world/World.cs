@@ -142,18 +142,19 @@ public class World : MonoBehaviour
 
 	public virtual Voxel GetVoxelAtChunk(Vector3Int pos, Vector3Int chunkPos)
 	{
-		if (IsChunkLoaded(chunkPos))
+		lock (chunks)
 		{
-			return chunks[chunkPos].GetVoxel(pos);
+			if (IsChunkLoaded(chunkPos))
+			{
+				return chunks[chunkPos].GetVoxel(pos);
+			}
 		}
-		else
-		{
-			float[] data = new float[1];
 
-			GenerateNoise(data, (Vector3Int.FloorToInt(noiseSettings.offset) + chunkPos * noiseSettings.resolution) + pos, Vector3Int.one);
+		float[] data = new float[1];
 
-			return new Voxel((Vector3)pos / worldSettings.ChunkResolution * worldSettings.ChunkSize, data[0]);
-		}
+		GenerateNoise(data, (Vector3Int.FloorToInt(noiseSettings.offset) + chunkPos * noiseSettings.resolution) + pos, Vector3Int.one);
+
+		return new Voxel((Vector3)pos / worldSettings.ChunkResolution * worldSettings.ChunkSize, data[0]);
 	}
 
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
