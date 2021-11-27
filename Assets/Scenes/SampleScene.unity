@@ -262,13 +262,15 @@ MonoBehaviour:
   enttiyCollider: {fileID: 461834953}
   rotation: {x: 0, y: 0}
   headPosition: {x: 0, y: 0.5, z: 0}
-  maxInteractionDistance: 5
+  maxInteractionDistance: Infinity
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
   terrainMask:
     serializedVersion: 2
     m_Bits: 64
+  stencil:
+    range: 3
   world: {fileID: 1626338178}
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}

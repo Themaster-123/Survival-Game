@@ -55,6 +55,6 @@ public static class ChunkPositionUtilities
 
     public static Vector3Int VoxelToChunkPosition(Vector3Int pos, World world)
 	{
-        return pos / world.worldSettings.ChunkResolution;
+        return Vector3Int.FloorToInt((Vector3)pos / world.worldSettings.ChunkResolution);
 	}
 }

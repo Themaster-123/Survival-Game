@@ -153,8 +153,8 @@ public class Entity : MonoBehaviour
     {     
     }
 
-    // handles ai / input
-    protected virtual void MoveEntity()
+	// handles ai / input
+	protected virtual void MoveEntity()
     {
     }
 
