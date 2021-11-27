@@ -8,7 +8,7 @@ public class SquareStencil : RangeStencil
 {
 	public override void SetVoxel(Voxel voxel, Vector3Int pos, World world)
 	{
-		int squareRange = Mathf.Max((int)range, 1);
+		int squareRange = Mathf.Max((int)range, 0);
 
 		for (int x = -squareRange; x <= squareRange; x++)
 		{
