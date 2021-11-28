@@ -25,7 +25,6 @@ public class Chunk : MonoBehaviour
        // print(position);
         int index = GetVoxelIndex(position);
         voxel.position = voxels[index].position;
-        print(voxel.value);
         voxels[index] = voxel;
         voxelsChanged = true;
     }
