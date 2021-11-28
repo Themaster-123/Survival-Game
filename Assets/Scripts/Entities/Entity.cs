@@ -204,6 +204,6 @@ public class Entity : MonoBehaviour
 	{
         Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, world);
         print(voxelPosition);
-        stencil.SetVoxel(new Voxel(0), voxelPosition, world);
+        stencil.SetVoxel(new Voxel(1), voxelPosition, world);
 	}
 }

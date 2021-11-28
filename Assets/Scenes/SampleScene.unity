@@ -270,7 +270,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   stencil:
-    range: 3
+    range: 5
   world: {fileID: 1626338178}
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}
