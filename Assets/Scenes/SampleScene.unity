@@ -716,9 +716,9 @@ MonoBehaviour:
   worldSettings: {fileID: 11400000, guid: 8eb4cfdeab6254f4ca53837289c5f722, type: 2}
   noiseSettings:
     settingsObject: {fileID: 11400000, guid: be609f1d11ac0e448b7a03ee5819e3b9, type: 2}
-    resolution: 32
+    resolution: 16
     offset: {x: 0, y: 0, z: 0}
-    size: {x: 0.01, y: 0.01, z: 0.01}
+    size: {x: 0.02, y: 0.01, z: 0.01}
     seed: 3
   chunkPrefab: {fileID: 8631612681894592453, guid: e38662d10b0d5ae429bc4af56b005317, type: 3}
   nodeTree: JgAZAAQAAAAAAOxRGEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBwABGwAIAABI4VpA

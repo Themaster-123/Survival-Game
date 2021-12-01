@@ -6,6 +6,7 @@ using System.Threading;
 using Unity.Jobs;
 using Unity.Burst;
 using Unity.Collections;
+using UnityEngine.Profiling;
 
 [AddComponentMenu("Survival Game/World/World")]
 public class World : MonoBehaviour
@@ -373,6 +374,8 @@ public class World : MonoBehaviour
 
 		while (true)
 		{
+			Profiler.BeginSample("World Load Loop");
+
 			uint size = Settings.Instance.GetChunkLoadDistance();
 
 
@@ -432,7 +435,9 @@ public class World : MonoBehaviour
 					}
 				}
 			}
+			Profiler.EndSample();
 		}
+
 	}
 
 	[BurstCompile(CompileSynchronously = true)]

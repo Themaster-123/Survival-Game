@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Default World Settings
   m_EditorClassIdentifier: 
   ChunkSize: 16
-  ChunkResolution: 32
+  ChunkResolution: 16

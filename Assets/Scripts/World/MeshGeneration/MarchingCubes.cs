@@ -306,7 +306,6 @@ public class MarchingCubes
     public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
 	{
 		Profiler.BeginSample("Marching Cubes");
-
 		/*		Chunk[] neighbors = Chunk.GetConnectionChunkNeighbors(chunkPosition, world);
 
 				for (int i = 0; i < neighbors.Length; i++)
@@ -354,8 +353,10 @@ public class MarchingCubes
 		}
 		else
 		{
+
 			NativeCounter vertexCounter = new NativeCounter(Allocator.TempJob);
 			Vector3Int increasedRes = resolution + Vector3Int.one;
+
 			NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(increasedRes.x * increasedRes.y * increasedRes.z, Allocator.TempJob);
 			for (int x = 0; x < increasedRes.x; x++)
 			{
@@ -368,7 +369,9 @@ public class MarchingCubes
 					}
 				}
 			}
+
 			int maxLength = 15 * resolution.x * resolution.y * resolution.z;
+
 
 			NativeArray<Vector3> verticesArray = new NativeArray<Vector3>(maxLength, Allocator.TempJob);
 			NativeArray<int> trianglesArray = new NativeArray<int>(maxLength, Allocator.TempJob);
@@ -386,16 +389,15 @@ public class MarchingCubes
 				resolution = resolution
 			};
 
-			JobHandle jobHandle = marchingCubesJob.Schedule(resolution.x * resolution.y * resolution.z, 1);
+			JobHandle jobHandle = marchingCubesJob.Schedule(resolution.x * resolution.y * resolution.z, 256);
 
 			jobHandle.Complete();
 
 			voxelsNativeArray.Dispose();
 			vertexCounter.Dispose();
 
-
-			vertices = new Vector3[marchingCubesJob.vertexCount.Count * 3];
-			triangles = new int[marchingCubesJob.vertexCount.Count * 3];
+			vertices = verticesArray.ToArray();
+			triangles = trianglesArray.ToArray();
 
 			for (int i = 0; i < marchingCubesJob.vertexCount.Count * 3; i++)
 			{
@@ -403,8 +405,12 @@ public class MarchingCubes
 				triangles[i] = trianglesArray[i];
 			}
 
+			Profiler.BeginSample("Marching Cubes 2");
+
 			verticesArray.Dispose();
 			trianglesArray.Dispose();
+			Profiler.EndSample();
+
 		}
 
 		Profiler.EndSample();
