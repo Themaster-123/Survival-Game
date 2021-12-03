@@ -303,7 +303,7 @@ public class MarchingCubes
 0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
-    public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
+    public static void GenerateMesh(Vector3Int resolution, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
 	{
 		Profiler.BeginSample("Marching Cubes");
 		/*		Chunk[] neighbors = Chunk.GetConnectionChunkNeighbors(chunkPosition, world);
@@ -358,6 +358,8 @@ public class MarchingCubes
 			Vector3Int increasedRes = resolution + Vector3Int.one;
 
 			NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(increasedRes.x * increasedRes.y * increasedRes.z, Allocator.TempJob);
+
+			Profiler.BeginSample("Marching Cubes 2");
 			for (int x = 0; x < increasedRes.x; x++)
 			{
 				for (int y = 0; y < increasedRes.y; y++)
@@ -369,6 +371,7 @@ public class MarchingCubes
 					}
 				}
 			}
+			Profiler.EndSample();
 
 			int maxLength = 15 * resolution.x * resolution.y * resolution.z;
 
@@ -405,7 +408,6 @@ public class MarchingCubes
 				triangles[i] = trianglesArray[i];
 			}
 
-			Profiler.BeginSample("Marching Cubes 2");
 
 			verticesArray.Dispose();
 			trianglesArray.Dispose();
@@ -413,7 +415,6 @@ public class MarchingCubes
 
 		}
 
-		Profiler.EndSample();
 
 		/*NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(voxels.Length, Allocator.TempJob);
 		NativeList<CellData> resultsNativeArray = new NativeList<CellData>(Allocator.TempJob);
