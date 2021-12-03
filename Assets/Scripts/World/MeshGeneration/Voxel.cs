@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Collections;
+using System.Runtime.InteropServices;
 
+[StructLayout(LayoutKind.Sequential)]
 public struct Voxel
 {
 	public Vector3 position;
