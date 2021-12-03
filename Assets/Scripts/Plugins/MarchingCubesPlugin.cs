@@ -8,29 +8,37 @@ public class MarchingCubesPlugin
 {
 	public const string NATIVE_LIB = "MarchingCubes";
 
-	public unsafe void Test(out Vector3[] a)
+	public void MarchingCubes(Vector3Int resolution, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles)
 	{
+		IntPtr verticesPtr = IntPtr.Zero;
+		IntPtr trianglesPtr = IntPtr.Zero;
+		IntPtr verticesVector = IntPtr.Zero;
+		IntPtr trianglesVector = IntPtr.Zero;
 		int length;
-		IntPtr array = IntPtr.Zero;
-		mcTest(ref array, out length);
-		IntPtr orginal = array;
+		mcMarchingCubes(isoLevel, resolution, voxels, ref verticesPtr, ref trianglesPtr, out length, ref verticesVector, ref trianglesVector);
 
-		a = new Vector3[length];
+		vertices = new Vector3[length];
+		triangles = new int[length];
 
-		int byteSize = Marshal.SizeOf(typeof(Vector3));
+		int vector3ByteSize = Marshal.SizeOf(typeof(Vector3));
 
 		for (int i = 0; i < length; i++)
 		{
-			a[i] = /*array[i];*/(Vector3)Marshal.PtrToStructure(array, typeof(Vector3));
-			array += byteSize;
+			vertices[i] = (Vector3)Marshal.PtrToStructure(verticesPtr, typeof(Vector3));
+			verticesPtr += vector3ByteSize;
 		}
 
-		mcReleaseArray(orginal);
+		Marshal.Copy(trianglesPtr, triangles, 0, length);
+
+		mcDeleteVector(verticesVector);
+		mcDeleteVector(trianglesVector);
 	}
 
+	// Need the Vector Pointers to release the memory later.
 	[DllImport(NATIVE_LIB)]
-	protected static extern unsafe void mcTest(ref IntPtr array, out int length);
+	protected static extern unsafe void mcMarchingCubes(float isoLevel, in Vector3Int resolution, in Voxel[] voxels, ref IntPtr vertices, ref IntPtr triangles, out int length, 
+		ref IntPtr verticesVector, ref IntPtr trianglesVector);
 
 	[DllImport(NATIVE_LIB)]
-	protected static extern unsafe void mcReleaseArray(IntPtr array);
+	protected static extern unsafe void mcDeleteVector(IntPtr vector);
 }
