@@ -303,7 +303,7 @@ public class MarchingCubes
 0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
-    public static void GenerateMesh(Vector3Int resolution, float isoLevel, in Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
+    public static void GenerateMesh(Vector3Int resolution, float isoLevel, Voxel[] voxels, out Vector3[] vertices, out int[] triangles, Vector3Int chunkPosition, World world)
 	{
 		Profiler.BeginSample("Marching Cubes");
 		/*		Chunk[] neighbors = Chunk.GetConnectionChunkNeighbors(chunkPosition, world);
@@ -321,7 +321,7 @@ public class MarchingCubes
 			return GetVoxel(position, voxels, resolution, chunkPosition, world);
 		}
 
-		if (!ThreadUtilities.IsMainThread())
+/*		if (!ThreadUtilities.IsMainThread())
 		{
 
 			List<Vector3> verticesList = new List<Vector3>();
@@ -352,9 +352,26 @@ public class MarchingCubes
 			triangles = trianglesList.ToArray();
 		}
 		else
-		{
+		{*/
+			Vector3Int increasedRes = resolution + Vector3Int.one;
 
-			NativeCounter vertexCounter = new NativeCounter(Allocator.TempJob);
+			Voxel[] voxelArray = new Voxel[increasedRes.x * increasedRes.y * increasedRes.z];
+			for (int x = 0; x < increasedRes.x; x++)
+			{
+				for (int y = 0; y < increasedRes.y; y++)
+				{
+					for (int z = 0; z < increasedRes.z; z++)
+					{
+						int index = (z * increasedRes.x * increasedRes.y) + (y * increasedRes.x) + x;
+						voxelArray[index] = getVoxel(new Vector3Int(x, y, z));
+					}
+				}
+			}
+
+			MarchingCubesPlugin.MarchingCubes(increasedRes, isoLevel, voxelArray, out vertices, out triangles);
+
+
+			/*NativeCounter vertexCounter = new NativeCounter(Allocator.TempJob);
 			Vector3Int increasedRes = resolution + Vector3Int.one;
 
 			NativeArray<Voxel> voxelsNativeArray = new NativeArray<Voxel>(increasedRes.x * increasedRes.y * increasedRes.z, Allocator.TempJob);
@@ -411,10 +428,10 @@ public class MarchingCubes
 
 			verticesArray.Dispose();
 			trianglesArray.Dispose();
-			Profiler.EndSample();
+			*/
 
-		}
-
+		//}
+		Profiler.EndSample();
 
 	}
 
