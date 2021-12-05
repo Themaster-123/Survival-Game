@@ -374,7 +374,6 @@ public class World : MonoBehaviour
 
 		while (true)
 		{
-			Profiler.BeginSample("World Load Loop");
 
 			uint size = Settings.Instance.GetChunkLoadDistance();
 
@@ -435,7 +434,6 @@ public class World : MonoBehaviour
 					}
 				}
 			}
-			Profiler.EndSample();
 		}
 
 	}

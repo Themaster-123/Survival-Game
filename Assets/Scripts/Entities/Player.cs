@@ -56,13 +56,6 @@ public class Player : Entity
     {
         base.Start();
         RegisterInteractInput();
-/*        MarchingCubesPlugin e = new MarchingCubesPlugin();
-        Vector3[] array;
-        e.Test(out array);
-        foreach (Vector3 i in array)
-		{
-            print(i);
-		}*/
     }
 
     protected override void Update()
