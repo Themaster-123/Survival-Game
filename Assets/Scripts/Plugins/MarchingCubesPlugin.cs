@@ -20,15 +20,18 @@ public static class MarchingCubesPlugin
 		vertices = new Vector3[length];
 		triangles = new int[length];
 
-		int vector3ByteSize = Marshal.SizeOf(typeof(Vector3));
-
-		for (int i = 0; i < length; i++)
+		if (length != 0)
 		{
-			vertices[i] = (Vector3)Marshal.PtrToStructure(verticesPtr, typeof(Vector3));
-			verticesPtr += vector3ByteSize;
-		}
+			int vector3ByteSize = Marshal.SizeOf(typeof(Vector3));
 
-		Marshal.Copy(trianglesPtr, triangles, 0, length);
+			for (int i = 0; i < length; i++)
+			{
+				vertices[i] = (Vector3)Marshal.PtrToStructure(verticesPtr, typeof(Vector3));
+				verticesPtr += vector3ByteSize;
+			}
+
+			Marshal.Copy(trianglesPtr, triangles, 0, length);
+		}
 
 		mcDeleteVector(verticesVector);
 		mcDeleteVector(trianglesVector);
