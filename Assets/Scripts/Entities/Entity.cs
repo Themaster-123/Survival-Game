@@ -29,6 +29,8 @@ public class Entity : MonoBehaviour
 
     protected Rigidbody rigidBody;
     protected float jumpTime;
+    // used to move in FixedUpdate
+    protected Vector2 physicsMovement;
 
     public virtual void LockMouse()
     {
@@ -60,7 +62,7 @@ public class Entity : MonoBehaviour
         foreach (RaycastHit hit in hits)
 		{
             if (((groundLayers.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject)
-			{
+			{ 
                 return true;
 			}
 		}
@@ -68,21 +70,10 @@ public class Entity : MonoBehaviour
         return false;
 	}
 
-    // changes the entity velocity to the target velocity(movement)
+    // changes physicsMovement to the sum of all movement
     public virtual void Move(Vector2 movement)
     {
-        Vector3 direction = GetHorizontalEntityRotation() * new Vector3(movement.x, 0, movement.y);
-        Vector3 targetVelocity = direction * maxSpeed;
-        Vector3 noUpwordVelocity = rigidBody.velocity - Vector3.Scale(rigidBody.velocity, rigidBody.transform.up);
-        Vector3 velocityChange = targetVelocity - noUpwordVelocity;
-
-        float maxAccel = Vector3.Dot(velocityChange, noUpwordVelocity.normalized) < 0 ? deceleration : acceleration;
-
-        Vector3 accel = velocityChange;
-
-        accel = Vector3.ClampMagnitude(accel, maxAccel * Time.deltaTime);
-
-        rigidBody.AddForce(accel, ForceMode.VelocityChange);
+        physicsMovement += movement;
     }
 
     // rotates the entity using mouse movements
@@ -153,9 +144,34 @@ public class Entity : MonoBehaviour
     {     
     }
 
+    protected virtual void FixedUpdate()
+	{
+        PhysicsMove();
+	}
+
 	// handles ai / input
 	protected virtual void MoveEntity()
     {
+    }
+
+    // changes the entity velocity to the target velocity(movement) then resets physicsMovement
+    protected virtual void PhysicsMove()
+    {
+        physicsMovement.Normalize();
+        Vector3 direction = GetHorizontalEntityRotation() * new Vector3(physicsMovement.x, 0, physicsMovement.y);
+
+        Vector3 horizontalVel = rigidBody.velocity;
+        horizontalVel.y = 0;
+        Vector3 targetVelocity = direction * maxSpeed;
+        Vector3 velocityDifference = targetVelocity - horizontalVel;
+
+        Vector3 force =  Vector3.ClampMagnitude(velocityDifference, acceleration * Time.fixedDeltaTime);
+
+/*        float oldY = rigidBody.velocity.y;
+        rigidBody.velocity = direction * maxSpeed;
+        rigidBody.velocity = new Vector3(rigidBody.velocity.x, oldY, rigidBody.velocity.z);*/
+        rigidBody.AddForce(force, ForceMode.VelocityChange);
+        physicsMovement = Vector2.zero;
     }
 
     protected virtual void GetComponents()
