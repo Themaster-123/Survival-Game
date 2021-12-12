@@ -253,15 +253,17 @@ MonoBehaviour:
   maxSpeed: 8
   acceleration: 80
   deceleration: 28
+  maxSlopeAngle: 55
+  rotation: {x: 3827.6033, y: -0.19999552}
   jumpStrength: 5
   jumpCooldown: 0.1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
-  groundedCheckDistance: 0.1
-  enttiyCollider: {fileID: 461834953}
-  rotation: {x: 0, y: 0}
+  groundedCheckDistance: 0.6
   headPosition: {x: 0, y: 0.5, z: 0}
+  feetPosition: {x: 0, y: 0, z: 0}
+  groundCheckRadius: 0.45
   maxInteractionDistance: Infinity
   interactionMask:
     serializedVersion: 2

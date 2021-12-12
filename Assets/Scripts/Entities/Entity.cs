@@ -9,16 +9,20 @@ public class Entity : MonoBehaviour
     public float maxSpeed = 8;
     public float acceleration = 8;
     public float deceleration = 8;
-    public float jumpStrength = 3;
-    public float jumpCooldown = .1f;
-    public LayerMask groundLayers;
-    public float groundedCheckDistance = .03f;
-    public CapsuleCollider enttiyCollider;
+    public float maxSlopeAngle = 65;
     [HideInInspector]
     public Vector2 rotation;
 
+    [Header("Jump Settings")]
+    public float jumpStrength = 3;
+    public float jumpCooldown = .1f;
+    public LayerMask groundLayers;
+    public float groundedCheckDistance = .03f; 
+
     [Header("Interaction")]
     public Vector3 headPosition;
+    public Vector3 feetPosition;
+    public float groundCheckRadius = .9f;
     public float maxInteractionDistance = 5;
     public LayerMask interactionMask;
     public LayerMask terrainMask;
@@ -31,6 +35,9 @@ public class Entity : MonoBehaviour
     protected float jumpTime;
     // used to move in FixedUpdate
     protected Vector2 physicsMovement;
+    protected Vector3 lastJumpPoint;
+    // tracks if entity is on ground
+    bool onGround = false;
 
     public virtual void LockMouse()
     {
@@ -49,6 +56,7 @@ public class Entity : MonoBehaviour
     {
         if (IsGrounded() && Time.time >= jumpTime)
 		{
+            lastJumpPoint = transform.position + feetPosition;
             jumpTime = Time.time + jumpCooldown;
             rigidBody.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
 		}
@@ -56,19 +64,28 @@ public class Entity : MonoBehaviour
 
     public bool IsGrounded()
 	{
-        Vector3 p1 = enttiyCollider.transform.position + enttiyCollider.center + enttiyCollider.transform.up * (-enttiyCollider.height + enttiyCollider.radius * 2) * 0.5F;
-        RaycastHit[] hits = Physics.SphereCastAll(p1, enttiyCollider.radius, -enttiyCollider.transform.up, groundedCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+        /*return IsGrounded(out _);*/
+        return onGround;
+	}
+
+    public bool IsGrounded(out RaycastHit hitPoint)
+    {
+        Vector3 p1 = transform.position + feetPosition;
+
+        RaycastHit[] hits = Physics.SphereCastAll(p1, groundCheckRadius, -transform.up, groundedCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
 
         foreach (RaycastHit hit in hits)
-		{
+        {
             if (((groundLayers.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject)
-			{ 
+            {
+                hitPoint = hit;
                 return true;
-			}
-		}
-
+            }
+        }
+        RaycastHit nullHitPoint = new RaycastHit();
+        hitPoint = nullHitPoint; 
         return false;
-	}
+    }
 
     // changes physicsMovement to the sum of all movement
     public virtual void Move(Vector2 movement)
@@ -147,6 +164,22 @@ public class Entity : MonoBehaviour
     protected virtual void FixedUpdate()
 	{
         PhysicsMove();
+        SetGrounded(false);
+	}
+
+    protected void OnCollisionEnter(Collision collision)
+	{
+        CheckIfOnGround(collision);
+    }
+
+	protected void OnCollisionStay(Collision collision)
+	{
+        CheckIfOnGround(collision);
+    }
+
+	private void OnDrawGizmos()
+	{
+        Gizmos.DrawSphere(lastJumpPoint, groundCheckRadius);
 	}
 
 	// handles ai / input
@@ -157,7 +190,15 @@ public class Entity : MonoBehaviour
     // changes the entity velocity to the target velocity(movement) then resets physicsMovement
     protected virtual void PhysicsMove()
     {
-        physicsMovement.Normalize();
+/*        RaycastHit hit = GetGroundedHit();
+		if (hit.transform != null && hit.distance != 0)
+		{
+            hit.
+			print(hit.point + " " + hit.distance);
+			rigidBody.position = new Vector3(rigidBody.position.x, hit.point.y + 1, rigidBody.position.z);
+		}*/
+
+		physicsMovement.Normalize();
         Vector3 direction = GetHorizontalEntityRotation() * new Vector3(physicsMovement.x, 0, physicsMovement.y);
 
         Vector3 horizontalVel = rigidBody.velocity;
@@ -167,11 +208,10 @@ public class Entity : MonoBehaviour
 
         Vector3 force =  Vector3.ClampMagnitude(velocityDifference, acceleration * Time.fixedDeltaTime);
 
-/*        float oldY = rigidBody.velocity.y;
-        rigidBody.velocity = direction * maxSpeed;
-        rigidBody.velocity = new Vector3(rigidBody.velocity.x, oldY, rigidBody.velocity.z);*/
         rigidBody.AddForce(force, ForceMode.VelocityChange);
         physicsMovement = Vector2.zero;
+
+
     }
 
     protected virtual void GetComponents()
@@ -221,5 +261,24 @@ public class Entity : MonoBehaviour
         Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, world);
         print(voxelPosition);
         stencil.SetVoxel(new Voxel(1), voxelPosition, world);
+	}
+
+    protected virtual void SetGrounded(bool grounded)
+	{
+        onGround = grounded;
+	}
+
+    // checks if the ground slope is below or equal maxSlopeAngle and other stuff
+    protected virtual void CheckIfOnGround(Collision collision)
+	{
+        for (int i = 0; i < collision.contactCount; i++)
+		{
+            if (Vector3.Angle(Vector3.up, collision.contacts[i].normal) <= maxSlopeAngle)
+			{
+                SetGrounded(true);
+                return;
+			}
+		}
+        SetGrounded(false);
 	}
 }
