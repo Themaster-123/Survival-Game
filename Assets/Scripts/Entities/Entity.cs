@@ -7,9 +7,11 @@ public class Entity : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float maxSpeed = 8;
-    public float acceleration = 8;
-    public float deceleration = 8;
+    public float acceleration = 80;
+    public float maxAirSpeed = 4;
+    public float airAcceleration = 20;
     public float maxSlopeAngle = 65;
+    public float snapPredictionTime = .1f;
     [HideInInspector]
     public Vector2 rotation;
 
@@ -37,7 +39,10 @@ public class Entity : MonoBehaviour
     protected Vector2 physicsMovement;
     protected Vector3 lastJumpPoint;
     // tracks if entity is on ground
-    bool onGround = false;
+    protected bool onGround = false;
+    protected uint stepsSinceLastGrounded = 0;
+    protected Vector3 contactNormal;
+    protected Vector3 combinedNormals;
 
     public virtual void LockMouse()
     {
@@ -67,25 +72,6 @@ public class Entity : MonoBehaviour
         /*return IsGrounded(out _);*/
         return onGround;
 	}
-
-    public bool IsGrounded(out RaycastHit hitPoint)
-    {
-        Vector3 p1 = transform.position + feetPosition;
-
-        RaycastHit[] hits = Physics.SphereCastAll(p1, groundCheckRadius, -transform.up, groundedCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
-
-        foreach (RaycastHit hit in hits)
-        {
-            if (((groundLayers.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject)
-            {
-                hitPoint = hit;
-                return true;
-            }
-        }
-        RaycastHit nullHitPoint = new RaycastHit();
-        hitPoint = nullHitPoint; 
-        return false;
-    }
 
     // changes physicsMovement to the sum of all movement
     public virtual void Move(Vector2 movement)
@@ -158,14 +144,19 @@ public class Entity : MonoBehaviour
     }
 
     protected virtual void Update()
-    {     
+    {
     }
 
     protected virtual void FixedUpdate()
 	{
+        UpdateState();
+        IncrementStepsSinceLastGrounded();
+        SnapToGround();
         PhysicsMove();
-        SetGrounded(false);
-	}
+        print(contactNormal);
+
+        ClearState();
+    }
 
     protected void OnCollisionEnter(Collision collision)
 	{
@@ -190,28 +181,21 @@ public class Entity : MonoBehaviour
     // changes the entity velocity to the target velocity(movement) then resets physicsMovement
     protected virtual void PhysicsMove()
     {
-/*        RaycastHit hit = GetGroundedHit();
-		if (hit.transform != null && hit.distance != 0)
-		{
-            hit.
-			print(hit.point + " " + hit.distance);
-			rigidBody.position = new Vector3(rigidBody.position.x, hit.point.y + 1, rigidBody.position.z);
-		}*/
-
 		physicsMovement.Normalize();
+
+        Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+        Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+        
         Vector3 direction = GetHorizontalEntityRotation() * new Vector3(physicsMovement.x, 0, physicsMovement.y);
 
-        Vector3 horizontalVel = rigidBody.velocity;
-        horizontalVel.y = 0;
-        Vector3 targetVelocity = direction * maxSpeed;
+        Vector3 horizontalVel = new Vector3(Vector3.Dot(rigidBody.velocity, xAxis), 0, Vector3.Dot(rigidBody.velocity, zAxis));
+        Vector3 targetVelocity = direction * (IsGrounded() ? maxSpeed : maxAirSpeed);
         Vector3 velocityDifference = targetVelocity - horizontalVel;
 
-        Vector3 force =  Vector3.ClampMagnitude(velocityDifference, acceleration * Time.fixedDeltaTime);
+        Vector3 force =  Vector3.ClampMagnitude(ProjectOnContactPlane(velocityDifference), (IsGrounded() ? acceleration : airAcceleration) * Time.fixedDeltaTime);
 
         rigidBody.AddForce(force, ForceMode.VelocityChange);
         physicsMovement = Vector2.zero;
-
-
     }
 
     protected virtual void GetComponents()
@@ -263,22 +247,102 @@ public class Entity : MonoBehaviour
         stencil.SetVoxel(new Voxel(1), voxelPosition, world);
 	}
 
-    protected virtual void SetGrounded(bool grounded)
+    protected virtual void SetGrounded(bool grounded, Vector3 normal)
 	{
         onGround = grounded;
+        contactNormal = normal.normalized;
 	}
+
+    protected virtual void SetGrounded(bool grounded)
+    {
+        SetGrounded(grounded, Vector3.up);
+    }
 
     // checks if the ground slope is below or equal maxSlopeAngle and other stuff
     protected virtual void CheckIfOnGround(Collision collision)
 	{
         for (int i = 0; i < collision.contactCount; i++)
 		{
-            if (Vector3.Angle(Vector3.up, collision.contacts[i].normal) <= maxSlopeAngle)
+            if (IsNormalBelowSlopeAngle(collision.contacts[i].normal))
 			{
-                SetGrounded(true);
-                return;
+                combinedNormals += collision.contacts[i].normal;
 			}
 		}
+
+        if (combinedNormals != Vector3.zero)
+		{
+            SetGrounded(true);
+            return;
+        }
+
         SetGrounded(false);
+	}
+
+    protected virtual void IncrementStepsSinceLastGrounded()
+	{
+        stepsSinceLastGrounded += 1;
+	}
+
+    protected bool PredictIfGroundUnderEntity(out RaycastHit hitPoint)
+    {
+        Vector3 p1 = transform.position + feetPosition + rigidBody.velocity * snapPredictionTime;
+
+        RaycastHit[] hits = Physics.RaycastAll(p1, -transform.up, groundedCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (((groundLayers.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject)
+            {
+                hitPoint = hit;
+                return true;
+            }
+        }
+        RaycastHit nullHitPoint = new RaycastHit();
+        hitPoint = nullHitPoint;
+        return false;
+    }
+
+    protected virtual void SnapToGround()
+	{
+        if (IsGrounded()) {
+            stepsSinceLastGrounded = 0;
+            return;
+		}
+
+        if (stepsSinceLastGrounded == 1)
+		{
+            bool groundUnder = PredictIfGroundUnderEntity(out RaycastHit hit);
+            print(groundUnder);
+
+            if (groundUnder && IsNormalBelowSlopeAngle(hit.normal))
+            {
+                print(hit.normal);
+                SetGrounded(true, hit.normal);
+				float speed = rigidBody.velocity.magnitude;
+				float dot = Vector3.Dot(rigidBody.velocity, hit.normal);
+				rigidBody.velocity = (rigidBody.velocity - hit.normal * dot).normalized * speed;
+			}
+        }
+	}
+
+    protected virtual bool IsNormalBelowSlopeAngle(Vector3 normal)
+	{
+        return Vector3.Angle(Vector3.up, normal) <= maxSlopeAngle;
+    }
+
+    Vector3 ProjectOnContactPlane(Vector3 vector)
+	{
+        return Vector3.ProjectOnPlane(vector, contactNormal);
+	}
+
+    protected void ClearState()
+	{
+        SetGrounded(false);
+        combinedNormals = Vector3.zero;
+	}
+
+    protected void UpdateState()
+	{
+        SetGrounded(onGround, combinedNormals);
 	}
 }
