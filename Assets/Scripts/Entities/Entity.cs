@@ -37,10 +37,11 @@ public class Entity : MonoBehaviour
     protected float jumpTime;
     // used to move in FixedUpdate
     protected Vector2 physicsMovement;
-    protected Vector3 lastJumpPoint;
+    protected bool jumped;
     // tracks if entity is on ground
     protected bool onGround = false;
     protected uint stepsSinceLastGrounded = 0;
+    protected uint stepsSinceLastJump = 0;
     protected Vector3 contactNormal;
     protected Vector3 combinedNormals;
 
@@ -61,9 +62,8 @@ public class Entity : MonoBehaviour
     {
         if (IsGrounded() && Time.time >= jumpTime)
 		{
-            lastJumpPoint = transform.position + feetPosition;
+            jumped = true;
             jumpTime = Time.time + jumpCooldown;
-            rigidBody.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
 		}
     }
 
@@ -168,11 +168,6 @@ public class Entity : MonoBehaviour
         CheckIfOnGround(collision);
     }
 
-	private void OnDrawGizmos()
-	{
-        Gizmos.DrawSphere(lastJumpPoint, groundCheckRadius);
-	}
-
 	// handles ai / input
 	protected virtual void MoveEntity()
     {
@@ -196,6 +191,18 @@ public class Entity : MonoBehaviour
 
         rigidBody.AddForce(force, ForceMode.VelocityChange);
         physicsMovement = Vector2.zero;
+
+        if (jumped)
+		{
+            jumped = false;
+            PhysicsJump();
+		}
+    }
+
+    protected virtual void PhysicsJump()
+	{
+        stepsSinceLastJump = 0;
+        rigidBody.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
     }
 
     protected virtual void GetComponents()
@@ -281,6 +288,7 @@ public class Entity : MonoBehaviour
     protected virtual void IncrementStepsSinceLastGrounded()
 	{
         stepsSinceLastGrounded += 1;
+        stepsSinceLastJump += 1;
 	}
 
     protected bool PredictIfGroundUnderEntity(out RaycastHit hitPoint)
@@ -309,7 +317,7 @@ public class Entity : MonoBehaviour
             return;
 		}
 
-        if (stepsSinceLastGrounded == 1)
+        if (stepsSinceLastGrounded == 1 && stepsSinceLastJump > 2)
 		{
             bool groundUnder = PredictIfGroundUnderEntity(out RaycastHit hit);
             print(groundUnder);
