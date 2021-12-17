@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DirectionBehavior))]
-public class MovementBehavior : MonoBehaviour
+public class MovementBehavior : Behavior
 {
     [Header("Movement Settings")]
     public float maxSpeed = 8;
@@ -79,9 +79,9 @@ public class MovementBehavior : MonoBehaviour
         SetJumpTime();
     }
 
-    protected virtual void Awake()
+    protected override void Awake()
 	{
-        GetComponents();
+        base.Awake();
 	}
 
     protected virtual void FixedUpdate()
@@ -221,7 +221,7 @@ public class MovementBehavior : MonoBehaviour
         jumpTime = Time.time;
     }
 
-    protected virtual void GetComponents()
+    protected override void GetComponents()
     {
         rigidBody = GetComponent<Rigidbody>();
         directionBehavior = GetComponent<DirectionBehavior>();
