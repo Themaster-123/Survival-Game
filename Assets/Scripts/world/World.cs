@@ -109,7 +109,7 @@ public class World : MonoBehaviour
 		}
 	}
 
-	public virtual void SetVoxel(Voxel voxel, Vector3Int pos)
+	public virtual void SetVoxel(in Voxel voxel, Vector3Int pos)
 	{
 		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
 		if (IsChunkLoaded(chunkPos))
@@ -133,6 +133,14 @@ public class World : MonoBehaviour
 
 			chunks[chunkPos].SetVoxel(localPos, voxel);
 		}
+	}
+
+	public virtual void AddVoxel(in Voxel voxel, Vector3Int pos)
+	{
+		Voxel prevVoxel = GetVoxel(pos);
+		Voxel newVoxel = voxel;
+		newVoxel.value = prevVoxel.value + newVoxel.value;
+		SetVoxel(newVoxel, pos);
 	}
 
 	public virtual Voxel GetVoxel(Vector3Int pos)
@@ -315,6 +323,32 @@ public class World : MonoBehaviour
 		}
 	}
 
+/*	protected virtual bool ChangeVoxel(in Voxel voxel, in Vector3Int pos)
+	{
+		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
+		if (IsChunkLoaded(chunkPos))
+		{
+			Vector3Int localPos = GetLocalVoxelPos(pos);
+
+			for (int i = 0; i < 3; i++)
+			{
+				int dir = localPos[i] == 0 ? -1 : (localPos[i] == worldSettings.ChunkResolution - 1 ? 1 : 0);
+				if (dir != 0)
+				{
+					Vector3Int direction = Vector3Int.zero;
+					direction[i] = dir;
+					Chunk chunk = GetChunk(chunkPos + direction);
+					if (chunk != null)
+					{
+						chunk.ReloadModel();
+					}
+				}
+			}
+
+			chunks[chunkPos].SetVoxel(localPos, voxel);
+		}
+	}*/
+
 	// gets closest chunk to load
 	public static Vector3Int[] GetClosestChunks(uint chunkLoadDistance)
 	{
@@ -436,14 +470,5 @@ public class World : MonoBehaviour
 			}
 		}
 
-	}
-
-	[BurstCompile(CompileSynchronously = true)]
-	protected struct WorldGenerationJob : IJob
-	{
-		[WriteOnly] NativeHashMap<int, ChunkData> chunks;
-		public void Execute()
-		{
-		}
 	}
 }
