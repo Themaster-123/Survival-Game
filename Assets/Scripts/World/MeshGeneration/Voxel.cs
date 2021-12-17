@@ -1,10 +1,13 @@
 using UnityEngine;
 using Unity.Collections;
 using System.Runtime.InteropServices;
+using System;
 
 [StructLayout(LayoutKind.Sequential)]
+[Serializable]
 public struct Voxel
 {
+	[HideInInspector]
 	public Vector3 position;
 	public float value;
 
