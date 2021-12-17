@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectionBehavior : MonoBehaviour
+public class DirectionBehavior : Behavior
 {
     public bool rotateOnXAxis = true;
     public bool rotateOnYAxis = false;
