@@ -137,6 +137,9 @@ GameObject:
   - component: {fileID: 461834953}
   - component: {fileID: 461834957}
   - component: {fileID: 461834958}
+  - component: {fileID: 461834960}
+  - component: {fileID: 461834959}
+  - component: {fileID: 461834961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -250,34 +253,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b84ac93a0c076ef409c7d21dd83679a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 1626338178}
+  mouseSensitivity: 0.1
+  playerCamera: {fileID: 963194227}
+--- !u!114 &461834959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461834952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06344a80904328448ea340421a1b5d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxSpeed: 8
   acceleration: 80
   maxAirSpeed: 8
   airAcceleration: 10
-  maxSlopeAngle: 55
+  maxSlopeAngle: 65
   snapPredictionTime: 0.1
-  rotation: {x: 3827.6033, y: -0.19999552}
-  jumpStrength: 5
+  jumpStrength: 7
   jumpCooldown: 0.1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
   groundedCheckDistance: 2
-  headPosition: {x: 0, y: 0.5, z: 0}
-  feetPosition: {x: 0, y: 0, z: 0}
-  groundCheckRadius: 0.499
+--- !u!114 &461834960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461834952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb3c4e1db059e64f8e2cda1dc0b4ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateOnXAxis: 1
+  rotateOnYAxis: 1
+  rotationTransform: {fileID: 963194228}
+  rotation: {x: 0, y: 0}
+--- !u!114 &461834961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461834952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bcdd0c1e76aac4a9468b5f41848fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPosition: {x: 0, y: 0.5, z: 0}
+  groundCheckRadius: 0.9
   maxInteractionDistance: Infinity
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
-  terrainMask:
-    serializedVersion: 2
-    m_Bits: 64
   stencil:
-    range: 5
-  world: {fileID: 1626338178}
-  mouseSensitivity: 0.1
-  playerCamera: {fileID: 963194227}
+    range: 1
 --- !u!1 &704900412
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,12 +404,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704900412}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.59, y: 19.36, z: -5.82}
-  m_LocalScale: {x: 9.82, y: 9.82, z: 9.6}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8975, y: -4.84, z: -1.455}
+  m_LocalScale: {x: 2.455, y: 9.82, z: 2.4}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 906315902}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -535,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &906315899
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -609,7 +647,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 24.2, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 4}
-  m_Children: []
+  m_Children:
+  - {fileID: 704900416}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -768,7 +807,7 @@ Transform:
   m_Children:
   - {fileID: 1748107679}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099238482
 GameObject:

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MovementBehavior))]
+[RequireComponent(typeof(DirectionBehavior))]
+[RequireComponent(typeof(DiggingBehavior))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
@@ -10,6 +13,9 @@ public class Player : Entity
     public Camera playerCamera;
 
     protected InputMaster inputMaster;
+    protected MovementBehavior movementBehavior;
+    protected DirectionBehavior directionBehavior;
+    protected DiggingBehavior diggingBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
@@ -19,17 +25,6 @@ public class Player : Entity
     public virtual Vector2 GetMouseMovement()
     {
         return inputMaster.Player.MouseMovement.ReadValue<Vector2>();
-    }
-
-	public override void MouseRotate(Vector2 mouseMovement)
-	{
-		base.MouseRotate(mouseMovement);
-    }
-
-
-    public override void CalculateRotation()
-	{
-        playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(rotation.y, rotation.x, 0));
     }
 
 	protected override void Awake()
@@ -70,8 +65,8 @@ public class Player : Entity
         Vector2 movement = GetPlayerMovement();
         Vector2 mouseMovement = GetMouseMovement() * mouseSensitivity;
 
-        Move(movement);
-        MouseRotate(mouseMovement);
+        movementBehavior.Move(movement);
+        directionBehavior.Rotate(mouseMovement);
     }
 
     // jumps if the player is holding jump
@@ -79,7 +74,7 @@ public class Player : Entity
 	{
         if (inputMaster.Player.Jump.ReadValue<float>() > .5f)
 		{
-            Jump();
+            movementBehavior.Jump();
 		}
 	}
 
@@ -102,6 +97,14 @@ public class Player : Entity
 
     protected virtual void OnInteract()
 	{
-        AttemptDig();
+        diggingBehavior.AttemptDig();
+	}
+
+	protected override void GetComponents()
+	{
+		base.GetComponents();
+        directionBehavior = GetComponent<DirectionBehavior>();
+        movementBehavior = GetComponent<MovementBehavior>();
+        diggingBehavior = GetComponent<DiggingBehavior>();
 	}
 }
