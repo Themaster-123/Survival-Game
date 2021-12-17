@@ -4,10 +4,26 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Stencil
+public class Stencil : MonoBehaviour
 {
-	public virtual void SetVoxel(Voxel voxel, Vector3Int pos, World world)
+	public virtual void AddVoxel(in Voxel voxel, Vector3Int pos, World world)
 	{
-		world.SetVoxel(voxel, pos);
+		LoopVoxel(voxel, pos, world, delegate (Voxel voxel, Vector3Int position, World world)
+		{
+			world.AddVoxel(voxel, position);
+		});
+	}
+
+	public virtual void SetVoxel(in Voxel voxel, Vector3Int pos, World world)
+	{
+		LoopVoxel(voxel, pos, world, delegate (Voxel voxel, Vector3Int position, World world)
+		{
+			world.SetVoxel(voxel, position);
+		});
+	}
+
+	public virtual void LoopVoxel(in Voxel voxel, Vector3Int pos, World world, Action<Voxel, Vector3Int, World> function)
+	{
+		function(voxel, pos, world);
 	}
 }

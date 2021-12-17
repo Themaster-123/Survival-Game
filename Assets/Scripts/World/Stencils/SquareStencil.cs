@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class SquareStencil : RangeStencil
 {
-	public override void SetVoxel(Voxel voxel, Vector3Int pos, World world)
+	public override void LoopVoxel(in Voxel voxel, Vector3Int pos, World world, Action<Voxel, Vector3Int, World> function)
 	{
 		int squareRange = Mathf.Max((int)range, 0);
 
@@ -17,7 +17,7 @@ public class SquareStencil : RangeStencil
 				for (int z = -squareRange; z <= squareRange; z++)
 				{
 					Vector3Int voxelPosition = pos + new Vector3Int(x, y, z);
-					world.SetVoxel(voxel, voxelPosition);
+					function(voxel, voxelPosition, world);
 				}
 			}
 		}
