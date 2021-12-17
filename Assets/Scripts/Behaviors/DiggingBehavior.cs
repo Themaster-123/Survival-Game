@@ -10,7 +10,7 @@ public class DiggingBehavior : Behavior
     public float groundCheckRadius = .9f;
     public float maxInteractionDistance = 5;
     public LayerMask interactionMask;
-    public SquareStencil stencil;
+    public Stencil stencil;
 
     protected DirectionBehavior directionBehavior;
     protected Entity entity;
@@ -45,7 +45,7 @@ public class DiggingBehavior : Behavior
     {
         Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, entity.world);
         print(voxelPosition);
-        stencil.SetVoxel(new Voxel(1), voxelPosition, entity.world);
+        stencil.AddVoxel(new Voxel(1), voxelPosition, entity.world);
     }
 
     protected override void GetComponents()
