@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(DirectionBehavior))]
 [RequireComponent(typeof(Entity))]
-public class DiggingBehavior : Behavior
+public class ModifierBehavior : Behavior
 {
     public Vector3 rayPosition;
     public float groundCheckRadius = .9f;
@@ -30,22 +30,22 @@ public class DiggingBehavior : Behavior
         return RaycastFromHead(interactionMask);
     }
 
-    public virtual void AttemptDig()
+    public virtual void AttemptModify(in Voxel voxel)
     {
         RaycastHit hit = RaycastFromHead(interactionMask);
 
         if (hit.collider != null)
         {
-            Dig(hit.point);
+            Modify(hit.point, voxel);
         }
     }
 
     // digs into terrain with the shape of the stencil
-    protected virtual void Dig(Vector3 position)
+    public virtual void Modify(Vector3 position, in Voxel voxel)
     {
         Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, entity.world);
         print(voxelPosition);
-        stencil.AddVoxel(new Voxel(1), voxelPosition, entity.world);
+        stencil.AddVoxel(voxel, voxelPosition, entity.world);
     }
 
     protected override void GetComponents()

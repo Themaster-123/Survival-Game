@@ -4,18 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementBehavior))]
 [RequireComponent(typeof(DirectionBehavior))]
-[RequireComponent(typeof(DiggingBehavior))]
+[RequireComponent(typeof(ModifierBehavior))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
     public float mouseSensitivity = .1f;
     [Header("Misc Settings")]
     public Camera playerCamera;
+    public Voxel modifyVoxel;
 
     protected InputMaster inputMaster;
     protected MovementBehavior movementBehavior;
     protected DirectionBehavior directionBehavior;
-    protected DiggingBehavior diggingBehavior;
+    protected ModifierBehavior diggingBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
@@ -97,7 +98,7 @@ public class Player : Entity
 
     protected virtual void OnInteract()
 	{
-        diggingBehavior.AttemptDig();
+        diggingBehavior.AttemptModify(modifyVoxel);
 	}
 
 	protected override void GetComponents()
@@ -105,6 +106,6 @@ public class Player : Entity
 		base.GetComponents();
         directionBehavior = GetComponent<DirectionBehavior>();
         movementBehavior = GetComponent<MovementBehavior>();
-        diggingBehavior = GetComponent<DiggingBehavior>();
+        diggingBehavior = GetComponent<ModifierBehavior>();
 	}
 }
