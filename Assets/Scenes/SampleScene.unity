@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 461834960}
   - component: {fileID: 461834959}
   - component: {fileID: 461834961}
+  - component: {fileID: 461834962}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -218,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461834952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 28.5, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
@@ -256,6 +257,9 @@ MonoBehaviour:
   world: {fileID: 1626338178}
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}
+  modifyVoxel:
+    position: {x: 0, y: 0, z: 0}
+    value: 1
 --- !u!114 &461834959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,8 +318,20 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
-  stencil:
-    range: 1
+  stencil: {fileID: 461834962}
+--- !u!114 &461834962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461834952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6053eb019b2b424438cdb8a0ed1f6c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
 --- !u!1 &704900412
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +495,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -573,7 +589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &906315899
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -645,7 +661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906315898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 24.2, z: 0}
+  m_LocalPosition: {x: 0, y: 240.9, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 4}
   m_Children:
   - {fileID: 704900416}

@@ -8,4 +8,9 @@ public static class VoxelUtilities
 	{
 		return Vector3Int.FloorToInt((pos / world.worldSettings.ChunkSize) * world.worldSettings.ChunkResolution);
 	}
+
+	public static float ClampVoxelValue(float value)
+	{
+		return Mathf.Clamp(value, -1, 1);
+	}
 }
