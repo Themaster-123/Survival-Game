@@ -25,7 +25,7 @@ public class Chunk : MonoBehaviour
        // print(position);
         int index = GetVoxelIndex(position);
         voxel.position = voxels[index].position;
-        voxel.value = Mathf.Clamp(voxel.value, -1, 1);
+        voxel.value = VoxelUtilities.ClampVoxelValue(voxel.value);
         voxels[index] = voxel;
         voxelsChanged = true;
     }
@@ -193,7 +193,7 @@ public class Chunk : MonoBehaviour
                 {
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
-                    voxel.value = Mathf.Clamp(voxelData[index], -1, 1);
+                    voxel.value = VoxelUtilities.ClampVoxelValue(-voxelData[index]);
                     voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxels[index] = voxel;
                 }
