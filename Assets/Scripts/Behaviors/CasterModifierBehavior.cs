@@ -38,7 +38,7 @@ public class CasterModifierBehavior : ModifierBehavior
         }
     }
 
-    public virtual void ContinuousModify(Voxel voxel)
+    public virtual void StartContinuousModifying(Voxel voxel)
 	{
         StopContinuousModifying();
         continuousModifier = StartCoroutine(EContinuousModify(voxel));
