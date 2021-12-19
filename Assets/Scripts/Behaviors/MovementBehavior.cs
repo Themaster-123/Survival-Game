@@ -172,11 +172,9 @@ public class MovementBehavior : Behavior
         if (stepsSinceLastGrounded == 1 && stepsSinceLastJump > 2)
         {
             bool groundUnder = PredictIfGroundUnderEntity(out RaycastHit hit);
-            print(groundUnder);
 
             if (groundUnder && IsNormalBelowSlopeAngle(hit.normal))
             {
-                print(hit.normal);
                 SetGrounded(true, hit.normal);
                 float speed = rigidBody.velocity.magnitude;
                 float dot = Vector3.Dot(rigidBody.velocity, hit.normal);
