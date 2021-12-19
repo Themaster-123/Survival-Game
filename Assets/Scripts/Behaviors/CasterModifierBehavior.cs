@@ -8,7 +8,8 @@ public class CasterModifierBehavior : ModifierBehavior
     public Vector3 rayPosition;
     public float maxInteractionDistance = 5;
     public LayerMask interactionMask;
-    public float continuousModifySpeed = 10;
+    public float continuousModifySpeed = 1;
+    public float continuousModifyRate = 30;
 
     protected Coroutine continuousModifier;
     protected DirectionBehavior directionBehavior;
@@ -56,8 +57,10 @@ public class CasterModifierBehavior : ModifierBehavior
 	{
         while (true)
 		{
-            AttemptModify(voxel);
-            yield return new WaitForSeconds(1 / continuousModifySpeed);
+            Voxel vox = voxel;
+            vox.value = vox.value / continuousModifyRate * continuousModifySpeed;
+            AttemptModify(vox);
+            yield return new WaitForSeconds(1 / continuousModifyRate);
         }
 	}
 
