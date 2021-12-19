@@ -49,6 +49,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""StopInteract"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9d2b6a42-7c45-4712-b517-f34a23d7d235"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)""
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd36abf2-9152-42c8-b9c9-c814953c66df"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -151,6 +170,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_MouseMovement = m_Player.FindAction("MouseMovement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_StopInteract = m_Player.FindAction("StopInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,6 +224,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_MouseMovement;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_StopInteract;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -212,6 +233,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @MouseMovement => m_Wrapper.m_Player_MouseMovement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @StopInteract => m_Wrapper.m_Player_StopInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +255,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @StopInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopInteract;
+                @StopInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopInteract;
+                @StopInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStopInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -249,6 +274,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @StopInteract.started += instance.OnStopInteract;
+                @StopInteract.performed += instance.OnStopInteract;
+                @StopInteract.canceled += instance.OnStopInteract;
             }
         }
     }
@@ -259,5 +287,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMouseMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnStopInteract(InputAction.CallbackContext context);
     }
 }

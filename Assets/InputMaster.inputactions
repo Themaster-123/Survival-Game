@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "StopInteract",
+                    "type": "PassThrough",
+                    "id": "9d2b6a42-7c45-4712-b517-f34a23d7d235",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cd36abf2-9152-42c8-b9c9-c814953c66df",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

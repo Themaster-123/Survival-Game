@@ -309,16 +309,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 461834952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bcdd0c1e76aac4a9468b5f41848fc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 67bcb002f8c7055469bc1a60179f700b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stencil: {fileID: 461834962}
   rayPosition: {x: 0, y: 0.5, z: 0}
-  groundCheckRadius: 0.9
   maxInteractionDistance: Infinity
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
-  stencil: {fileID: 461834962}
+  continuousModifySpeed: 1
+  continuousModifyRate: 30
 --- !u!114 &461834962
 MonoBehaviour:
   m_ObjectHideFlags: 0

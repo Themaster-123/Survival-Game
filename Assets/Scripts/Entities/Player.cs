@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MovementBehavior))]
 [RequireComponent(typeof(DirectionBehavior))]
-[RequireComponent(typeof(ModifierBehavior))]
+[RequireComponent(typeof(CasterModifierBehavior))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
@@ -16,7 +16,7 @@ public class Player : Entity
     protected InputMaster inputMaster;
     protected MovementBehavior movementBehavior;
     protected DirectionBehavior directionBehavior;
-    protected ModifierBehavior diggingBehavior;
+    protected CasterModifierBehavior casterModifierBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
@@ -82,6 +82,7 @@ public class Player : Entity
     protected virtual void RegisterInteractInput()
 	{
         inputMaster.Player.Interact.performed += context => OnInteract();
+        inputMaster.Player.StopInteract.performed += context => OnStopInteract();
     }
 
 	protected override void AddEntityToWorld()
@@ -98,7 +99,12 @@ public class Player : Entity
 
     protected virtual void OnInteract()
 	{
-        diggingBehavior.AttemptModify(modifyVoxel);
+        casterModifierBehavior.StartContinuousModifying(modifyVoxel);
+	}
+
+    protected virtual void OnStopInteract()
+	{
+        casterModifierBehavior.StopContinuousModifying();
 	}
 
 	protected override void GetComponents()
@@ -106,6 +112,6 @@ public class Player : Entity
 		base.GetComponents();
         directionBehavior = GetComponent<DirectionBehavior>();
         movementBehavior = GetComponent<MovementBehavior>();
-        diggingBehavior = GetComponent<ModifierBehavior>();
+        casterModifierBehavior = GetComponent<CasterModifierBehavior>();
 	}
 }
