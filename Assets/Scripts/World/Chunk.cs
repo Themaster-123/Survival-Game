@@ -73,6 +73,22 @@ public class Chunk : MonoBehaviour
         UpdateMesh(vertices, triangles);
     }
 
+    [ContextMenu("Test")]
+    public virtual void Test()
+	{
+        for (int x = 0; x < world.worldSettings.ChunkResolution; x++)
+		{
+            for (int y = 0; y < world.worldSettings.ChunkResolution; y++)
+            {
+                for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
+                {
+                    world.SetVoxel(new Voxel(0), position * world.worldSettings.ChunkResolution + new Vector3Int(x, y, z));
+                }
+            }
+        }
+
+	}
+
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
 	{
