@@ -227,7 +227,10 @@ public class MovementBehavior : Behavior
 	{
         if (!onGround) return;
 
+        //Vector3.Dot(-Physics.gravity, contactNormal)
+        // * (Physics.gravity.magnitude * (Vector3.Angle(-Physics.gravity.normalized, contactNormal) / 180))
         Vector3 slipVelocity = (contactNormal - (-Physics.gravity.normalized)) * Physics.gravity.magnitude;
+        print(slipVelocity);
 
         rigidBody.AddForce(-slipVelocity, ForceMode.Acceleration);
 	}
