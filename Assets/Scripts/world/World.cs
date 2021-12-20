@@ -115,21 +115,34 @@ public class World : MonoBehaviour
 		if (IsChunkLoaded(chunkPos))
 		{
 			Vector3Int localPos = GetLocalVoxelPos(pos);
-
+			Vector3Int direction = Vector3Int.zero;
 			for (int i = 0; i < 3; i++)
 			{
 				int dir = localPos[i] == 0 ? -1 : (localPos[i] == worldSettings.ChunkResolution - 1 ? 1 : 0);
-				if (dir != 0)
+				direction[i] = dir;
+			}
+
+			for (int x = Mathf.Min(direction.x, 0); x <= Mathf.Max(direction.x, 0); x++)
+			{
+				for (int y = Mathf.Min(direction.y, 0); y <= Mathf.Max(direction.y, 0); y++)
 				{
-					Vector3Int direction = Vector3Int.zero;
-					direction[i] = dir;
-					Chunk chunk = GetChunk(chunkPos + direction);
-					if (chunk != null)
+					for (int z = Mathf.Min(direction.z, 0); z <= Mathf.Max(direction.z, 0); z++)
 					{
-						chunk.ReloadModel();
+
+						Vector3Int localNeighborPos = new Vector3Int(x, y, z);
+						if (localNeighborPos != Vector3Int.zero)
+						{
+							Chunk chunk = GetChunk(chunkPos + localNeighborPos);
+							if (chunk != null)
+							{
+								chunk.ReloadModel();
+							}
+						}
 					}
 				}
 			}
+			
+
 
 			chunks[chunkPos].SetVoxel(localPos, voxel);
 		}
