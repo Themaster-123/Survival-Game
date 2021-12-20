@@ -44,7 +44,7 @@ public class MovementBehavior : Behavior
         physicsMovement += movement;
     }
 
-    // makes the entity jump with the force of jumpStrength
+    // makes the rigidbody jump with the force of jumpStrength
     public virtual void Jump()
     {
         if (IsGrounded() && Time.time >= jumpTime)
@@ -54,7 +54,7 @@ public class MovementBehavior : Behavior
         }
     }
 
-    // changes the entity velocity to the target velocity(movement) then resets physicsMovement
+    // changes the rigidbody velocity to the target velocity(movement) then resets physicsMovement
     protected virtual void PhysicsMove()
     {
         physicsMovement.Normalize();
@@ -72,6 +72,8 @@ public class MovementBehavior : Behavior
 
         rigidBody.AddForce(force, ForceMode.VelocityChange);
         physicsMovement = Vector2.zero;
+
+
     }
 
     protected virtual void OnEnable()
@@ -91,6 +93,7 @@ public class MovementBehavior : Behavior
         SnapToGround();
         PhysicsMove();
         PhysicsJump();
+        PreventSlipping();
 
         ClearState();
     }
@@ -218,6 +221,16 @@ public class MovementBehavior : Behavior
 	{
         jumpTime = Time.time;
     }
+
+    // Stops the rigidbody from slipping on a slope
+    protected virtual void PreventSlipping()
+	{
+        if (!onGround) return;
+
+        Vector3 slipVelocity = (contactNormal - (-Physics.gravity.normalized)) * Physics.gravity.magnitude;
+
+        rigidBody.AddForce(-slipVelocity, ForceMode.Acceleration);
+	}
 
     protected override void GetComponents()
     {
