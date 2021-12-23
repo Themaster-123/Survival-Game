@@ -5,7 +5,6 @@ using System;
 using System.Threading;
 using Unity.Jobs;
 using Unity.Burst;
-using Unity.Collections;
 using UnityEngine.Profiling;
 
 [AddComponentMenu("Survival Game/World/World")]
@@ -186,6 +185,26 @@ public class World : MonoBehaviour
 		position.z = MathUtilities.Mod(position.z, worldSettings.ChunkResolution);
 
 		return position;
+	}
+
+	public virtual bool IsVoxelSurrounded(Vector3Int position)
+	{
+		for (int x = -1; x <= 1; x++)
+		{
+			for (int y = -1; y <= 1; y++)
+			{
+				for (int z = -1; z <= 1; z++)
+				{
+					Vector3Int offset = new Vector3Int(x, y, z);
+					if (GetVoxel(position + offset).value <= 0f)
+					{
+						return false;
+					}
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public virtual FastNoise.OutputMinMax GenerateNoise(in float[] voxelData, Vector3Int offset, Vector3Int resolution)
