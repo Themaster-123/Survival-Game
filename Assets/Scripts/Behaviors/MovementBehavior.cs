@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(DirectionBehavior))]
 public class MovementBehavior : Behavior
 {
@@ -145,11 +148,21 @@ public class MovementBehavior : Behavior
         stepsSinceLastJump += 1;
     }
 
-    protected bool PredictIfGroundUnderEntity(out RaycastHit hitPoint)
+    protected bool PredictIfGroundUnderRigidbody(out RaycastHit hitPoint)
     {
         Vector3 p1 = transform.position + rigidBody.velocity * snapPredictionTime;
 
-        RaycastHit[] hits = Physics.RaycastAll(p1, -transform.up, groundedCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+        return RaycastAtRigidbody(p1, -transform.up, groundedCheckDistance, groundLayers, out hitPoint);
+    }
+    
+    protected bool RaycastAtRigidbody(Vector3 position, Vector3 direction, float distance, LayerMask mask, out RaycastHit hitPoint)
+	{
+        RaycastHit[] hits = Physics.RaycastAll(position, direction, distance, mask, QueryTriggerInteraction.Ignore);
+
+/*        hits = new List<RaycastHit>(hits).Where(delegate (RaycastHit hit)
+        {
+            return ((mask.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject;
+        }).ToArray();*/
 
         foreach (RaycastHit hit in hits)
         {
@@ -159,6 +172,7 @@ public class MovementBehavior : Behavior
                 return true;
             }
         }
+
         RaycastHit nullHitPoint = new RaycastHit();
         hitPoint = nullHitPoint;
         return false;
@@ -174,7 +188,7 @@ public class MovementBehavior : Behavior
 
         if (stepsSinceLastGrounded == 1 && stepsSinceLastJump > 2)
         {
-            bool groundUnder = PredictIfGroundUnderEntity(out RaycastHit hit);
+            bool groundUnder = PredictIfGroundUnderRigidbody(out RaycastHit hit);
 
             if (groundUnder && IsNormalBelowSlopeAngle(hit.normal))
             {
@@ -231,6 +245,26 @@ public class MovementBehavior : Behavior
         Vector3 slipVelocity = slipDirection * Physics.gravity.magnitude;
 
         rigidBody.AddForce(-slipVelocity, ForceMode.Acceleration);
+	}
+
+    // Unused for now
+    // If the rigidbody is out of bounds launch it back to the World.
+    protected virtual void HandleOutOfBounds()
+	{
+		/*bool worldBelow = RaycastAtRigidbody(transform.position, -transform.up, Mathf.Infinity, groundLayers, out _);
+		if (!worldBelow)
+		{
+			bool worldAbove = RaycastAtRigidbody(transform.position, transform.up, Mathf.Infinity, groundLayers, out RaycastHit aboveHit);
+			if (worldAbove)
+			{
+				rigidBody.velocity = new Vector3(rigidBody.velocity.x, aboveHit.distance, rigidBody.velocity.z);
+			}
+		}*/
+/*		bool worldBelow = RaycastAtRigidbody(transform.position, -transform.up, groundedCheckDistance, groundLayers, out _);
+		if (!worldBelow && entity.world.GetVoxel(VoxelUtilities.ToVoxelPosition(transform.position + , entity.world)).value >= 0)
+		{
+			rigidBody.velocity = new Vector3(rigidBody.velocity.x, 10, rigidBody.velocity.z);
+		}*/
 	}
 
     protected override void GetComponents()

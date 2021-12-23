@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoundsBehavior))]
 [AddComponentMenu("Survival Game/Entities/Entity")]
 public class Entity : MonoBehaviour
 {
