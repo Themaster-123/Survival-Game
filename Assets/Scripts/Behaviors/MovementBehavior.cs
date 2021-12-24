@@ -18,7 +18,6 @@ public class MovementBehavior : Behavior
 
     [Header("Jump Settings")]
     public float jumpStrength = 3;
-    public float jumpCooldown = .1f;
     public LayerMask groundLayers;
     public float groundedCheckDistance = 2.0f;
 
@@ -50,10 +49,9 @@ public class MovementBehavior : Behavior
     // makes the rigidbody jump with the force of jumpStrength
     public virtual void Jump()
     {
-        if (IsGrounded() && Time.time >= jumpTime)
+        if (IsGrounded())
         {
             jumped = true;
-            jumpTime = Time.time + jumpCooldown;
         }
     }
 
@@ -227,7 +225,7 @@ public class MovementBehavior : Behavior
         {
             jumped = false;
             stepsSinceLastJump = 0;
-            rigidBody.AddForce(transform.up * jumpStrength, ForceMode.VelocityChange);
+            rigidBody.AddForce(transform.up * (jumpStrength - rigidBody.velocity.y), ForceMode.VelocityChange);
         }
     }
 
