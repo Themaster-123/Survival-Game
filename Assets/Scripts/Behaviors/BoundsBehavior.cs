@@ -8,6 +8,7 @@ public class BoundsBehavior : Behavior
 {
 	public Vector3 checkPosition;
 	public LayerMask groundMask;
+	public float radius = .5f;
 	protected Entity entity;
 	protected Rigidbody rigidBody;
 
@@ -19,11 +20,11 @@ public class BoundsBehavior : Behavior
 	protected virtual void CheckGroundneath()
 	{
 		Vector3Int pos = VoxelUtilities.ToVoxelPosition(transform.position + checkPosition, entity.world);
-		if (entity.world.IsVoxelSurrounded(pos))
+		if (entity.world.IsVoxelSurrounded(pos)/* || entity.world.GetVoxel(pos).value > 0*/)
 		{
-			if (Physics.Raycast(transform.position + checkPosition, Vector3.up, out RaycastHit hit, float.PositiveInfinity, groundMask) && hit.distance > .3f)
+			if (Physics.Raycast(transform.position + checkPosition, Vector3.up, out RaycastHit hit, float.PositiveInfinity, groundMask))
 			{
-				rigidBody.position = hit.point - checkPosition;
+				transform.position = hit.point - checkPosition + hit.normal * radius;
 				//rigidBody.velocity = new Vector3(rigidBody.velocity.x, 9, rigidBody.velocity.z);
 			} else
 			{

@@ -207,6 +207,31 @@ public class World : MonoBehaviour
 		return true;
 	}
 
+	public virtual Vector3 GetNearestPoint(Vector3 position)
+	{
+		Vector3Int chunkPosition = ChunkPositionUtilities.ToChunkPosition(position, this); ;
+		Vector3 closestPoint = position;
+		float closestDistance = float.PositiveInfinity;
+		for (int x = -1; x <= 1; x++)
+		{
+			for (int y = -1; y <= 1; y++)
+			{
+				for (int z = -1; z <= 1; z++)
+				{
+					Vector3 point = GetChunk(chunkPosition + new Vector3Int(x, y, z)).meshCollider.ClosestPoint(position);
+					float distance = (point - position).sqrMagnitude;
+					if (distance < closestDistance)
+					{
+						closestPoint = point;
+						closestDistance = distance;
+					}
+				}
+			}
+		}
+
+		return closestPoint;
+	}
+
 	public virtual FastNoise.OutputMinMax GenerateNoise(in float[] voxelData, Vector3Int offset, Vector3Int resolution)
 	{
 		return noise.GenUniformGrid3D(voxelData, offset.x, offset.y, offset.z, resolution.x, resolution.y, resolution.z, noiseSettings.size.x, (int)noiseSettings.seed);

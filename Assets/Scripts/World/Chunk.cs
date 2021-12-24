@@ -9,7 +9,7 @@ public class Chunk : MonoBehaviour
     public Vector3Int position;
     public World world;
 
-    protected MeshCollider meshCollider;
+    public MeshCollider meshCollider;
     protected MeshFilter meshFilter;
     protected Voxel[] voxels;
     protected bool voxelsChanged = false;
