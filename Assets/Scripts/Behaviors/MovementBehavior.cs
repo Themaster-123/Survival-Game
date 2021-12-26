@@ -18,7 +18,6 @@ public class MovementBehavior : Behavior
 
     [Header("Jump Settings")]
     public float jumpStrength = 3;
-    public LayerMask groundLayers;
     public float groundedCheckDistance = 2.0f;
 
     protected Rigidbody rigidBody;
@@ -150,12 +149,12 @@ public class MovementBehavior : Behavior
     {
         Vector3 p1 = transform.position + rigidBody.velocity * snapPredictionTime;
 
-        return RaycastAtRigidbody(p1, -transform.up, groundedCheckDistance, groundLayers, out hitPoint);
+        return RaycastAtRigidbody(p1, -transform.up, groundedCheckDistance, out hitPoint);
     }
     
-    protected bool RaycastAtRigidbody(Vector3 position, Vector3 direction, float distance, LayerMask mask, out RaycastHit hitPoint)
+    protected bool RaycastAtRigidbody(Vector3 position, Vector3 direction, float distance, out RaycastHit hitPoint)
 	{
-        RaycastHit[] hits = Physics.RaycastAll(position, direction, distance, mask, QueryTriggerInteraction.Ignore);
+        RaycastHit[] hits = Physics.RaycastAll(position, direction, distance, ~0, QueryTriggerInteraction.Ignore);
 
 /*        hits = new List<RaycastHit>(hits).Where(delegate (RaycastHit hit)
         {
@@ -164,7 +163,7 @@ public class MovementBehavior : Behavior
 
         foreach (RaycastHit hit in hits)
         {
-            if (((groundLayers.value >> hit.transform.gameObject.layer) & 1) == 1 && hit.transform.gameObject != gameObject)
+            if (hit.transform.gameObject != gameObject)
             {
                 hitPoint = hit;
                 return true;
