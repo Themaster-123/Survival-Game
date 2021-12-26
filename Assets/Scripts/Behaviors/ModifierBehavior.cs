@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Entity))]
 public class ModifierBehavior : Behavior
 {
     public Stencil stencil;
