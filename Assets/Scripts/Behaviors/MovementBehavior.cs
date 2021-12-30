@@ -45,6 +45,11 @@ public class MovementBehavior : Behavior
         physicsMovement += movement;
     }
 
+    public virtual void Move(Vector3 movement)
+	{
+        Move(new Vector2(movement.x, movement.z));
+	}
+
     // makes the rigidbody jump with the force of jumpStrength
     public virtual void Jump()
     {
