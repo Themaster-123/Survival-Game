@@ -57,11 +57,16 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
-        MoveEntity();
         CheckIsHoldingJump();
+        HandleInput();
     }
 
     protected override void MoveEntity()
+	{
+        base.MoveEntity();
+    }
+
+    protected virtual void HandleInput()
 	{
         Vector2 movement = GetPlayerMovement();
         Vector2 mouseMovement = GetMouseMovement() * mouseSensitivity;
