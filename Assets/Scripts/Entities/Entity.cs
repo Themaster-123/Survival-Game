@@ -54,6 +54,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        MoveEntity();
     }
 
     // handles ai / input
