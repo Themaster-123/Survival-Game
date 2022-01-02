@@ -1,3 +1,5 @@
+#define USE_OUT_OF_BOUNDS_CHECKS
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -5,10 +7,28 @@ using UnityEngine;
 
 public class Grid
 {
+	public delegate void ValueChangedEvent(int x, int y, int value);
+
+	public event ValueChangedEvent OnValueChangedEvent;
+
 	public int width { get; protected set; }
 	public int height { get; protected set; }
 
 	protected int[,] gridArray;
+
+	public bool IsInBounds(int x, int y)
+	{
+		if (x >= 0 && y >= 0 & x < width && y < height)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public bool IsInBounds(Vector2Int pos)
+	{
+		return IsInBounds(pos.x, pos.y);
+	}
 
 	public Grid(int width, int height)
 	{
@@ -30,12 +50,24 @@ public class Grid
 	{
 		get
 		{
-			return gridArray[x, y];
+				return gridArray[x, y];
 		}
 
-		set
+	set
 		{
+#if USE_OUT_OF_BOUNDS_CHECKS
+			if (IsInBounds(x, y))
+			{
+#endif
 			gridArray[x, y] = value;
+			OnValueChangedEvent?.Invoke(x, y, value);
+#if USE_OUT_OF_BOUNDS_CHECKS
+			}
+			else
+			{
+				Debug.LogWarning("Attepting to get a value outside the range");
+			}
+#endif
 		}
 	}
 }
