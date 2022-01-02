@@ -50,10 +50,22 @@ public class Grid
 	{
 		get
 		{
+#if USE_OUT_OF_BOUNDS_CHECKS
+			if (IsInBounds(x, y))
+			{
+#endif
 				return gridArray[x, y];
+#if USE_OUT_OF_BOUNDS_CHECKS
+			}
+			else
+			{
+				Debug.LogWarning("Attepting to get a value outside the range");
+				return 0;
+			}
+#endif
 		}
 
-	set
+		set
 		{
 #if USE_OUT_OF_BOUNDS_CHECKS
 			if (IsInBounds(x, y))
@@ -65,9 +77,22 @@ public class Grid
 			}
 			else
 			{
-				Debug.LogWarning("Attepting to get a value outside the range");
+				Debug.LogWarning("Attepting to set a value outside the range");
 			}
 #endif
+		}
+	}
+
+	public int this[Vector2Int pos]
+	{
+		get
+		{
+			return this[pos.x, pos.y];
+		}
+
+		set
+		{
+			this[pos.x, pos.y] = value;
 		}
 	}
 }
