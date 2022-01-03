@@ -5,16 +5,16 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
-public class Grid
+public class Grid<T>
 {
-	public delegate void ValueChangedEvent(int x, int y, int value);
+	public delegate void ValueChangedEvent(int x, int y, T value);
 
 	public event ValueChangedEvent OnValueChangedEvent;
 
 	public int width { get; protected set; }
 	public int height { get; protected set; }
 
-	protected int[,] gridArray;
+	protected T[,] gridArray;
 
 	public bool IsInBounds(int x, int y)
 	{
@@ -35,18 +35,18 @@ public class Grid
 		this.width = width;
 		this.height = height;
 
-		gridArray = new int[width, height];
+		gridArray = new T[width, height];
 	}
 
-	public Grid(int[,] gridArray)
+	public Grid(T[,] gridArray)
 	{
-		this.gridArray = gridArray.Clone() as int[,];
+		this.gridArray = gridArray.Clone() as T[,];
 
 		this.width = gridArray.GetLength(0);
 		this.height = gridArray.GetLength(1);
 	}
 
-	public int this[int x, int y]
+	public T this[int x, int y]
 	{
 		get
 		{
@@ -60,7 +60,7 @@ public class Grid
 			else
 			{
 				Debug.LogWarning("Attepting to get a value outside the range");
-				return 0;
+				return default(T);
 			}
 #endif
 		}
@@ -83,7 +83,7 @@ public class Grid
 		}
 	}
 
-	public int this[Vector2Int pos]
+	public T this[Vector2Int pos]
 	{
 		get
 		{
