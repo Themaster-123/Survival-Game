@@ -1,5 +1,6 @@
 #define USE_OUT_OF_BOUNDS_CHECKS
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -36,6 +37,22 @@ public class Grid<T>
 		this.height = height;
 
 		gridArray = new T[width, height];
+	}
+
+	public Grid(int width, int height, Func<Grid<T>, int, int, T> instaniateGridObject)
+	{
+		this.width = width;
+		this.height = height;
+
+		gridArray = new T[width, height];
+
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				gridArray[x, y] = instaniateGridObject(this, x, y);
+			}
+		}
 	}
 
 	public Grid(T[,] gridArray)
