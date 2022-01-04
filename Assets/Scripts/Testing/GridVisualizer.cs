@@ -9,16 +9,25 @@ public class GridVisualizer : MonoBehaviour
     public int height = 10;
     public float cellSize = 1;
 
-    public  Grid<int> grid;
+    public Pathfinding pathFinding;
+    public Grid<PathNode> grid;
+
+    protected const int TEXTURE_LENGTH = 5;
     protected TextMesh[,] textValues;
     protected InputMaster inputMaster;
     protected MeshFilter meshFilter;
     protected Mesh mesh;
+    protected List<PathNode> path;
 
     public Vector3 GetWorldPosition(int x, int y)
 	{
         return transform.TransformPoint(GetLocalPosition(x, y));
 	}
+
+    public Vector3 GetWorldPosition(Vector2Int gridPosition)
+    {
+        return GetWorldPosition(gridPosition.x, gridPosition.y);
+    }
 
     public Vector3 GetLocalPosition(int x, int y)
 	{
@@ -32,12 +41,14 @@ public class GridVisualizer : MonoBehaviour
 
     void Awake()
     {
-        grid = new Grid<int>(width, height);
+        pathFinding = new Pathfinding(width, height);
+        grid = pathFinding.grid;
         textValues = new TextMesh[width, height];
 		grid.OnValueChangedEvent += Grid_OnValueChangedEvent;
         inputMaster = new InputMaster();
         meshFilter = GetComponent<MeshFilter>();
         mesh = new Mesh();
+        path = new List<PathNode>();
     }
 
 	private void Start()
@@ -50,6 +61,7 @@ public class GridVisualizer : MonoBehaviour
             }
         }
 		inputMaster.Testing.LeftClick.performed += context => OnLeftClick();
+		inputMaster.Testing.RightClick.performed += context => OnRightClick();
         UpdateVisuals();
     }
 
@@ -58,12 +70,35 @@ public class GridVisualizer : MonoBehaviour
         Vector2Int pos = GetGridPosition(GetWorldMousePosition());
         if (grid.IsInBounds(pos))
 		{
-            grid[pos] += 1;
+            //grid[pos] += 1;
+            List<PathNode> path = pathFinding.FindPath(Vector2Int.zero, pos);
+
+            if (path != null)
+			{
+                /*                print("fadasd");
+                                for (int i = 1; i < path.Count; i++)
+                                {
+                                    PathNode node0 = path[i-1];
+                                    PathNode node1 = path[i];
+                                    //Debug.DrawLine(GetWorldPosition(node0.gridPosition) + transform.TransformDirection(new Vector3(1, 1)) * .5f, GetWorldPosition(node1.gridPosition) + transform.TransformDirection(new Vector3(1, 1)) * .5f, Color.red, 2.5f);
+                                }*/
+                this.path = path;
+			}
+
+        }
+        UpdateVisuals();
+    }
+    private void OnRightClick()
+    {
+        Vector2Int pos = GetGridPosition(GetWorldMousePosition());
+        if (grid.IsInBounds(pos))
+        {
+            grid[pos].walkable = !grid[pos].walkable;
         }
         UpdateVisuals();
     }
 
-	private void OnEnable()
+    private void OnEnable()
 	{
         inputMaster.Enable();
     }
@@ -92,7 +127,7 @@ public class GridVisualizer : MonoBehaviour
         }
     }
 
-    protected void Grid_OnValueChangedEvent(int x, int y, int value)
+    protected void Grid_OnValueChangedEvent(int x, int y, PathNode value)
     {
         textValues[x, y].text = value.ToString();
     }
@@ -118,7 +153,7 @@ public class GridVisualizer : MonoBehaviour
                 int index1 = index0 + 1;
                 int index2 = index0 + 2;
                 int index3 = index0 + 3;
-                int value = grid[x, y];
+                //int value = grid[x, y];
 
                 vertices[index0] = new Vector3(x, y) * cellSize - (new Vector3(width, height) / 2) *cellSize;
                 vertices[index1] = new Vector3(x, y) * cellSize + new Vector3(cellSize, 0) - (new Vector3(width, height) / 2) * cellSize;
@@ -130,10 +165,20 @@ public class GridVisualizer : MonoBehaviour
                 triangles[triIndex+3] = index2;
                 triangles[triIndex+4] = index3;
                 triangles[triIndex+5] = index1;
-                uvs[index0] = new Vector2(value / 5f + .5f / 5f, 0);
-                uvs[index1] = new Vector2(value / 5f + .5f / 5f, 0);
-                uvs[index2] = new Vector2(value / 5f + .5f / 5f, 0);
-                uvs[index3] = new Vector2(value / 5f + .5f / 5f, 0);
+                if (path.Contains(grid[x, y]))
+				{
+					uvs[index0] = new Vector2(4f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+					uvs[index1] = new Vector2(4f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+					uvs[index2] = new Vector2(4f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+					uvs[index3] = new Vector2(4f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+				} else if (!grid[x, y].walkable)
+				{
+                    uvs[index0] = new Vector2(3f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+                    uvs[index1] = new Vector2(3f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+                    uvs[index2] = new Vector2(3f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+                    uvs[index3] = new Vector2(3f / TEXTURE_LENGTH + .5f / TEXTURE_LENGTH, 0);
+                }
+
             }
         }
         mesh.vertices = vertices;

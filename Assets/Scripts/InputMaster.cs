@@ -160,6 +160,71 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Testing"",
+            ""id"": ""5fd5db50-da18-480b-aa0c-097e392c4f37"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e4e7a5aa-6e82-45a9-a985-9967506d8fe6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e8bac482-8ebc-4e00-bbc3-38d50d6c5d98"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Right Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""525fb795-7eba-4007-a3d8-f9e5db36aa39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""215b7424-f894-4ca7-9058-9582d8200786"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8204cd7-cba6-469a-91cb-5fafd70b643d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""505cb326-1978-476b-9e5c-2eac4285f986"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -171,6 +236,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_StopInteract = m_Player.FindAction("StopInteract", throwIfNotFound: true);
+        // Testing
+        m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
+        m_Testing_MousePosition = m_Testing.FindAction("MousePosition", throwIfNotFound: true);
+        m_Testing_LeftClick = m_Testing.FindAction("Left Click", throwIfNotFound: true);
+        m_Testing_RightClick = m_Testing.FindAction("Right Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -281,6 +351,55 @@ public class @InputMaster : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Testing
+    private readonly InputActionMap m_Testing;
+    private ITestingActions m_TestingActionsCallbackInterface;
+    private readonly InputAction m_Testing_MousePosition;
+    private readonly InputAction m_Testing_LeftClick;
+    private readonly InputAction m_Testing_RightClick;
+    public struct TestingActions
+    {
+        private @InputMaster m_Wrapper;
+        public TestingActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_Testing_MousePosition;
+        public InputAction @LeftClick => m_Wrapper.m_Testing_LeftClick;
+        public InputAction @RightClick => m_Wrapper.m_Testing_RightClick;
+        public InputActionMap Get() { return m_Wrapper.m_Testing; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestingActions set) { return set.Get(); }
+        public void SetCallbacks(ITestingActions instance)
+        {
+            if (m_Wrapper.m_TestingActionsCallbackInterface != null)
+            {
+                @MousePosition.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnMousePosition;
+                @LeftClick.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnLeftClick;
+                @RightClick.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
+            }
+            m_Wrapper.m_TestingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+            }
+        }
+    }
+    public TestingActions @Testing => new TestingActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -288,5 +407,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnStopInteract(InputAction.CallbackContext context);
+    }
+    public interface ITestingActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
     }
 }
