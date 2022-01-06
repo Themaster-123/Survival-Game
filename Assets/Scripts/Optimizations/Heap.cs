@@ -62,8 +62,10 @@ public class Heap<T> where T : IHeapItem<T>
 				Swap(item, parentItem);
 			} else
 			{
-				return;
+				break;
 			}
+
+			parentIndex = (item.HeapIndex - 1) / 2;
 		}
 	}
 
