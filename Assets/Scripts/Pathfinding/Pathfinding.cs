@@ -1,12 +1,15 @@
+#define TIME_PATHFINDING
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class Pathfinding
 {
-    public Grid<PathNode> grid;
+	public Grid<PathNode> grid;
 
-	protected const int MOVE_STRAIGHT_COST = 10  ;
+	protected const int MOVE_STRAIGHT_COST = 10;
 	protected const int MOVE_DIAGONAL_COST = 14;
 
 	public Pathfinding(int width, int height)
@@ -16,11 +19,16 @@ public class Pathfinding
 
 	public List<PathNode> FindPath(Vector2Int start, Vector2Int end)
 	{
+#if TIME_PATHFINDING
+		Stopwatch sw = new Stopwatch();
+		sw.Start();
+#endif
 		PathNode startNode = grid[start];
 		PathNode endNode = grid[end];
 
-		List<PathNode> openList = new List<PathNode>() { startNode };
+		Heap<PathNode> openList = new Heap<PathNode>(grid.width * grid.height);
 		HashSet<PathNode> closedList = new HashSet<PathNode>();
+		openList.Add(startNode);
 
 		for (int x = 0; x < grid.width; x++)
 		{
@@ -38,13 +46,16 @@ public class Pathfinding
 
 		while (openList.Count > 0)
 		{
-			PathNode currentNode = GetLowestFCostNode(openList);
+			PathNode currentNode = openList.RemoveFirst();
 			if (currentNode == endNode)
 			{
+#if TIME_PATHFINDING
+				sw.Stop();
+				MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
+#endif
 				return GetFullPath(endNode);
 			}
 
-			openList.Remove(currentNode);
 			closedList.Add(currentNode);
 
 			foreach (PathNode neighbourNode in GetNeighbours(currentNode))
@@ -79,6 +90,10 @@ public class Pathfinding
 					{
 						openList.Add(neighbourNode);
 					}
+					else
+					{
+						openList.UpdateItem(neighbourNode);
+					}
 				}
 			}
 		}
@@ -106,7 +121,7 @@ public class Pathfinding
 		PathNode lowestFCostNode = openList[0];
 		for (int i = 1; i < openList.Count; i++)
 		{
-			if (openList[i].fCost < lowestFCostNode.fCost) lowestFCostNode = openList[i];
+			if (openList[i].fCost < lowestFCostNode.fCost || (openList[i].fCost == lowestFCostNode.fCost && openList[i].hCost < lowestFCostNode.hCost)) lowestFCostNode = openList[i];
 		}
 
 		return lowestFCostNode;
