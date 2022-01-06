@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathNode
+public class PathNode : IHeapItem<PathNode>
 {
 	public Vector2Int gridPosition;
 
@@ -12,6 +12,8 @@ public class PathNode
 
 	public PathNode prevNode;
 	public bool walkable = true;
+
+	public int HeapIndex { get; set; }
 
 	protected Grid<PathNode> grid;
 
@@ -24,6 +26,17 @@ public class PathNode
 	public void CalculateFCost()
 	{
 		fCost = gCost + hCost;
+	}
+
+	public int CompareTo(PathNode other)
+	{
+		int compare = fCost.CompareTo(other.fCost);
+		if (compare == 0)
+		{
+			compare = hCost.CompareTo(other.hCost);
+		}
+
+		return -compare;
 	}
 
 	public override string ToString()
