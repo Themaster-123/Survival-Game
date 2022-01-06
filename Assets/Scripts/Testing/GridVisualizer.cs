@@ -31,12 +31,12 @@ public class GridVisualizer : MonoBehaviour
 
     public Vector3 GetLocalPosition(int x, int y)
 	{
-        return (new Vector3(x, y) - (new Vector3(width, height) / 2)) * cellSize;
+        return (new Vector3(x, y) - (new Vector3(width, height) * .5f)) * cellSize;
     }
 
     public Vector2Int GetGridPosition(Vector3 position)
 	{
-        return (Vector2Int)Vector3Int.FloorToInt(transform.InverseTransformPoint(position / cellSize) + (new Vector3(width, height) / 2));
+        return (Vector2Int)Vector3Int.FloorToInt(transform.InverseTransformPoint(position / cellSize) + (new Vector3(width, height) * .5f));
 	}
 
     void Awake()
