@@ -62,15 +62,10 @@ public class PhysicalGrid : MonoBehaviour
 		return clampedPos;
 	}
 
-	protected void Start()
+	protected void Awake()
 	{
 		CalculateFields();
 		InitializeFields();
-	}
-
-	protected void Update()
-	{
-		//SetGridValues();
 	}
 
 	protected void OnDrawGizmos()
