@@ -104,7 +104,7 @@ public class Chunk : MonoBehaviour
                 for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
                 {
                     int index = (z * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution) + (y * world.worldSettings.ChunkResolution) + x;
-                    voxels[index].position = new Vector3(x, y, z) / world.worldSettings.ChunkResolution * world.worldSettings.ChunkSize;
+                    voxels[index].position = new Vector3(x, y, z) * world.worldSettings.InverseChunkResolution * world.worldSettings.ChunkSize;
                 }
             }
         }

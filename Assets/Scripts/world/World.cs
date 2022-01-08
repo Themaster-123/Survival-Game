@@ -175,7 +175,7 @@ public class World : MonoBehaviour
 
 		GenerateNoise(data, (Vector3Int.FloorToInt(noiseSettings.offset) + chunkPos * noiseSettings.resolution) + pos, Vector3Int.one);
 
-		return new Voxel((Vector3)pos / worldSettings.ChunkResolution * worldSettings.ChunkSize, VoxelUtilities.ClampVoxelValue(-data[0]));
+		return new Voxel((Vector3)pos * worldSettings.InverseChunkResolution * worldSettings.ChunkSize, VoxelUtilities.ClampVoxelValue(-data[0]));
 	}
 
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)

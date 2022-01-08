@@ -423,7 +423,7 @@ public class MarchingCubes
 			neighborChunk = chunkPosition + neighborChunk;
 			//MonoBehaviour.print(chunkPosition + " " + neighborChunk + " " + position + " " + localPosition);
 			Voxel voxel = world.GetVoxelAtChunk(localPosition, neighborChunk);
-			voxel.position = (Vector3)position / world.worldSettings.ChunkResolution * world.worldSettings.ChunkSize;
+			voxel.position = (Vector3)position * world.worldSettings.InverseChunkResolution * world.worldSettings.ChunkSize;
 			return voxel;
 		}
 
