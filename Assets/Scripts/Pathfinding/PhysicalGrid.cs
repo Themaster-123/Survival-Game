@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class PhysicalGrid : MonoBehaviour
 {
-	public bool displayPathGizmos = false;
+	public bool DisplayGridGizmos = false;
     public LayerMask wallMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
     public Pathfinding pathfinding;
+
 	[Header("testing")]
 	public Transform target;
 	public Transform seeker;
 	public bool calculatePath = false;
+	protected Vector3[] path = new Vector3[0];
 
 	protected float nodeDiameter;
 	protected int width, height;
-	protected List<PathNode> path = new List<PathNode>();
 
 	public Vector3 GetWorldPosition(int x, int y)
 	{
@@ -78,11 +79,7 @@ public class PhysicalGrid : MonoBehaviour
 	{
 		if (calculatePath == true)
 		{
-			List<PathNode> path = pathfinding.FindPath(GetGridPosition(seeker.position), GetGridPosition(target.position));
-			if (path != null)
-			{
-				this.path = path;
-			}
+			path = PathRequestManager.GetPath(seeker.position, target.position);
 			calculatePath = false;
 		}
 	}
@@ -119,7 +116,7 @@ public class PhysicalGrid : MonoBehaviour
 
 		Gizmos.DrawWireCube(new Vector3(0, 0, 0), new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
 
-		if (pathfinding != null)
+		if (pathfinding != null && DisplayGridGizmos)
 		{
 			for (int x = 0; x < width; x++)
 			{
@@ -127,16 +124,15 @@ public class PhysicalGrid : MonoBehaviour
 				{
 					Vector3 worldPoint = GetCenterLocalPosition(x, y);
 					Gizmos.color = pathfinding.grid[x, y].walkable ? Color.white : Color.gray;
-					if (path.Contains(pathfinding.grid[x, y]))
-					{
-						Gizmos.color = Color.cyan;
-					}
-					if (!displayPathGizmos || path.Contains(pathfinding.grid[x, y]))
-					{
-						Gizmos.DrawCube(worldPoint, Vector3.one * (nodeRadius * .9f));
-					}
+					Gizmos.DrawCube(worldPoint, Vector3.one * (nodeRadius * .9f));
 				}
 			}
+		}
+
+		Gizmos.color = Color.cyan;
+		for (int i = 1; i < path.Length; i++)
+		{
+			Gizmos.DrawLine(path[i - 1], path[i]);
 		}
 	}
 }
