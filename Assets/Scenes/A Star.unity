@@ -8420,14 +8420,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e1c48f596d776429720b8169154939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPathGizmos: 1
+  DisplayGridGizmos: 0
   wallMask:
     serializedVersion: 2
     m_Bits: 256
   gridWorldSize: {x: 16, y: 16}
-  nodeRadius: 0.25
-  target: {fileID: 611750614}
-  seeker: {fileID: 643002778}
+  nodeRadius: 0.1
+  target: {fileID: 643002778}
+  seeker: {fileID: 611750614}
   calculatePath: 0
 --- !u!23 &631445844
 MeshRenderer:

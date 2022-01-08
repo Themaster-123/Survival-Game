@@ -20,6 +20,9 @@ public class PathRequestManager : MonoBehaviour
 	public static Vector3[] GetPath(Vector3 start, Vector3 end)
 	{
 		List<PathNode> path = instance.pathfinding.FindPath(instance.physicalGrid.GetGridPosition(start), instance.physicalGrid.GetGridPosition(end));
+
+		if (path == null) return new Vector3[0];
+
 		Vector3[] simplifedPath = SimplifyPath(path);
 		return simplifedPath;
 	}
