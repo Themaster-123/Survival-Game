@@ -26,6 +26,8 @@ public class Pathfinding
 		PathNode startNode = grid[start];
 		PathNode endNode = grid[end];
 
+		if (!startNode.walkable || !endNode.walkable) return null;
+
 		Heap<PathNode> openList = new Heap<PathNode>(grid.width * grid.height);
 		HashSet<PathNode> closedList = new HashSet<PathNode>();
 		openList.Add(startNode);
@@ -97,6 +99,11 @@ public class Pathfinding
 				}
 			}
 		}
+
+#if TIME_PATHFINDING
+		sw.Stop();
+		MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
+#endif
 
 		// Out of nodes!!!
 		return null;
