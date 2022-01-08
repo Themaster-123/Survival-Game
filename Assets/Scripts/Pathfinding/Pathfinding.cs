@@ -117,10 +117,9 @@ public class Pathfinding
 
 	protected int CalculateDistanceCost(PathNode a, PathNode b)
 	{
-		int xDistance = Mathf.Abs(a.gridPosition.x - b.gridPosition.x);
-		int yDistance = Mathf.Abs(a.gridPosition.y - b.gridPosition.y);
-		int remaining = Mathf.Abs(xDistance - yDistance);
-		return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
+		Vector2Int distance = MathUtilities.Abs(a.gridPosition - b.gridPosition);
+		int remaining = Mathf.Abs(distance.x - distance.y);
+		return MOVE_DIAGONAL_COST * Mathf.Min(distance.x, distance.y) + MOVE_STRAIGHT_COST * remaining;
 	}
 
 	protected PathNode GetLowestFCostNode(List<PathNode> openList)

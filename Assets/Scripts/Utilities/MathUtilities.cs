@@ -15,4 +15,9 @@ public static class MathUtilities
 		int r = a % b;
 		return r < 0 ? r + b : r;
 	}
+
+	public static Vector2Int Abs(Vector2Int vector)
+	{
+		return new Vector2Int(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
+	}
 }
