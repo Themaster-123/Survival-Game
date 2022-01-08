@@ -86,7 +86,8 @@ public class PhysicalGrid : MonoBehaviour
 
 	protected void InitializeFields()
 	{
-		pathfinding = new Pathfinding(width, height);
+		Grid<PathNode> grid = new Grid<PathNode>(width, height, (Grid<PathNode> grid, int x, int y) => new PathNode(grid, new Vector2Int(x, y)));
+		pathfinding = new Pathfinding(grid);
 		SetGridValues();
 	}
 

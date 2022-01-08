@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
-public class Grid<T>
+public class Grid<T> : IGrid<T>
 {
-	public delegate void ValueChangedEvent(int x, int y, T value);
+	public event ValueChangedEvent<T> OnValueChangedEvent;
 
-	public event ValueChangedEvent OnValueChangedEvent;
-
-	public int width { get; protected set; }
-	public int height { get; protected set; }
+	public int width { get; }
+	public int height { get; }
 
 	protected T[,] gridArray;
 

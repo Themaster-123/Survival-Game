@@ -7,14 +7,14 @@ using System.Diagnostics;
 
 public class Pathfinding
 {
-	public Grid<PathNode> grid;
+	public IGrid<PathNode> grid;
 
 	protected const int MOVE_STRAIGHT_COST = 10;
 	protected const int MOVE_DIAGONAL_COST = 14;
 
-	public Pathfinding(int width, int height)
+	public Pathfinding(IGrid<PathNode> grid)
 	{
-		InitateGrid(width, height);
+		InitateGrid(grid);
 	}
 
 	public List<PathNode> FindPath(Vector2Int start, Vector2Int end)
@@ -109,9 +109,9 @@ public class Pathfinding
 		return null;
 	}
 
-	protected void InitateGrid(int width, int height)
+	protected void InitateGrid(IGrid<PathNode> grid)
 	{
-		grid = new Grid<PathNode>(width, height, (Grid<PathNode> grid, int x, int y) => new PathNode(grid, new Vector2Int(x, y)));
+		this.grid = grid;//new Grid<PathNode>(width, height, (Grid<PathNode> grid, int x, int y) => new PathNode(grid, new Vector2Int(x, y)));
 
 	}
 
