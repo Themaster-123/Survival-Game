@@ -12,64 +12,73 @@ public class Grid<T> : IGrid<T>
 
 	public int width { get; }
 	public int height { get; }
+	public int depth { get; }
 
-	protected T[,] gridArray;
+	public int MaxSize { get { return width * height * depth; } }
 
-	public bool IsInBounds(int x, int y)
+	protected T[,,] gridArray;
+
+	public bool IsInBounds(int x, int y, int z)
 	{
-		if (x >= 0 && y >= 0 & x < width && y < height)
+		if (x >= 0 && y >= 0 && z >= 0 && x < width && y < height && z < depth)
 		{
 			return true;
 		}
 		return false;
 	}
 
-	public bool IsInBounds(Vector2Int pos)
+	public bool IsInBounds(Vector3Int pos)
 	{
-		return IsInBounds(pos.x, pos.y);
+		return IsInBounds(pos.x, pos.y, pos.z);
 	}
 
-	public Grid(int width, int height)
+	public Grid(int width, int height, int depth)
 	{
 		this.width = width;
 		this.height = height;
+		this.depth = depth;
 
-		gridArray = new T[width, height];
+		gridArray = new T[width, height, depth];
 	}
 
-	public Grid(int width, int height, Func<Grid<T>, int, int, T> instaniateGridObject)
+	public Grid(int width, int height, int depth, Func<Grid<T>, int, int, int, T> instaniateGridObject)
 	{
 		this.width = width;
 		this.height = height;
+		this.depth = depth;
 
-		gridArray = new T[width, height];
+		gridArray = new T[width, height, depth];
 
 		for (int x = 0; x < width; x++)
 		{
 			for (int y = 0; y < height; y++)
 			{
-				gridArray[x, y] = instaniateGridObject(this, x, y);
+				for (int z = 0; z < depth; z++)
+				{
+					gridArray[x, y, z] = instaniateGridObject(this, x, y, z);
+
+				}
 			}
 		}
 	}
 
-	public Grid(T[,] gridArray)
+	public Grid(T[,,] gridArray)
 	{
-		this.gridArray = gridArray.Clone() as T[,];
+		this.gridArray = gridArray.Clone() as T[,,];
 
 		this.width = gridArray.GetLength(0);
 		this.height = gridArray.GetLength(1);
 	}
 
-	public T this[int x, int y]
+	public T this[int x, int y, int z]
 	{
 		get
 		{
 #if USE_OUT_OF_BOUNDS_CHECKS
-			if (IsInBounds(x, y))
+			if (IsInBounds(x, y, z))
 			{
 #endif
-				return gridArray[x, y];
+				return gridArray[x, y, z];
 #if USE_OUT_OF_BOUNDS_CHECKS
 			}
 			else
@@ -83,10 +92,10 @@ public class Grid<T> : IGrid<T>
 		set
 		{
 #if USE_OUT_OF_BOUNDS_CHECKS
-			if (IsInBounds(x, y))
+			if (IsInBounds(x, y, z))
 			{
 #endif
-			gridArray[x, y] = value;
+			gridArray[x, y, z] = value;
 			OnValueChangedEvent?.Invoke(x, y, value);
 #if USE_OUT_OF_BOUNDS_CHECKS
 			}
@@ -98,16 +107,16 @@ public class Grid<T> : IGrid<T>
 		}
 	}
 
-	public T this[Vector2Int pos]
+	public T this[Vector3Int pos]
 	{
 		get
 		{
-			return this[pos.x, pos.y];
+			return this[pos.x, pos.y, pos.z];
 		}
 
 		set
 		{
-			this[pos.x, pos.y] = value;
+			this[pos.x, pos.y, pos.z] = value;
 		}
 	}
 }

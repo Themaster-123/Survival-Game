@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathNode : IHeapItem<PathNode>
 {
-	public Vector2Int gridPosition;
+	public Vector3Int gridPosition;
 
 	public int gCost;
 	public int hCost;
@@ -17,7 +17,7 @@ public class PathNode : IHeapItem<PathNode>
 
 	protected Grid<PathNode> grid;
 
-	public PathNode(in Grid<PathNode> grid, Vector2Int gridPosition)
+	public PathNode(in Grid<PathNode> grid, Vector3Int gridPosition)
 	{
 		this.grid = grid;
 		this.gridPosition = gridPosition;

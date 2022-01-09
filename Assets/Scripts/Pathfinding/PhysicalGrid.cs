@@ -5,8 +5,9 @@ using UnityEngine;
 public class PhysicalGrid : MonoBehaviour
 {
 	public bool DisplayGridGizmos = false;
+	public bool OnlyDisplayUnwalkable = false;
     public LayerMask wallMask;
-    public Vector2 gridWorldSize;
+    public Vector3 gridWorldSize;
     public float nodeRadius;
     public Pathfinding pathfinding;
 
@@ -17,49 +18,50 @@ public class PhysicalGrid : MonoBehaviour
 	protected Vector3[] path = new Vector3[0];
 
 	protected float nodeDiameter;
-	protected int width, height;
+	protected int width, height, depth;
 
-	public Vector3 GetWorldPosition(int x, int y)
+	public Vector3 GetWorldPosition(int x, int y, int z)
 	{
-		return transform.TransformPoint(GetLocalPosition(x, y));
+		return transform.TransformPoint(GetLocalPosition(x, y, z));
 	}
 
-	public Vector3 GetWorldPosition(Vector2Int gridPosition)
+	public Vector3 GetWorldPosition(Vector3Int gridPosition)
 	{
-		return GetWorldPosition(gridPosition.x, gridPosition.y);
+		return GetWorldPosition(gridPosition.x, gridPosition.y, gridPosition.z);
 	}
 
-	public Vector3 GetCenterWorldPosition(int x, int y)
+	public Vector3 GetCenterWorldPosition(int x, int y, int z)
 	{
-		return GetWorldPosition(x, y) + transform.TransformDirection(new Vector3(.5f, 0 , .5f) * nodeRadius);
+		return GetWorldPosition(x, y, z) + transform.TransformDirection(new Vector3(.5f, .5f, .5f) * nodeRadius);
 	}
 
-	public Vector3 GetCenterWorldPosition(Vector2Int gridPosition)
+	public Vector3 GetCenterWorldPosition(Vector3Int gridPosition)
 	{
-		return GetCenterWorldPosition(gridPosition.x, gridPosition.y);
+		return GetCenterWorldPosition(gridPosition.x, gridPosition.y, gridPosition.z);
 	}
 
-	public Vector3 GetLocalPosition(int x, int y)
+	public Vector3 GetLocalPosition(int x, int y, int z)
 	{
-		return (new Vector3(x, 0, y) - (new Vector3(width, 0 , height) * .5f)) * nodeRadius;
+		return (new Vector3(x, y, z) - (new Vector3(width, height , depth) * .5f)) * nodeRadius;
 	}
 
-	public Vector3 GetCenterLocalPosition(int x, int y)
+	public Vector3 GetCenterLocalPosition(int x, int y, int z)
 	{
-		return GetLocalPosition(x, y) + new Vector3(.5f, 0, .5f) * nodeRadius;
+		return GetLocalPosition(x, y, z) + new Vector3(.5f, .5f, .5f) * nodeRadius;
 	}
 
-	public Vector2Int GetGridPositionUnclamped(Vector3 position)
+	public Vector3Int GetGridPositionUnclamped(Vector3 position)
 	{
-		Vector3Int vec3Pos = Vector3Int.FloorToInt(transform.InverseTransformPoint(position) / nodeRadius + (new Vector3(width, 0, height) * .5f));
-		return new Vector2Int(vec3Pos.x, vec3Pos.z);
+		Vector3Int vec3Pos = Vector3Int.FloorToInt(transform.InverseTransformPoint(position) / nodeRadius + (new Vector3(width, height, depth) * .5f));
+		return new Vector3Int(vec3Pos.x, vec3Pos.y, vec3Pos.z);
 	}
 
-	public Vector2Int GetGridPosition(Vector3 position)
+	public Vector3Int GetGridPosition(Vector3 position)
 	{
-		Vector2Int clampedPos = GetGridPositionUnclamped(position);
+		Vector3Int clampedPos = GetGridPositionUnclamped(position);
 		clampedPos.x = Mathf.Clamp(clampedPos.x, 0, width - 1);
 		clampedPos.y = Mathf.Clamp(clampedPos.y, 0, height - 1);
+		clampedPos.z = Mathf.Clamp(clampedPos.z, 0, depth - 1);
 		return clampedPos;
 	}
 
@@ -86,7 +88,7 @@ public class PhysicalGrid : MonoBehaviour
 
 	protected void InitializeFields()
 	{
-		Grid<PathNode> grid = new Grid<PathNode>(width, height, (Grid<PathNode> grid, int x, int y) => new PathNode(grid, new Vector2Int(x, y)));
+		Grid<PathNode> grid = new Grid<PathNode>(width, height, depth, (Grid<PathNode> grid, int x, int y, int z) => new PathNode(grid, new Vector3Int(x, y, z)));
 		pathfinding = new Pathfinding(grid);
 		SetGridValues();
 	}
@@ -96,6 +98,7 @@ public class PhysicalGrid : MonoBehaviour
 		nodeDiameter = nodeRadius * 2;
 		width = Mathf.RoundToInt(gridWorldSize.x / nodeRadius);
 		height = Mathf.RoundToInt(gridWorldSize.y / nodeRadius);
+		depth = Mathf.RoundToInt(gridWorldSize.z / nodeRadius);
 	}
 
 	protected void SetGridValues()
@@ -104,8 +107,11 @@ public class PhysicalGrid : MonoBehaviour
 		{
 			for (int y = 0; y < height; y++)
 			{
-				Vector3 worldPoint = GetCenterWorldPosition(x, y);
-				pathfinding.grid[x, y].walkable = !Physics.CheckSphere(worldPoint, nodeRadius * .5f, wallMask, QueryTriggerInteraction.Ignore);
+				for (int z = 0; z < depth; z++)
+				{
+					Vector3 worldPoint = GetCenterWorldPosition(x, y, z);
+					pathfinding.grid[x, y, z].walkable = !Physics.CheckSphere(worldPoint, nodeRadius * .5f, wallMask, QueryTriggerInteraction.Ignore);
+				}
 			}
 		}
 	}
@@ -115,7 +121,7 @@ public class PhysicalGrid : MonoBehaviour
 		Gizmos.color = Color.white;
 		Gizmos.matrix = transform.localToWorldMatrix;
 
-		Gizmos.DrawWireCube(new Vector3(0, 0, 0), new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+		Gizmos.DrawWireCube(new Vector3(0, 0, 0), new Vector3(gridWorldSize.x, gridWorldSize.y, gridWorldSize.z));
 
 		if (pathfinding != null && DisplayGridGizmos)
 		{
@@ -123,14 +129,21 @@ public class PhysicalGrid : MonoBehaviour
 			{
 				for (int y = 0; y < height; y++)
 				{
-					Vector3 worldPoint = GetCenterLocalPosition(x, y);
-					Gizmos.color = pathfinding.grid[x, y].walkable ? Color.white : Color.gray;
-					Gizmos.DrawCube(worldPoint, Vector3.one * (nodeRadius * .9f));
+					for (int z = 0; z < depth; z++)
+					{
+						if (!OnlyDisplayUnwalkable || !pathfinding.grid[x, y, z].walkable)
+						{
+							Vector3 worldPoint = GetCenterLocalPosition(x, y, z);
+							Gizmos.color = pathfinding.grid[x, y, z].walkable ? Color.white : Color.gray;
+							Gizmos.DrawCube(worldPoint, Vector3.one * (nodeRadius * .9f));
+						}
+					}
 				}
 			}
 		}
 
 		Gizmos.color = Color.cyan;
+		Gizmos.matrix = Matrix4x4.identity;
 		for (int i = 1; i < path.Length; i++)
 		{
 			Gizmos.DrawLine(path[i - 1], path[i]);

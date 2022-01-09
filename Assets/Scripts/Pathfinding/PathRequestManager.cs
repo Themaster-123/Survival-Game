@@ -30,11 +30,11 @@ public class PathRequestManager : MonoBehaviour
 	protected static Vector3[] SimplifyPath(List<PathNode> path)
 	{
 		List<Vector3> waypoints = new List<Vector3>();
-		Vector2Int directionOld = Vector2Int.zero;
+		Vector3Int directionOld = Vector3Int.zero;
 
 		for (int i = 1; i < path.Count; i++)
 		{
-			Vector2Int directionNew = path[i - 1].gridPosition - path[i].gridPosition;
+			Vector3Int directionNew = path[i - 1].gridPosition - path[i].gridPosition;
 
 			if (directionNew != directionOld)
 			{

@@ -11,13 +11,14 @@ public class Pathfinding
 
 	protected const int MOVE_STRAIGHT_COST = 10;
 	protected const int MOVE_DIAGONAL_COST = 14;
+	protected const int MOVE_3D_DIAGONAL_COST = 17;
 
 	public Pathfinding(IGrid<PathNode> grid)
 	{
 		InitateGrid(grid);
 	}
 
-	public List<PathNode> FindPath(Vector2Int start, Vector2Int end)
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
 	{
 #if TIME_PATHFINDING
 		Stopwatch sw = new Stopwatch();
@@ -28,7 +29,7 @@ public class Pathfinding
 
 		if (!startNode.walkable || !endNode.walkable) return null;
 
-		Heap<PathNode> openList = new Heap<PathNode>(grid.width * grid.height);
+		Heap<PathNode> openList = new Heap<PathNode>(grid.MaxSize);
 		HashSet<PathNode> closedList = new HashSet<PathNode>();
 		openList.Add(startNode);
 
@@ -36,10 +37,13 @@ public class Pathfinding
 		{
 			for (int y = 0; y < grid.height; y++)
 			{
-				PathNode pathNode = grid[x, y];
-				pathNode.gCost = int.MaxValue;
-				pathNode.CalculateFCost();
-				pathNode.prevNode = null;
+				for (int z = 0; z < grid.depth; z++)
+				{
+					PathNode pathNode = grid[x, y, z];
+					pathNode.gCost = int.MaxValue;
+					pathNode.CalculateFCost();
+					pathNode.prevNode = null;
+				}
 			}
 		}
 
@@ -64,12 +68,12 @@ public class Pathfinding
 			{
 				if (!neighbourNode.walkable || closedList.Contains(neighbourNode)) continue;
 
-				Vector2Int localPosition = neighbourNode.gridPosition - currentNode.gridPosition;
+				Vector3Int localPosition = neighbourNode.gridPosition - currentNode.gridPosition;
 				bool cornerCovered = true;
 
 				for (int i = 0; i < 2; i++)
 				{
-					Vector2Int pos = currentNode.gridPosition;
+					Vector3Int pos = currentNode.gridPosition;
 					pos[i] += localPosition[i];
 					if (grid[pos].walkable)
 					{
@@ -85,15 +89,16 @@ public class Pathfinding
 				{
 					neighbourNode.prevNode = currentNode;
 					neighbourNode.gCost = tentativeGCost;
-					neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
-					neighbourNode.CalculateFCost();
 
 					if (!openList.Contains(neighbourNode))
 					{
+						neighbourNode.hCost = CalculateDistanceCost(neighbourNode, endNode);
+						neighbourNode.CalculateFCost();
 						openList.Add(neighbourNode);
 					}
 					else
 					{
+						neighbourNode.CalculateFCost();
 						openList.UpdateItem(neighbourNode);
 					}
 				}
@@ -117,9 +122,11 @@ public class Pathfinding
 
 	protected int CalculateDistanceCost(PathNode a, PathNode b)
 	{
-		Vector2Int distance = MathUtilities.Abs(a.gridPosition - b.gridPosition);
-		int remaining = Mathf.Abs(distance.x - distance.y);
-		return MOVE_DIAGONAL_COST * Mathf.Min(distance.x, distance.y) + MOVE_STRAIGHT_COST * remaining;
+		Vector3Int distance = MathUtilities.Abs(a.gridPosition - b.gridPosition);
+		int min = Mathf.Min(distance.x, distance.y, distance.z);
+		int max = Mathf.Max(distance.x, distance.y, distance.z);
+		int mid = distance.x + distance.y + distance.z - min - max;
+		return MOVE_DIAGONAL_COST * (mid - min) + MOVE_STRAIGHT_COST * (max - mid) + MOVE_3D_DIAGONAL_COST * min;
 	}
 
 	protected PathNode GetLowestFCostNode(List<PathNode> openList)
@@ -153,13 +160,16 @@ public class Pathfinding
 		{
 			for (int y = -1; y <= 1; y++)
 			{
-				if (x == 0 && y == 0) continue;
-
-				Vector2Int pos = node.gridPosition + new Vector2Int(x, y);
-
-				if (grid.IsInBounds(pos))
+				for (int z = -1; z <= 1; z++)
 				{
-					neighbourList.Add(grid[pos]);
+					if (x == 0 && y == 0 && z == 0) continue;
+
+					Vector3Int pos = node.gridPosition + new Vector3Int(x, y, z);
+
+					if (grid.IsInBounds(pos))
+					{
+						neighbourList.Add(grid[pos]);
+					}
 				}
 			}
 		}

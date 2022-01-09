@@ -10,12 +10,14 @@ public interface IGrid<T>
 
 	public int width { get; }
 	public int height { get; }
+	public int depth { get; }
+	public int MaxSize { get; }
 
-	public T this[int x, int y] { get; set; }
+	public T this[int x, int y, int z] { get; set; }
 
-	public T this[Vector2Int pos] { get; set; }
+	public T this[Vector3Int pos] { get; set; }
 
-	public bool IsInBounds(int x, int y);
+	public bool IsInBounds(int x, int y, int z);
 
-	public bool IsInBounds(Vector2Int pos);
+	public bool IsInBounds(Vector3Int pos);
 }
