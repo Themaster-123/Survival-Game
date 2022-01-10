@@ -27,6 +27,10 @@ public class Heap<T> where T : IHeapItem<T>
 		items[currentItemCount] = item;
 		SortUp(item);
 		currentItemCount++;
+		if (currentItemCount >= items.Length)
+		{
+			Array.Resize(ref items, items.Length * 2);
+		}
 	}
 
 	public T RemoveFirst()
@@ -41,6 +45,8 @@ public class Heap<T> where T : IHeapItem<T>
 
 	public bool Contains(T item)
 	{
+		if (item.HeapIndex >= items.Length) return false;
+
 		return Equals(items[item.HeapIndex], item);
 	}
 
