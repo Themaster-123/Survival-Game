@@ -15,11 +15,8 @@ public class PathNode : IHeapItem<PathNode>
 
 	public int HeapIndex { get; set; }
 
-	protected Grid<PathNode> grid;
-
-	public PathNode(in Grid<PathNode> grid, Vector3Int gridPosition)
+	public PathNode(Vector3Int gridPosition)
 	{
-		this.grid = grid;
 		this.gridPosition = gridPosition;
 	}
 
@@ -30,10 +27,10 @@ public class PathNode : IHeapItem<PathNode>
 
 	public int CompareTo(PathNode other)
 	{
-		int compare = fCost.CompareTo(other.fCost);
+		int compare = hCost.CompareTo(other.hCost);
 		if (compare == 0)
 		{
-			compare = hCost.CompareTo(other.hCost);
+			compare = fCost.CompareTo(other.fCost);
 		}
 
 		return -compare;

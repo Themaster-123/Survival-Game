@@ -7,15 +7,16 @@ using System.Diagnostics;
 
 public class Pathfinding
 {
-	public IGrid<PathNode> grid;
+	public World world;
 
+	protected const float VOXEL_VALUE_CUTOFF = 0;
 	protected const int MOVE_STRAIGHT_COST = 10;
 	protected const int MOVE_DIAGONAL_COST = 14;
 	protected const int MOVE_3D_DIAGONAL_COST = 17;
 
-	public Pathfinding(IGrid<PathNode> grid)
+	public Pathfinding(World world)
 	{
-		InitateGrid(grid);
+		InitateValues(world);
 	}
 
 	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
@@ -24,28 +25,22 @@ public class Pathfinding
 		Stopwatch sw = new Stopwatch();
 		sw.Start();
 #endif
-		PathNode startNode = grid[start];
-		PathNode endNode = grid[end];
+		Dictionary<Vector3Int, PathNode> nodeSet = new Dictionary<Vector3Int, PathNode>();
+		PathNode startNode = GetPathNodeFromVoxel(start, nodeSet);
+		PathNode endNode = GetPathNodeFromVoxel(end, nodeSet);
 
-		if (!startNode.walkable || !endNode.walkable) return null;
+		if (!startNode.walkable || !endNode.walkable) 
+		{
+#if TIME_PATHFINDING
+			sw.Stop();
+			MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
+#endif
+			return null; 
+		}
 
-		Heap<PathNode> openList = new Heap<PathNode>(grid.MaxSize);
+		Heap<PathNode> openList = new Heap<PathNode>(world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution);
 		HashSet<PathNode> closedList = new HashSet<PathNode>();
 		openList.Add(startNode);
-
-		for (int x = 0; x < grid.width; x++)
-		{
-			for (int y = 0; y < grid.height; y++)
-			{
-				for (int z = 0; z < grid.depth; z++)
-				{
-					PathNode pathNode = grid[x, y, z];
-					pathNode.gCost = int.MaxValue;
-					pathNode.CalculateFCost();
-					pathNode.prevNode = null;
-				}
-			}
-		}
 
 		startNode.gCost = 0;
 		startNode.hCost = CalculateDistanceCost(startNode, endNode);
@@ -64,7 +59,7 @@ public class Pathfinding
 
 			closedList.Add(currentNode);
 
-			foreach (PathNode neighbourNode in GetNeighbours(currentNode))
+			foreach (PathNode neighbourNode in GetNeighbours(currentNode, nodeSet))
 			{
 				if (!neighbourNode.walkable || closedList.Contains(neighbourNode)) continue;
 
@@ -75,7 +70,7 @@ public class Pathfinding
 				{
 					Vector3Int pos = currentNode.gridPosition;
 					pos[i] += localPosition[i];
-					if (grid[pos].walkable)
+					if (GetPathNodeFromVoxel(pos, nodeSet).walkable)
 					{
 						cornerCovered = false;
 					}
@@ -114,10 +109,9 @@ public class Pathfinding
 		return null;
 	}
 
-	protected void InitateGrid(IGrid<PathNode> grid)
+	protected void InitateValues(World world)
 	{
-		this.grid = grid;//new Grid<PathNode>(width, height, (Grid<PathNode> grid, int x, int y) => new PathNode(grid, new Vector2Int(x, y)));
-
+		this.world = world;
 	}
 
 	protected int CalculateDistanceCost(PathNode a, PathNode b)
@@ -153,7 +147,7 @@ public class Pathfinding
 		return path;
 	}
 
-	protected List<PathNode> GetNeighbours(PathNode node)
+	protected List<PathNode> GetNeighbours(PathNode node, Dictionary<Vector3Int, PathNode> nodeSet)
 	{
 		List<PathNode> neighbourList = new List<PathNode>();
 		for (int x = -1; x <= 1; x++)
@@ -166,14 +160,26 @@ public class Pathfinding
 
 					Vector3Int pos = node.gridPosition + new Vector3Int(x, y, z);
 
-					if (grid.IsInBounds(pos))
-					{
-						neighbourList.Add(grid[pos]);
-					}
+					neighbourList.Add(GetPathNodeFromVoxel(pos, nodeSet));
 				}
 			}
 		}
 
 		return neighbourList;
+	}
+
+	protected PathNode GetPathNodeFromVoxel(Vector3Int pos, Dictionary<Vector3Int, PathNode> nodeSet)
+	{
+		if (nodeSet.TryGetValue(pos, out PathNode pathNode)) return pathNode;
+
+		pathNode = new PathNode(pos);
+
+		pathNode.gCost = int.MaxValue;
+		pathNode.CalculateFCost();
+		pathNode.walkable = world.GetVoxel(pos).value > VOXEL_VALUE_CUTOFF ? false : true;
+
+		nodeSet.Add(pos, pathNode);
+
+		return pathNode;
 	}
 }

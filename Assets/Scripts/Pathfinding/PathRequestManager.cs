@@ -19,7 +19,7 @@ public class PathRequestManager : MonoBehaviour
 
 	public static Vector3[] GetPath(Vector3 start, Vector3 end)
 	{
-		List<PathNode> path = instance.pathfinding.FindPath(instance.physicalGrid.GetGridPosition(start), instance.physicalGrid.GetGridPosition(end));
+		List<PathNode> path = instance.pathfinding.FindPath(VoxelUtilities.ToVoxelPosition(start, instance.physicalGrid.world), VoxelUtilities.ToVoxelPosition(end, instance.physicalGrid.world));
 
 		if (path == null) return new Vector3[0];
 
@@ -38,12 +38,12 @@ public class PathRequestManager : MonoBehaviour
 
 			if (directionNew != directionOld)
 			{
-				waypoints.Add(instance.physicalGrid.GetCenterWorldPosition(path[i - 1].gridPosition));
+				waypoints.Add(VoxelUtilities.ToWorldPosition(path[i - 1].gridPosition, instance.physicalGrid.world));
 			}
 
 			directionOld = directionNew;
 		}
-		waypoints.Add(instance.physicalGrid.GetCenterWorldPosition(path[path.Count - 1].gridPosition));
+		waypoints.Add(VoxelUtilities.ToWorldPosition(path[path.Count - 1].gridPosition, instance.physicalGrid.world));
 
 		return waypoints.ToArray();
 	}

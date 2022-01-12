@@ -13,4 +13,9 @@ public static class VoxelUtilities
 	{
 		return Mathf.Clamp(value, -1, 1);
 	}
+
+	public static Vector3 ToWorldPosition(Vector3Int pos, World world)
+	{
+		return (pos + new Vector3(.5f, .5f, .5f)) * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution;
+	}
 }

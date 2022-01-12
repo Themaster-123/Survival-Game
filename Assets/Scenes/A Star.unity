@@ -8426,7 +8426,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   gridWorldSize: {x: 16, y: 16, z: 16}
-  nodeRadius: 1
+  nodeRadius: 0.33333334
   target: {fileID: 643002778}
   seeker: {fileID: 611750614}
   calculatePath: 0
