@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class PhysicalGrid : MonoBehaviour
 {
-	public World world;
+	public World World 
+	{ 
+		get 
+		{ 
+			lock (world) 
+			{ 
+				return world; 
+			} 
+		} 
+		set 
+		{ 
+			lock (world) 
+			{ 
+				pathfinding.world = value; 
+				world = value; 
+			} 
+		} 
+	}
+
     public Pathfinding pathfinding;
 
 	[Header("testing")]
@@ -12,6 +30,8 @@ public class PhysicalGrid : MonoBehaviour
 	public Transform seeker;
 	public bool calculatePath = false;
 	protected Vector3[] path = new Vector3[0];
+	[SerializeField]
+	protected World world;
 
 	protected void Awake()
 	{
@@ -24,17 +44,21 @@ public class PhysicalGrid : MonoBehaviour
 		DrawGrid();
 	}
 
+	protected void FixedUpdate()
+	{
+		PathRequestManager.GetPath(seeker.position, target.position, (Vector3[] path) => { this.path = path; });
+	}
+
 	protected void OnValidate()
 	{
 		if (calculatePath == true)
 		{
-			path = PathRequestManager.GetPath(seeker.position, target.position);
 			calculatePath = false;
 		}
 	}
 	protected void InitializeFields()
 	{
-		pathfinding = new Pathfinding(world);
+		pathfinding = new Pathfinding(World);
 	}
 
 	protected void DrawGrid()

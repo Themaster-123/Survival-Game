@@ -27,10 +27,10 @@ public class PathNode : IHeapItem<PathNode>
 
 	public int CompareTo(PathNode other)
 	{
-		int compare = hCost.CompareTo(other.hCost);
+		int compare = fCost.CompareTo(other.fCost);
 		if (compare == 0)
 		{
-			compare = fCost.CompareTo(other.fCost);
+			compare = hCost.CompareTo(other.hCost);
 		}
 
 		return -compare;
