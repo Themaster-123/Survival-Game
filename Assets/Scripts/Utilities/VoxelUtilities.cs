@@ -18,4 +18,8 @@ public static class VoxelUtilities
 	{
 		return (pos + new Vector3(.5f, .5f, .5f)) * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution;
 	}
+	public static Vector3 ToWorldPosition(int x, int y, int z, World world)
+	{
+		return ToWorldPosition(new Vector3Int(x, y, z), world);
+	}
 }
