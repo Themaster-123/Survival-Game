@@ -44,9 +44,10 @@ public class PhysicalGrid : MonoBehaviour
 		DrawGrid();
 	}
 
-	protected void FixedUpdate()
+	protected void Start()
 	{
-		PathRequestManager.GetPath(seeker.position, target.position, (Vector3[] path) => { this.path = path; });
+		GetPath();
+
 	}
 
 	protected void OnValidate()
@@ -72,5 +73,11 @@ public class PhysicalGrid : MonoBehaviour
 		{
 			Gizmos.DrawLine(path[i - 1], path[i]);
 		}
+	}
+
+	protected void GetPath()
+	{
+		PathRequestManager.GetPath(seeker.position, target.position, 65, (Vector3[] path) => { this.path = path; GetPath(); });
+
 	}
 }

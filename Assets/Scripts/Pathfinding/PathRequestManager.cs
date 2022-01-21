@@ -38,9 +38,14 @@ public class PathRequestManager : MonoBehaviour
 		}
 	}
 
-	public static void GetPath(Vector3 start, Vector3 end, Action<Vector3[]> callback)
+	public static void GetPathInAir(Vector3 start, Vector3 end, Action<Vector3[]> callback)
 	{
-		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback));
+		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPath(start, end)));
+	}
+
+	public static void GetPath(Vector3 start, Vector3 end, float maxSlope, Action<Vector3[]> callback) 
+	{
+		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPathOnGround(start, end, maxSlope)));
 	}
 
 	protected static Vector3[] SimplifyPath(List<PathNode> path)
@@ -90,7 +95,7 @@ public class PathRequestManager : MonoBehaviour
 		{
 			while (pathRequestQueue.TryDequeue(out PathRequest pathRequest))
 			{
-				List<PathNode> path = instance.pathfinding.FindPath(VoxelUtilities.ToVoxelPosition(pathRequest.start, instance.physicalGrid.World), VoxelUtilities.ToVoxelPosition(pathRequest.end, instance.physicalGrid.World));
+				List<PathNode> path = pathRequest.findPath(VoxelUtilities.ToVoxelPosition(pathRequest.start, instance.physicalGrid.World), VoxelUtilities.ToVoxelPosition(pathRequest.end, instance.physicalGrid.World));
 
 				Vector3[] simplifedPath;
 
@@ -119,12 +124,14 @@ public class PathRequestManager : MonoBehaviour
 		public Vector3 start;
 		public Vector3 end;
 		public Action<Vector3[]> callback;
+		public Func<Vector3Int, Vector3Int, List<PathNode>> findPath;
 
-		public PathRequest(Vector3 start, Vector3 end, Action<Vector3[]> callback)
+		public PathRequest(Vector3 start, Vector3 end, Action<Vector3[]> callback, Func<Vector3Int, Vector3Int, List<PathNode>> findPath)
 		{
 			this.start = start;
 			this.end = end;
 			this.callback = callback;
+			this.findPath = findPath;
 		}
 	}
 }
