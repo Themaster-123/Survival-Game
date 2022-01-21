@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using System;
 
 public class Pathfinding
 {
@@ -19,15 +20,15 @@ public class Pathfinding
 		InitateValues(world);
 	}
 
-	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel)
 	{
 #if TIME_PATHFINDING
 		Stopwatch sw = new Stopwatch();
 		sw.Start();
 #endif
 		Dictionary<Vector3Int, PathNode> nodeSet = new Dictionary<Vector3Int, PathNode>();
-		PathNode startNode = GetPathNodeFromVoxel(start, nodeSet);
-		PathNode endNode = GetPathNodeFromVoxel(end, nodeSet);
+		PathNode startNode = pathNodeFromVoxel(start, nodeSet);
+		PathNode endNode = pathNodeFromVoxel(end, nodeSet);
 
 		if (!startNode.walkable || !endNode.walkable) 
 		{
@@ -59,24 +60,26 @@ public class Pathfinding
 
 			closedList.Add(currentNode);
 
-			foreach (PathNode neighbourNode in GetNeighbours(currentNode, nodeSet))
+			foreach (PathNode neighbourNode in GetNeighbours(currentNode, nodeSet, pathNodeFromVoxel))
 			{
 				if (!neighbourNode.walkable || closedList.Contains(neighbourNode)) continue;
 
 				Vector3Int localPosition = neighbourNode.gridPosition - currentNode.gridPosition;
-				bool cornerCovered = true;
 
-				for (int i = 0; i < 2; i++)
+				// might add back?
+/*				bool cornerCovered = true;
+
+				for (int i = 0; i < 3; i++)
 				{
 					Vector3Int pos = currentNode.gridPosition;
 					pos[i] += localPosition[i];
-					if (GetPathNodeFromVoxel(pos, nodeSet).walkable)
+					if (pathNodeFromVoxel(pos, nodeSet).walkable)
 					{
 						cornerCovered = false;
 					}
 				}
 
-				if (cornerCovered) continue;
+				if (cornerCovered) continue;*/
 
 				int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighbourNode);
 
@@ -107,6 +110,19 @@ public class Pathfinding
 
 		// Out of nodes!!!
 		return null;
+	}
+
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
+	{
+		return FindPath(start, end, GetPathNodeFromVoxel);
+	}
+
+	public List<PathNode> FindPathOnGround(Vector3Int start, Vector3Int end, float maxSlope)
+	{
+		return FindPath(start, end, (Vector3Int pos, Dictionary<Vector3Int, PathNode> hashSet) =>
+		{
+			return GetPathNodeFromVoxel(pos, hashSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
+		});
 	}
 
 	protected void InitateValues(World world)
@@ -147,7 +163,7 @@ public class Pathfinding
 		return path;
 	}
 
-	protected List<PathNode> GetNeighbours(PathNode node, Dictionary<Vector3Int, PathNode> nodeSet)
+	protected List<PathNode> GetNeighbours(PathNode node, Dictionary<Vector3Int, PathNode> nodeSet, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel)
 	{
 		List<PathNode> neighbourList = new List<PathNode>();
 		for (int x = -1; x <= 1; x++)
@@ -160,7 +176,7 @@ public class Pathfinding
 
 					Vector3Int pos = node.gridPosition + new Vector3Int(x, y, z);
 
-					neighbourList.Add(GetPathNodeFromVoxel(pos, nodeSet));
+					neighbourList.Add(pathNodeFromVoxel(pos, nodeSet));
 				}
 			}
 		}
@@ -168,7 +184,7 @@ public class Pathfinding
 		return neighbourList;
 	}
 
-	protected PathNode GetPathNodeFromVoxel(Vector3Int pos, Dictionary<Vector3Int, PathNode> nodeSet)
+	protected PathNode GetPathNodeFromVoxel(Vector3Int pos, Dictionary<Vector3Int, PathNode> nodeSet, Func<Voxel, Vector3Int, bool> isWalkable)
 	{
 		if (nodeSet.TryGetValue(pos, out PathNode pathNode)) return pathNode;
 
@@ -176,10 +192,56 @@ public class Pathfinding
 
 		pathNode.gCost = int.MaxValue;
 		pathNode.CalculateFCost();
-		pathNode.walkable = world.GetVoxel(pos).value > VOXEL_VALUE_CUTOFF ? false : true;
+		pathNode.walkable = isWalkable(world.GetVoxel(pos), pos);
 
 		nodeSet.Add(pos, pathNode);
 
 		return pathNode;
+	}
+
+	protected PathNode GetPathNodeFromVoxel(Vector3Int pos, Dictionary<Vector3Int, PathNode> nodeSet)
+	{
+		return GetPathNodeFromVoxel(pos, nodeSet, (Voxel voxel, Vector3Int pos) => voxel.value > VOXEL_VALUE_CUTOFF ? false : true);
+	}
+
+	protected bool IsVoxelOnGround(Voxel voxel, Vector3Int pos, float maxSlope)
+	{
+		if (voxel.value <= 0) return false;
+
+		for (int nX = -1; nX <= 1; nX++)
+		{
+			for (int nY = -1; nY <= 1; nY++)
+			{
+				for (int nZ = -1; nZ <= 1; nZ++)
+				{
+					if (nX == 0 && nY == 0 && nZ == 0) continue;
+
+					Vector3Int offset = new Vector3Int(nX, nY, nZ);
+
+					int amountOfNonZeros = 0;
+					for (int i = 0; i < 3; i++)
+					{
+						if (offset[i] != 0)
+						{
+							amountOfNonZeros++;
+						}
+					}
+
+					if (amountOfNonZeros > 1) continue;
+
+					Vector3Int offsetPos = pos + offset;
+
+					if (world.GetVoxel(offsetPos).value <= 0f)
+					{
+						Vector3 normal = MathUtilities.FindGradientVector(pos, (Vector3Int pos) => world.GetVoxel(pos).value);
+						normal.Normalize();
+						if (normal != Vector3.zero && Vector3.Angle(Vector3.up, normal) <= maxSlope) return true;
+						return false;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }
