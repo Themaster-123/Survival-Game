@@ -6,8 +6,11 @@ using UnityEngine;
 using System.Diagnostics;
 using System;
 
+
 public class Pathfinding
 {
+	public delegate void endNodeAction(ref PathNode node, Voxel voxel, Dictionary<Vector3Int, PathNode> nodeSet);
+
 	public World world;
 
 	protected const float VOXEL_VALUE_CUTOFF = 0;
@@ -20,7 +23,8 @@ public class Pathfinding
 		InitateValues(world);
 	}
 
-	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel)
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel,
+		Func<PathNode, PathNode, bool> walkableException, endNodeAction tryMakeEndNodeWalkable)
 	{
 #if TIME_PATHFINDING
 		Stopwatch sw = new Stopwatch();
@@ -30,13 +34,19 @@ public class Pathfinding
 		PathNode startNode = pathNodeFromVoxel(start, nodeSet);
 		PathNode endNode = pathNodeFromVoxel(end, nodeSet);
 
-		if (!startNode.walkable || !endNode.walkable) 
+		if (!endNode.walkable) 
 		{
+			Voxel endVoxel = world.GetVoxel(end);
+			nodeSet.Remove(endNode.gridPosition);
+			tryMakeEndNodeWalkable(ref endNode, endVoxel, nodeSet);
+			if (!endNode.walkable)
+			{
 #if TIME_PATHFINDING
-			sw.Stop();
-			MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
+				sw.Stop();
+				MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
 #endif
-			return null; 
+				return null;
+			}
 		}
 
 		Heap<PathNode> openList = new Heap<PathNode>(world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution);
@@ -62,7 +72,7 @@ public class Pathfinding
 
 			foreach (PathNode neighbourNode in GetNeighbours(currentNode, nodeSet, pathNodeFromVoxel))
 			{
-				if (!neighbourNode.walkable || closedList.Contains(neighbourNode)) continue;
+				if ((!walkableException(currentNode, neighbourNode) && !neighbourNode.walkable) || closedList.Contains(neighbourNode)) continue;
 
 				Vector3Int localPosition = neighbourNode.gridPosition - currentNode.gridPosition;
 
@@ -114,7 +124,7 @@ public class Pathfinding
 
 	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
 	{
-		return FindPath(start, end, GetPathNodeFromVoxel);
+		return FindPath(start, end, GetPathNodeFromVoxel, (_a, _b) => false, delegate(ref PathNode _a, Voxel _b, Dictionary<Vector3Int, PathNode> nodeSet) { });
 	}
 
 	public List<PathNode> FindPathOnGround(Vector3Int start, Vector3Int end, float maxSlope)
@@ -122,6 +132,38 @@ public class Pathfinding
 		return FindPath(start, end, (Vector3Int pos, Dictionary<Vector3Int, PathNode> hashSet) =>
 		{
 			return GetPathNodeFromVoxel(pos, hashSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
+		}, (currentNode, neighbourNode) =>
+		{
+			if (currentNode.gridPosition.x == neighbourNode.gridPosition.x && currentNode.gridPosition.z == neighbourNode.gridPosition.z || world.GetVoxel(currentNode.gridPosition + Vector3Int.down).value > 0)
+			{
+				if (neighbourNode.gridPosition.y < currentNode.gridPosition.y && world.GetVoxel(neighbourNode.gridPosition).value <= 0)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}, delegate (ref PathNode node, Voxel voxel, Dictionary<Vector3Int, PathNode> nodeSet)
+		{
+			if (voxel.value > 0)
+			{
+				Vector3Int topVoxelPosition = node.gridPosition + Vector3Int.up;
+				while (world.GetVoxel(topVoxelPosition).value > 0)
+				{
+					topVoxelPosition += Vector3Int.up;
+				}
+
+				node = GetPathNodeFromVoxel(topVoxelPosition + Vector3Int.down, nodeSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
+			} else
+			{
+				Vector3Int bottomVoxelPosition = node.gridPosition + Vector3Int.down;
+				while (world.GetVoxel(bottomVoxelPosition).value <= 0)
+				{
+					bottomVoxelPosition += Vector3Int.down;
+				}
+
+				node = GetPathNodeFromVoxel(bottomVoxelPosition, nodeSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
+			}
 		});
 	}
 
@@ -186,7 +228,9 @@ public class Pathfinding
 
 	protected PathNode GetPathNodeFromVoxel(Vector3Int pos, Dictionary<Vector3Int, PathNode> nodeSet, Func<Voxel, Vector3Int, bool> isWalkable)
 	{
-		if (nodeSet.TryGetValue(pos, out PathNode pathNode)) return pathNode;
+		PathNode pathNode;
+
+		if (nodeSet.TryGetValue(pos, out pathNode)) return pathNode;
 
 		pathNode = new PathNode(pos);
 
@@ -233,7 +277,7 @@ public class Pathfinding
 
 					if (world.GetVoxel(offsetPos).value <= 0f)
 					{
-						Vector3 normal = MathUtilities.FindGradientVector(pos, (Vector3Int pos) => world.GetVoxel(pos).value);
+						Vector3 normal = -MathUtilities.FindGradientVector(pos, (Vector3Int pos) => world.GetVoxel(pos).value);
 						normal.Normalize();
 						if (normal != Vector3.zero && Vector3.Angle(Vector3.up, normal) <= maxSlope) return true;
 						return false;
