@@ -28,7 +28,6 @@ public class PhysicalGrid : MonoBehaviour
 	[Header("testing")]
 	public Transform target;
 	public Transform seeker;
-	public bool calculatePath = false;
 	protected Vector3[] path = new Vector3[0];
 	[SerializeField]
 	protected World world;
@@ -43,13 +42,6 @@ public class PhysicalGrid : MonoBehaviour
 		DrawGrid();
 	}
 
-	protected void OnValidate()
-	{
-		if (calculatePath == true)
-		{
-			calculatePath = false;
-		}
-	}
 	protected void InitializeFields()
 	{
 		pathfinding = new Pathfinding(World);
