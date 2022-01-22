@@ -6,8 +6,14 @@ using System;
 [AddComponentMenu("Survival Game/World/Chunk")]
 public class Chunk : MonoBehaviour
 {
+    [Header("Properties")]
     public Vector3Int position;
     public World world;
+
+    [Header("Voxel Visualizer")]
+    public bool ShowVoxels = true;
+    public bool ShowNormals = true;
+    public bool OnlyShowGroundVoxels = true;
 
     public MeshCollider meshCollider;
     protected MeshFilter meshFilter;
@@ -76,18 +82,20 @@ public class Chunk : MonoBehaviour
     [ContextMenu("Test")]
     public virtual void Test()
 	{
-        for (int x = 0; x < world.worldSettings.ChunkResolution; x++)
-		{
-            for (int y = 0; y < world.worldSettings.ChunkResolution; y++)
-            {
-                for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
-                {
-                    world.SetVoxel(new Voxel(0), position * world.worldSettings.ChunkResolution + new Vector3Int(x, y, z));
-                }
-            }
-        }
+   
 
-	}
+    }
+
+
+    protected virtual Vector3Int GetWorldVoxelPosition(Vector3Int pos)
+	{
+        return pos + position * world.worldSettings.ChunkResolution;
+    }
+
+    protected virtual Vector3Int GetWorldVoxelPosition(int x, int y, int z)
+    {
+        return GetWorldVoxelPosition(new Vector3Int(x, y, z));
+    }
 
     // creates voxel array off of voxelData
     protected virtual void UpdateVoxels(in float[] voxelData)
@@ -119,7 +127,13 @@ public class Chunk : MonoBehaviour
 	{
 	}
 
-    protected virtual void LateUpdate()
+    protected void OnDrawGizmosSelected()
+    {
+        DrawVoxels();
+        DrawNormals();
+    }
+
+	protected virtual void LateUpdate()
 	{
         UpdateChunkIfChanged();
     }
@@ -173,6 +187,78 @@ public class Chunk : MonoBehaviour
     protected virtual void UpdateTransform()
     {
         transform.position = (Vector3)position * world.worldSettings.ChunkSize;
+    }
+
+    protected virtual void DrawVoxels()
+	{
+        for (int x = 0; x < world.worldSettings.ChunkResolution; x++)
+        {
+            for (int y = 0; y < world.worldSettings.ChunkResolution; y++)
+            {
+                for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
+                {
+                    Voxel voxel = GetVoxel(new Vector3Int(x, y, z));
+                    if (OnlyShowGroundVoxels && voxel.value <= 0) continue;
+                    Gizmos.color = voxel.value <= 0 ? Color.white : Color.gray;
+                    Gizmos.DrawWireCube(VoxelUtilities.ToWorldPosition(GetWorldVoxelPosition(x, y, z), world), Vector3.one * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution);
+                }
+            }
+        }
+    }
+
+    protected virtual void DrawNormals()
+	{
+        for (int x = 0; x < world.worldSettings.ChunkResolution; x++)
+        {
+            for (int y = 0; y < world.worldSettings.ChunkResolution; y++)
+            {
+                for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
+                {
+                    Vector3Int pos = GetWorldVoxelPosition(x, y, z);
+
+                    if (world.GetVoxel(pos).value <= 0) continue;
+
+                    for (int nX = -1; nX <= 1; nX++)
+                    {
+                        for (int nY = -1; nY <= 1; nY++)
+                        {
+                            for (int nZ = -1; nZ <= 1; nZ++)
+                            {
+                                if (nX == 0 && nY == 0 && nZ == 0) continue;
+
+                                Vector3Int offset = new Vector3Int(nX, nY, nZ);
+
+                                int amountOfNonZeros = 0;
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    if (offset[i] != 0)
+                                    {
+                                        amountOfNonZeros++;
+                                    }
+                                }
+
+                                if (amountOfNonZeros > 1) continue;
+
+                                Vector3Int offsetPos = pos + offset;
+
+                                if (world.GetVoxel(offsetPos).value <= 0f)
+                                {
+                                    goto LeaveNeighbourCheck;
+                                }
+                            }
+                        }
+                    }
+
+                    continue;
+                    LeaveNeighbourCheck:
+
+                    Vector3 vector = MathUtilities.FindGradientVector(new Vector3Int(x, y, z), (Vector3Int pos) => world.GetVoxel(position * world.worldSettings.ChunkResolution + pos).value);
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawRay(VoxelUtilities.ToWorldPosition(pos, world), -vector.normalized);
+
+                }
+            }
+        }
     }
 
     // gets chunk up forward and right neighbors

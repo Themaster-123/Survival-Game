@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e1c48f596d776429720b8169154939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  world: {fileID: 1626338178}
   target: {fileID: 442324050}
   seeker: {fileID: 1403397051}
   calculatePath: 0
+  world: {fileID: 1626338178}
 --- !u!23 &157267903
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442324046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.7, y: -2.72, z: 2.28}
+  m_LocalPosition: {x: -0.397, y: 0.507, z: 3.639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1391,7 +1391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403397047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.44, z: -8.4}
+  m_LocalPosition: {x: -18.19, y: 1.09, z: 21.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
