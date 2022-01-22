@@ -40,14 +40,7 @@ public class PhysicalGrid : MonoBehaviour
 
 	protected void OnDrawGizmos()
 	{
-
 		DrawGrid();
-	}
-
-	protected void Start()
-	{
-		GetPath();
-
 	}
 
 	protected void OnValidate()
