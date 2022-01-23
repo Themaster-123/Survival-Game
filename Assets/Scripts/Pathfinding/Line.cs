@@ -54,4 +54,11 @@ public struct Line
 	{
 		return GetSide(point) != approachSide;
 	}
+
+	public void DrawGizmos(float length)
+	{
+		Vector3 lineDir = new Vector3(1, 0, gradient).normalized;
+		Vector3 lineCenter = new Vector3(pointOnLine1.x, 0, pointOnLine1.y) + Vector3.up;
+		Gizmos.DrawLine(lineCenter - lineDir * length * .5f, lineCenter + lineDir * length * .5f);
+	}
 }
