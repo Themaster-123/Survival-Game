@@ -13,10 +13,10 @@ public class Pathfinding
 
 	public World world;
 
-	protected const float VOXEL_VALUE_CUTOFF = 0;
-	protected const int MOVE_STRAIGHT_COST = 10;
-	protected const int MOVE_DIAGONAL_COST = 14;
-	protected const int MOVE_3D_DIAGONAL_COST = 17;
+	protected readonly static float VOXEL_VALUE_CUTOFF = 0;
+	protected readonly static int MOVE_STRAIGHT_COST = 10;
+	protected readonly static int MOVE_DIAGONAL_COST = 14;
+	protected readonly static int MOVE_3D_DIAGONAL_COST = 17;
 
 	public Pathfinding(World world)
 	{
