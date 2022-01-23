@@ -52,4 +52,10 @@ public static class MathUtilities
 
 		return new Vector3(divX, divY, divZ);
 	}
+
+	// creates a new Vector2 with the old vector's x and z
+	public static Vector2 Flatten(Vector3 vector)
+	{
+		return new Vector2(vector.x, vector.z);
+	}
 }
