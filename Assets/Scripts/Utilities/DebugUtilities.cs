@@ -28,5 +28,15 @@ public static class DebugUtilities
         return textMesh;
     }
 
-    //public static TextMesh CreateWorldText(in string text, Vector3 worldPosition, Quaternion worldRotation, int fontSize = 40, Color color = default(Color), )
+    public static void DrawPath(Vector3[] path)
+	{
+        if (path == null) return;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.matrix = Matrix4x4.identity;
+        for (int i = 1; i < path.Length; i++)
+        {
+            Gizmos.DrawLine(path[i - 1], path[i]);
+        }
+    }
 }
