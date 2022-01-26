@@ -52,12 +52,7 @@ public class PhysicalGrid : MonoBehaviour
 		Gizmos.color = Color.white;
 		Gizmos.matrix = transform.localToWorldMatrix;
 
-		Gizmos.color = Color.cyan;
-		Gizmos.matrix = Matrix4x4.identity;
-		for (int i = 1; i < path.Length; i++)
-		{
-			Gizmos.DrawLine(path[i - 1], path[i]);
-		}
+		DebugUtilities.DrawPath(path);
 	}
 
 	protected void GetPath()
