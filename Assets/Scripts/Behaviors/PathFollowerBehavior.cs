@@ -34,7 +34,7 @@ public class PathFollowerBehavior : Behavior
 	{
 		if (CurrentPath == null || CurrentPath.Length == 0) return;
 
-		if (currentPathIndex < CurrentPath.Length - 1 && (MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position)).sqrMagnitude < minPathDistance * minPathDistance)
+		if (currentPathIndex < CurrentPath.Length - 1 && (MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position)).sqrMagnitude < maxPathDistance * maxPathDistance)
 		{
 			currentPathIndex++;
 		}
