@@ -20,6 +20,18 @@ public class MovementBehavior : Behavior
     public float jumpStrength = 3;
     public float groundedCheckDistance = 2.0f;
 
+    // The velocity not accounting for speed or vertical velocity
+    [HideInInspector]
+    public Vector3 MovementVelocity 
+    { 
+        get
+		{
+            Vector3 velocity = rigidBody.velocity;
+            velocity.y = 0;
+            return velocity.normalized;
+		} 
+    }
+
     protected Rigidbody rigidBody;
     // tracks if entity is on ground
     protected bool onGround = false;
