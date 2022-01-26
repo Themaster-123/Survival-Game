@@ -9,7 +9,8 @@ public class PathFollowerBehavior : Behavior
 	public float maxPathDistance = 1f;
 	[Range(0, 100)]
 	public float steeringStrength = 25f;
-	public float slowDownDistance = 1f;
+	public float maxSlowDownDistance = 1f;
+	public float minSlowDownDistance = .5f;
 
 	public Vector3[] CurrentPath { get; protected set; }
 	protected MovementBehavior movementBehavior;
@@ -45,8 +46,18 @@ public class PathFollowerBehavior : Behavior
 		Vector3 movementVelocity = movementBehavior.MovementVelocity;
 		Vector3 steering = desiredVelocity - movementVelocity;
 		steering *= steeringStrength * 0.01f;
+		float speed = 1;
 
-		movementBehavior.Move((movementVelocity + steering) * Time.fixedDeltaTime);
+		if (currentPathIndex == CurrentPath.Length - 1)
+		{
+			if (direction.sqrMagnitude <= maxSlowDownDistance * maxSlowDownDistance)
+			{
+				float clampedDistance = Mathf.Clamp(direction.magnitude, minSlowDownDistance, maxSlowDownDistance);
+				speed = MathUtilities.MapToRange(clampedDistance, minSlowDownDistance, maxSlowDownDistance, 0f, 1f);
+			}
+		}
+
+		movementBehavior.Move((movementVelocity + steering) * speed * Time.fixedDeltaTime);
 	}
 
 	protected override void GetComponents()
