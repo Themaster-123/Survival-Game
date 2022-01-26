@@ -97,6 +97,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
   world: {fileID: 0}
+  ShowVoxels: 1
+  ShowNormals: 1
+  OnlyShowGroundVoxels: 1
+  meshCollider: {fileID: 0}
 --- !u!64 &3034686091808136588
 MeshCollider:
   m_ObjectHideFlags: 0

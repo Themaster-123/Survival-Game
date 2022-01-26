@@ -169,7 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 442324050}
   seeker: {fileID: 1403397051}
-  calculatePath: 0
   world: {fileID: 1626338178}
 --- !u!23 &157267903
 MeshRenderer:
@@ -1137,6 +1136,7 @@ GameObject:
   - component: {fileID: 1301190593}
   - component: {fileID: 1301190592}
   - component: {fileID: 1301190585}
+  - component: {fileID: 1301190594}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Untagged
@@ -1157,6 +1157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 1626338178}
+  target: {fileID: 442324050}
 --- !u!114 &1301190586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1302,6 +1303,20 @@ MonoBehaviour:
   rotateOnYAxis: 0
   rotationTransform: {fileID: 1301190591}
   rotation: {x: 0, y: 0}
+--- !u!114 &1301190594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301190584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356bf47b809274c419a1314abb5148af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPathDistance: 1
+  steeringStrength: 25
 --- !u!1 &1403397047
 GameObject:
   m_ObjectHideFlags: 0
