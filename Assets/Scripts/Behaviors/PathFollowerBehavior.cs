@@ -40,9 +40,10 @@ public class PathFollowerBehavior : Behavior
 			currentPathIndex++;
 		}
 
-		Vector2 direction = MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position);
+		Vector2 offset = MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position);
+		Vector2 direction = offset.normalized;
 
-		Vector3 desiredVelocity = MathUtilities.UnFlatten(direction.normalized);
+		Vector3 desiredVelocity = MathUtilities.UnFlatten(direction);
 		Vector3 movementVelocity = movementBehavior.MovementVelocity;
 		Vector3 steering = desiredVelocity - movementVelocity;
 		steering *= steeringStrength * 0.01f;
@@ -50,9 +51,9 @@ public class PathFollowerBehavior : Behavior
 
 		if (currentPathIndex == CurrentPath.Length - 1)
 		{
-			if (direction.sqrMagnitude <= maxSlowDownDistance * maxSlowDownDistance)
+			if (offset.sqrMagnitude <= maxSlowDownDistance * maxSlowDownDistance)
 			{
-				float clampedDistance = Mathf.Clamp(direction.magnitude, minSlowDownDistance, maxSlowDownDistance);
+				float clampedDistance = Mathf.Clamp(offset.magnitude, minSlowDownDistance, maxSlowDownDistance);
 				speed = MathUtilities.MapToRange(clampedDistance, minSlowDownDistance, maxSlowDownDistance, 0f, 1f);
 			}
 		}
