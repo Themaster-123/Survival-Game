@@ -63,4 +63,12 @@ public static class MathUtilities
 	{
 		return new Vector3(vector.x, 0, vector.y);
 	}
+
+	public static float MapToRange(float oldValue, float oldMin, float oldMax, float newMin, float newMax)
+	{
+		float oldRange = (oldMax - oldMin);
+		float newRange = (newMax - newMin);
+		float newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin;
+		return newValue;
+	}
 }
