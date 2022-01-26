@@ -71,7 +71,7 @@ public class Player : Entity
         Vector2 movement = GetPlayerMovement();
         Vector2 mouseMovement = GetMouseMovement() * mouseSensitivity;
 
-        movementBehavior.Move(movement);
+        movementBehavior.Move(movement * Time.deltaTime);
         directionBehavior.Rotate(mouseMovement);
     }
 

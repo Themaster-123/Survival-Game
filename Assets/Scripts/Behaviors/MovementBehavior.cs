@@ -62,7 +62,7 @@ public class MovementBehavior : Behavior
     // changes the rigidbody velocity to the target velocity(movement) then resets physicsMovement
     protected virtual void PhysicsMove()
     {
-        physicsMovement.Normalize();
+        physicsMovement = Vector2.ClampMagnitude(physicsMovement / Time.fixedDeltaTime, 1.0f);
 
         Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
         Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
