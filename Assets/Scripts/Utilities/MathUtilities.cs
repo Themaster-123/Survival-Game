@@ -58,4 +58,9 @@ public static class MathUtilities
 	{
 		return new Vector2(vector.x, vector.z);
 	}
+
+	public static Vector3 UnFlatten(Vector2 vector)
+	{
+		return new Vector3(vector.x, 0, vector.y);
+	}
 }
