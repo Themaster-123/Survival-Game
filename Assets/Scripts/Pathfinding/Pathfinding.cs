@@ -23,7 +23,7 @@ public class Pathfinding
 		InitateValues(world);
 	}
 
-	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel,
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, int maxNodes, Func<Vector3Int, Dictionary<Vector3Int, PathNode>, PathNode> pathNodeFromVoxel,
 		Func<PathNode, PathNode, bool> walkableException, endNodeAction tryMakeEndNodeWalkable)
 	{
 #if TIME_PATHFINDING
@@ -56,8 +56,16 @@ public class Pathfinding
 		startNode.gCost = 0;
 		startNode.hCost = CalculateDistanceCost(startNode, endNode);
 
+		int amountOfNodesLooked = 0;
 		while (openList.Count > 0)
 		{
+			amountOfNodesLooked++;
+
+			if (amountOfNodesLooked > maxNodes)
+			{
+				break;
+			}
+
 			PathNode currentNode = openList.RemoveFirst();
 			if (currentNode == endNode)
 			{
@@ -65,7 +73,7 @@ public class Pathfinding
 				sw.Stop();
 				MonoBehaviour.print("Path found: " + sw.ElapsedMilliseconds + " ms");
 #endif
-				return GetFullPath(endNode);
+				return GetFullPath(currentNode);
 			}
 
 			closedList.Add(currentNode);
@@ -122,14 +130,14 @@ public class Pathfinding
 		return null;
 	}
 
-	public List<PathNode> FindPath(Vector3Int start, Vector3Int end)
+	public List<PathNode> FindPath(Vector3Int start, Vector3Int end, int maxNodes)
 	{
-		return FindPath(start, end, GetPathNodeFromVoxel, (_a, _b) => false, delegate(ref PathNode _a, Voxel _b, Dictionary<Vector3Int, PathNode> nodeSet) { });
+		return FindPath(start, end, maxNodes, GetPathNodeFromVoxel, (_a, _b) => false, delegate(ref PathNode _a, Voxel _b, Dictionary<Vector3Int, PathNode> nodeSet) { });
 	}
 
-	public List<PathNode> FindPathOnGround(Vector3Int start, Vector3Int end, float maxSlope)
+	public List<PathNode> FindPathOnGround(Vector3Int start, Vector3Int end, float maxSlope, int maxNodes)
 	{
-		return FindPath(start, end, (Vector3Int pos, Dictionary<Vector3Int, PathNode> hashSet) =>
+		return FindPath(start, end, maxNodes, (Vector3Int pos, Dictionary<Vector3Int, PathNode> hashSet) =>
 		{
 			return GetPathNodeFromVoxel(pos, hashSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
 		}, (currentNode, neighbourNode) =>
