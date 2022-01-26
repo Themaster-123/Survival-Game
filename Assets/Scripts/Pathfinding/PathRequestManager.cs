@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class PathRequestManager : MonoBehaviour
 {
+	public readonly static int DEFAULT_MAX_NODES = 10_000;
+
 	protected static PathRequestManager instance;
 	protected Thread pathRequestThread;
 	protected Pathfinding pathfinding;
@@ -38,14 +40,23 @@ public class PathRequestManager : MonoBehaviour
 		}
 	}
 
-	public static void GetPathInAir(Vector3 start, Vector3 end, Action<Vector3[]> callback)
+	public static void GetPathInAir(Vector3 start, Vector3 end, int maxNodes, Action<Vector3[]> callback)
 	{
-		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPath(start, end)));
+		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPath(start, end, maxNodes)));
 	}
 
-	public static void GetPath(Vector3 start, Vector3 end, float maxSlope, Action<Vector3[]> callback) 
+	public static void GetPath(Vector3 start, Vector3 end, float maxSlope, int maxNodes, Action<Vector3[]> callback) 
 	{
-		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPathOnGround(start, end, maxSlope)));
+		instance.pathRequestQueue.Enqueue(new PathRequest(start, end, callback, (Vector3Int start, Vector3Int end) => instance.pathfinding.FindPathOnGround(start, end, maxSlope, maxNodes)));
+	}
+	public static void GetPathInAir(Vector3 start, Vector3 end, Action<Vector3[]> callback)
+	{
+		GetPath(start, end, DEFAULT_MAX_NODES, callback);
+	}
+
+	public static void GetPath(Vector3 start, Vector3 end, float maxSlope, Action<Vector3[]> callback)
+	{
+		GetPath(start, end, maxSlope, DEFAULT_MAX_NODES, callback);
 	}
 
 	protected static Vector3[] SimplifyPath(List<PathNode> path)
