@@ -9,6 +9,8 @@ using System;
 
 public class Pathfinding
 {
+	public static readonly int MAX_GROUND_CHECK_ITERATIONS = 1000;
+
 	public delegate void endNodeAction(ref PathNode node, Voxel voxel, Dictionary<Vector3Int, PathNode> nodeSet);
 
 	public World world;
@@ -153,25 +155,26 @@ public class Pathfinding
 			return false;
 		}, delegate (ref PathNode node, Voxel voxel, Dictionary<Vector3Int, PathNode> nodeSet)
 		{
+			Vector3Int checkDirection = Vector3Int.down;
+			Vector3Int finalNodeOffset = Vector3Int.zero;
+			Func<float, bool> voxelCheckFunction = (float value) => { return value <= 0; };
+
 			if (voxel.value > 0)
 			{
-				Vector3Int topVoxelPosition = node.gridPosition + Vector3Int.up;
-				while (world.GetVoxel(topVoxelPosition).value > 0)
-				{
-					topVoxelPosition += Vector3Int.up;
-				}
-
-				node = GetPathNodeFromVoxel(topVoxelPosition + Vector3Int.down, nodeSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
-			} else
-			{
-				Vector3Int bottomVoxelPosition = node.gridPosition + Vector3Int.down;
-				while (world.GetVoxel(bottomVoxelPosition).value <= 0)
-				{
-					bottomVoxelPosition += Vector3Int.down;
-				}
-
-				node = GetPathNodeFromVoxel(bottomVoxelPosition, nodeSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
+				checkDirection = Vector3Int.up;
+				finalNodeOffset = Vector3Int.down;
+				voxelCheckFunction = (float value) => { return value > 0; };
 			}
+
+			Vector3Int voxelPosition = node.gridPosition + checkDirection;
+			for (int i = 0; i <= MAX_GROUND_CHECK_ITERATIONS; i++)
+			{
+				if (!voxelCheckFunction(world.GetVoxel(voxelPosition).value)) break;
+
+				voxelPosition += checkDirection;
+			}
+
+			node = GetPathNodeFromVoxel(voxelPosition + finalNodeOffset, nodeSet, (Voxel voxel, Vector3Int pos) => IsVoxelOnGround(voxel, pos, maxSlope));
 		});
 	}
 
