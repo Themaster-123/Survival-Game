@@ -15,21 +15,15 @@ public class Rabbit : Entity
 	protected DirectionBehavior directionBehavior;
 	protected PathFollowerBehavior pathFollowerBehavior;
 	protected HealthBehavior healthBehavior;
-	protected float time = 0;
 
 	protected override void Start()
 	{
 		base.Start();
-		time = Time.time + 5f;
 	}
 
 	protected override void Update()
 	{
 		base.Update();
-		if (Time.time >= time)
-		{
-			healthBehavior.Health -=1000;
-		}
 	}
 
 	protected override void MoveEntity()
