@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DirectionBehavior))]
+[RequireComponent(typeof(InteractableBehavior))]
 public class CasterModifierBehavior : ModifierBehavior
 {
-    public Vector3 rayPosition;
     public float maxInteractionDistance = 5;
     public LayerMask interactionMask;
     public float continuousModifySpeed = 1;
@@ -13,25 +13,11 @@ public class CasterModifierBehavior : ModifierBehavior
 
     protected Coroutine continuousModifier;
     protected DirectionBehavior directionBehavior;
-
-    protected virtual RaycastHit RaycastFromHead(LayerMask mask)
-    {
-        Vector3 origin = transform.TransformPoint(directionBehavior.GetHorizontalEntityRotation() * rayPosition);
-        Vector3 direction = directionBehavior.GetDirection();
-
-        Physics.Raycast(origin, direction, out RaycastHit hit, maxInteractionDistance, mask, QueryTriggerInteraction.Ignore);
-
-        return hit;
-    }
-
-    protected virtual RaycastHit RaycastFromHead()
-    {
-        return RaycastFromHead(interactionMask);
-    }
+    protected InteractableBehavior interactableBehavior;
 
     public virtual void AttemptModify(in Voxel voxel)
     {
-        RaycastHit hit = RaycastFromHead(interactionMask);
+        RaycastHit hit = CastModiferRay();
 
         if (hit.collider != null)
         {
@@ -42,7 +28,7 @@ public class CasterModifierBehavior : ModifierBehavior
     public virtual void StartContinuousModifying(Voxel voxel)
 	{
         StopContinuousModifying();
-        continuousModifier = StartCoroutine(EContinuousModify(voxel));
+        continuousModifier = StartCoroutine(ContinuousModify(voxel));
 	}
 
     public virtual void StopContinuousModifying()
@@ -53,7 +39,12 @@ public class CasterModifierBehavior : ModifierBehavior
         }
     }
 
-    protected virtual IEnumerator EContinuousModify(Voxel voxel)
+    protected virtual RaycastHit CastModiferRay()
+    {
+        return interactableBehavior.Raycast(interactionMask, maxInteractionDistance);
+    }
+
+    protected virtual IEnumerator ContinuousModify(Voxel voxel)
 	{
         while (true)
 		{
@@ -68,5 +59,6 @@ public class CasterModifierBehavior : ModifierBehavior
 	{
 		base.GetComponents();
         directionBehavior = GetComponent<DirectionBehavior>();
+        interactableBehavior = GetComponent<InteractableBehavior>();
     }
 }
