@@ -37,12 +37,13 @@ public class HealthBehavior : Behavior
 
 			if (health == 0)
 			{
-				OnDeath();
+				Kill();
 			}
 		}
 	}
 
 	[SerializeField]
+
 	protected float maxHealth = 100;
 
 	[SerializeField]
@@ -63,9 +64,5 @@ public class HealthBehavior : Behavior
 	protected virtual void OnValidate()
 	{
 		health = Mathf.Clamp(health, 0, maxHealth);
-	}
-
-	protected virtual void OnDeath()
-	{
 	}
 }
