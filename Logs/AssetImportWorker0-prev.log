@@ -15,12 +15,12 @@ C:/Users/thepu/Desktop/Unity Games/Survival Game
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-51067
+55288
 Successfully changed project path to: C:/Users/thepu/Desktop/Unity Games/Survival Game
 C:/Users/thepu/Desktop/Unity Games/Survival Game
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 43.93 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.48 ms.
+Refreshing native plugins compatible for Editor in 44.92 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.49 ms.
 Initialize engine version: 2020.3.21f1 (a38c86f6690f)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/thepu/Desktop/Unity Games/Survival Game/Assets
@@ -35,39 +35,39 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56876
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56148
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.21f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002393 seconds.
+Registered in 0.002484 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 47.70 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
+Refreshing native plugins compatible for Editor in 41.52 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.16 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.194 seconds
+- Completed reload, in  1.379 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1194ms)
-		BeginReloadAssembly (53ms)
+	ReloadAssembly (1380ms)
+		BeginReloadAssembly (60ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (474ms)
-			LoadAssemblies (51ms)
+		EndReloadAssembly (451ms)
+			LoadAssemblies (58ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (149ms)
+			SetupTypeCache (161ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (33ms)
-			SetupLoadedEditorAssemblies (176ms)
+			RebuildScriptCaches (30ms)
+			SetupLoadedEditorAssemblies (166ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (48ms)
-				BeforeProcessingInitializeOnLoad (16ms)
-				ProcessInitializeOnLoadAttributes (79ms)
+				RefreshPlugins (42ms)
+				BeforeProcessingInitializeOnLoad (15ms)
+				ProcessInitializeOnLoadAttributes (78ms)
 				ProcessInitializeOnLoadMethodAttributes (26ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
@@ -75,12 +75,12 @@ Domain Reload Profiling:
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.009016 seconds.
+Registered in 0.007692 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 48.11 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.12 ms.
+Refreshing native plugins compatible for Editor in 46.14 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.14 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
@@ -109,45 +109,45 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.989 seconds
+- Completed reload, in  1.850 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1990ms)
-		BeginReloadAssembly (145ms)
+	ReloadAssembly (1851ms)
+		BeginReloadAssembly (152ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (20ms)
-		EndReloadAssembly (1784ms)
-			LoadAssemblies (118ms)
+			CreateAndSetChildDomain (17ms)
+		EndReloadAssembly (1632ms)
+			LoadAssemblies (107ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (506ms)
+			SetupTypeCache (425ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (58ms)
-			SetupLoadedEditorAssemblies (963ms)
+			RebuildScriptCaches (60ms)
+			SetupLoadedEditorAssemblies (910ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (6ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (48ms)
-				BeforeProcessingInitializeOnLoad (87ms)
-				ProcessInitializeOnLoadAttributes (801ms)
-				ProcessInitializeOnLoadMethodAttributes (13ms)
-				AfterProcessingInitializeOnLoad (9ms)
+				RefreshPlugins (46ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (766ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (7ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
 Refreshing native plugins compatible for Editor in 0.81 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
+Preloading 1 native plugins for Editor in 0.09 ms.
 Unloading 2295 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 117.3 MB.
 System memory in use after: 117.5 MB.
 
 Unloading 30 unused Assets to reduce memory usage. Loaded Objects now: 2735.
-Total: 4.425900 ms (FindLiveObjects: 0.276400 ms CreateObjectMapping: 0.151900 ms MarkObjects: 3.898200 ms  DeleteObjects: 0.097700 ms)
+Total: 4.141400 ms (FindLiveObjects: 0.365300 ms CreateObjectMapping: 0.237700 ms MarkObjects: 3.456800 ms  DeleteObjects: 0.080400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -161,115 +161,56 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5d817ffe1de69f1ab7afa67c6903121f') in 0.029489 seconds 
-  Import took 0.033635 seconds .
+  path: Assets/Scripts/Entities/Rabbit.cs
+  artifactKey: Guid(ba2c4c54c694e6a43bb75c34c42be44e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Entities/Rabbit.cs using Guid(ba2c4c54c694e6a43bb75c34c42be44e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a79c3370a43857cd3f62c4c4c318ea2e') in 0.029516 seconds 
+  Import took 0.033215 seconds .
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 5.63 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 21 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72.0 MB.
+System memory in use after: 72.3 MB.
+
+Unloading 21 unused Assets to reduce memory usage. Loaded Objects now: 2735.
+Total: 3.928400 ms (FindLiveObjects: 0.221300 ms CreateObjectMapping: 0.100300 ms MarkObjects: 3.591900 ms  DeleteObjects: 0.014200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 258.545781 seconds.
+  path: Assets/Scripts/Behaviors/WandererBehavior.cs
+  artifactKey: Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Behaviors/WandererBehavior.cs using Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c25692eaf5f15a363df15a85dcfa8179') in 0.001954 seconds 
+  Import took 0.005343 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1730.648799 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ee80bfad3d9df1cc897eae287c2f8e1') in 0.002566 seconds 
-  Import took 0.009307 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.675308 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74fcec69812e84709d4b7f54d437d719') in 0.002467 seconds 
-  Import took 0.006545 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.632653 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8db54043abe9159d11a3ea81cd3f9fdb') in 0.002533 seconds 
-  Import took 0.007490 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 177.801952 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a02599bff1a208f0adda6668b5fff74b') in 0.002531 seconds 
-  Import took 0.006982 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 102.110030 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1221ed7844472898287a66d3865ce72') in 0.002666 seconds 
-  Import took 0.007144 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 140.601276 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b80493a22fdfc35da85e24b38aae6e52') in 0.003028 seconds 
-  Import took 0.007571 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 66.232877 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1583c8eb2d772b5cee65c701d880c73') in 0.002871 seconds 
-  Import took 0.007071 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.102561 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '257c3f6b56d6984dc6903e7d7bfd9d6c') in 0.002734 seconds 
-  Import took 0.006784 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 107.611072 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5faba815724749b494e9b187bb60148') in 0.002420 seconds 
-  Import took 0.006653 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 27.835471 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c08b29d67fb9ed1dce73ecfd9723d07') in 0.002688 seconds 
-  Import took 0.006766 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 72.912633 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34143c9a6d8185bf7238c13904a1976d') in 0.002449 seconds 
-  Import took 0.007207 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.713925 seconds.
-  path: Assets/Scripts/Utilities/MathUtilities.cs
-  artifactKey: Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Utilities/MathUtilities.cs using Guid(ffc9bf3bb9d4a964daebbbeb2c36b609) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a645ee07585410223e7f8143a1d2f241') in 0.002679 seconds 
-  Import took 0.006757 seconds .
+  Time since last request: 4.512736 seconds.
+  path: Assets/Scripts/Behaviors/WandererBehavior.cs
+  artifactKey: Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Behaviors/WandererBehavior.cs using Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76ce4a62dbb2fb88c4b115ff96090a1f') in 0.003740 seconds 
+  Import took 0.007567 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.008474 seconds.
+Registered in 0.008431 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.52 ms, found 4 plugins.
 Preloading 1 native plugins for Editor in 0.08 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -299,42 +240,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.420 seconds
+- Completed reload, in  1.196 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1421ms)
-		BeginReloadAssembly (307ms)
+	ReloadAssembly (1196ms)
+		BeginReloadAssembly (152ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
+			DisableScriptedObjects (13ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (166ms)
-		EndReloadAssembly (1043ms)
-			LoadAssemblies (124ms)
+			CreateAndSetChildDomain (47ms)
+		EndReloadAssembly (986ms)
+			LoadAssemblies (100ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (336ms)
+			SetupTypeCache (322ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (422ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (429ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (79ms)
-				ProcessInitializeOnLoadAttributes (321ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (7ms)
+				BeforeProcessingInitializeOnLoad (81ms)
+				ProcessInitializeOnLoadAttributes (327ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (8ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.63 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
+Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.16 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 117.1 MB.
 System memory in use after: 117.3 MB.
 
 Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2737.
-Total: 3.957400 ms (FindLiveObjects: 0.254700 ms CreateObjectMapping: 0.107300 ms MarkObjects: 3.556700 ms  DeleteObjects: 0.037000 ms)
+Total: 3.236200 ms (FindLiveObjects: 0.234300 ms CreateObjectMapping: 0.135500 ms MarkObjects: 2.844800 ms  DeleteObjects: 0.020500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -349,12 +290,12 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007694 seconds.
+Registered in 0.009222 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 1.28 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.14 ms.
+Refreshing native plugins compatible for Editor in 0.79 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.11 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
@@ -383,1554 +324,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.311 seconds
+- Completed reload, in  1.937 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1312ms)
-		BeginReloadAssembly (178ms)
+	ReloadAssembly (1937ms)
+		BeginReloadAssembly (150ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (62ms)
-		EndReloadAssembly (1058ms)
-			LoadAssemblies (127ms)
+			CreateAndSetChildDomain (49ms)
+		EndReloadAssembly (1708ms)
+			LoadAssemblies (133ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (301ms)
+			SetupTypeCache (845ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (41ms)
-			SetupLoadedEditorAssemblies (474ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (542ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (8ms)
 				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (91ms)
-				ProcessInitializeOnLoadAttributes (357ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (98ms)
+				ProcessInitializeOnLoadAttributes (415ms)
 				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.1 MB.
-System memory in use after: 117.3 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2739.
-Total: 3.596700 ms (FindLiveObjects: 0.230700 ms CreateObjectMapping: 0.121200 ms MarkObjects: 3.220000 ms  DeleteObjects: 0.023600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.008287 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.61 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.580 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1580ms)
-		BeginReloadAssembly (133ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (3ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (1324ms)
-			LoadAssemblies (216ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (474ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (469ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (82ms)
-				ProcessInitializeOnLoadAttributes (364ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (8ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.77 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.1 MB.
-System memory in use after: 117.3 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2741.
-Total: 4.271400 ms (FindLiveObjects: 0.235100 ms CreateObjectMapping: 0.105400 ms MarkObjects: 3.894500 ms  DeleteObjects: 0.034400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007614 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.102 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1103ms)
-		BeginReloadAssembly (123ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (3ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (915ms)
-			LoadAssemblies (92ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (294ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (400ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (72ms)
-				ProcessInitializeOnLoadAttributes (308ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.1 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2743.
-Total: 3.785200 ms (FindLiveObjects: 0.214700 ms CreateObjectMapping: 0.097900 ms MarkObjects: 3.451800 ms  DeleteObjects: 0.019000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010294 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.137 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1138ms)
-		BeginReloadAssembly (127ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (12ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (40ms)
-		EndReloadAssembly (940ms)
-			LoadAssemblies (94ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (304ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (410ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (74ms)
-				ProcessInitializeOnLoadAttributes (316ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.1 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2745.
-Total: 4.130900 ms (FindLiveObjects: 0.237900 ms CreateObjectMapping: 0.108300 ms MarkObjects: 3.756100 ms  DeleteObjects: 0.027000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007382 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.351 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1351ms)
-		BeginReloadAssembly (121ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (1061ms)
-			LoadAssemblies (133ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (360ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (44ms)
-			SetupLoadedEditorAssemblies (420ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (326ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2747.
-Total: 4.206100 ms (FindLiveObjects: 0.241300 ms CreateObjectMapping: 0.102200 ms MarkObjects: 3.842500 ms  DeleteObjects: 0.018700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007931 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.204 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1204ms)
-		BeginReloadAssembly (177ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (58ms)
-		EndReloadAssembly (932ms)
-			LoadAssemblies (132ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (293ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (408ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (313ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (8ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2749.
-Total: 3.576500 ms (FindLiveObjects: 0.233500 ms CreateObjectMapping: 0.101100 ms MarkObjects: 3.221300 ms  DeleteObjects: 0.019500 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010767 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.129 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1130ms)
-		BeginReloadAssembly (129ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (933ms)
-			LoadAssemblies (106ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (298ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (400ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (70ms)
-				ProcessInitializeOnLoadAttributes (311ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2751.
-Total: 3.868500 ms (FindLiveObjects: 0.244500 ms CreateObjectMapping: 0.105000 ms MarkObjects: 3.493400 ms  DeleteObjects: 0.024400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.009773 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.462 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1462ms)
-		BeginReloadAssembly (281ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (105ms)
-		EndReloadAssembly (1089ms)
-			LoadAssemblies (165ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (379ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (39ms)
-			SetupLoadedEditorAssemblies (453ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (78ms)
-				ProcessInitializeOnLoadAttributes (352ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2753.
-Total: 3.887900 ms (FindLiveObjects: 0.225300 ms CreateObjectMapping: 0.096600 ms MarkObjects: 3.541200 ms  DeleteObjects: 0.023400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007288 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.136 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1137ms)
-		BeginReloadAssembly (150ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (52ms)
-		EndReloadAssembly (928ms)
-			LoadAssemblies (101ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (292ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (407ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (76ms)
-				ProcessInitializeOnLoadAttributes (310ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2755.
-Total: 4.026600 ms (FindLiveObjects: 0.230100 ms CreateObjectMapping: 0.131800 ms MarkObjects: 3.644700 ms  DeleteObjects: 0.018900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007109 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.268 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1269ms)
-		BeginReloadAssembly (214ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (100ms)
-		EndReloadAssembly (962ms)
-			LoadAssemblies (130ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (317ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (405ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (71ms)
-				ProcessInitializeOnLoadAttributes (314ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2757.
-Total: 4.054700 ms (FindLiveObjects: 0.218700 ms CreateObjectMapping: 0.080700 ms MarkObjects: 3.729400 ms  DeleteObjects: 0.025100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007175 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.248 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1248ms)
-		BeginReloadAssembly (114ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (987ms)
-			LoadAssemblies (106ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (330ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (419ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (323ms)
-				ProcessInitializeOnLoadMethodAttributes (9ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.62 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2759.
-Total: 3.640700 ms (FindLiveObjects: 0.244700 ms CreateObjectMapping: 0.095400 ms MarkObjects: 3.278500 ms  DeleteObjects: 0.020700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007232 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.132 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1132ms)
-		BeginReloadAssembly (114ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (37ms)
-		EndReloadAssembly (956ms)
-			LoadAssemblies (105ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (296ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (36ms)
-			SetupLoadedEditorAssemblies (425ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (71ms)
-				ProcessInitializeOnLoadAttributes (334ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2761.
-Total: 3.334300 ms (FindLiveObjects: 0.220800 ms CreateObjectMapping: 0.104400 ms MarkObjects: 2.986300 ms  DeleteObjects: 0.021300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007132 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.096 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1096ms)
-		BeginReloadAssembly (115ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (42ms)
-		EndReloadAssembly (919ms)
-			LoadAssemblies (95ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (287ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (406ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (312ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2763.
-Total: 3.606500 ms (FindLiveObjects: 0.215100 ms CreateObjectMapping: 0.096200 ms MarkObjects: 3.274600 ms  DeleteObjects: 0.019200 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.008892 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.52 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.351 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1351ms)
-		BeginReloadAssembly (310ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (115ms)
-		EndReloadAssembly (960ms)
-			LoadAssemblies (194ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (319ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (35ms)
-			SetupLoadedEditorAssemblies (408ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (72ms)
-				ProcessInitializeOnLoadAttributes (316ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2765.
-Total: 3.195200 ms (FindLiveObjects: 0.229300 ms CreateObjectMapping: 0.108200 ms MarkObjects: 2.839400 ms  DeleteObjects: 0.017400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007253 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.210 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1211ms)
-		BeginReloadAssembly (112ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (36ms)
-		EndReloadAssembly (1037ms)
-			LoadAssemblies (96ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (407ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (40ms)
-			SetupLoadedEditorAssemblies (402ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (71ms)
-				ProcessInitializeOnLoadAttributes (311ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2767.
-Total: 3.535200 ms (FindLiveObjects: 0.303000 ms CreateObjectMapping: 0.155200 ms MarkObjects: 3.055400 ms  DeleteObjects: 0.020400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010260 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.415 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1416ms)
-		BeginReloadAssembly (130ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (1188ms)
-			LoadAssemblies (195ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (424ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (432ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (84ms)
-				ProcessInitializeOnLoadAttributes (326ms)
-				ProcessInitializeOnLoadMethodAttributes (9ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.65 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.4 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2769.
-Total: 3.879500 ms (FindLiveObjects: 0.290600 ms CreateObjectMapping: 0.112600 ms MarkObjects: 3.425900 ms  DeleteObjects: 0.048500 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007821 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.310 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1311ms)
-		BeginReloadAssembly (115ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (1134ms)
-			LoadAssemblies (95ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (456ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (56ms)
-			SetupLoadedEditorAssemblies (403ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (73ms)
-				ProcessInitializeOnLoadAttributes (310ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (5ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.2 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2771.
-Total: 3.691500 ms (FindLiveObjects: 0.223800 ms CreateObjectMapping: 0.097000 ms MarkObjects: 3.346300 ms  DeleteObjects: 0.023200 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.009956 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.16 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.869 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1870ms)
-		BeginReloadAssembly (154ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (46ms)
-		EndReloadAssembly (1637ms)
-			LoadAssemblies (129ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (775ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (47ms)
-			SetupLoadedEditorAssemblies (562ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (94ms)
-				ProcessInitializeOnLoadAttributes (440ms)
-				ProcessInitializeOnLoadMethodAttributes (10ms)
-				AfterProcessingInitializeOnLoad (8ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.02 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.14 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2773.
-Total: 5.339900 ms (FindLiveObjects: 0.316700 ms CreateObjectMapping: 0.186900 ms MarkObjects: 4.806800 ms  DeleteObjects: 0.027700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007222 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.334 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1334ms)
-		BeginReloadAssembly (112ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (35ms)
-		EndReloadAssembly (1079ms)
-			LoadAssemblies (137ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (382ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (396ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (71ms)
-				ProcessInitializeOnLoadAttributes (306ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
+				AfterProcessingInitializeOnLoad (10ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (8ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
 Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
+System memory in use before: 117.1 MB.
+System memory in use after: 117.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2775.
-Total: 3.763500 ms (FindLiveObjects: 0.224500 ms CreateObjectMapping: 0.095500 ms MarkObjects: 3.419600 ms  DeleteObjects: 0.022600 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2739.
+Total: 5.458000 ms (FindLiveObjects: 0.533400 ms CreateObjectMapping: 0.230700 ms MarkObjects: 4.649600 ms  DeleteObjects: 0.042500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1945,12 +374,12 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007339 seconds.
+Registered in 0.008802 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.64 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.11 ms.
+Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
@@ -1979,210 +408,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.247 seconds
+- Completed reload, in  1.533 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1247ms)
-		BeginReloadAssembly (120ms)
+	ReloadAssembly (1533ms)
+		BeginReloadAssembly (182ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (8ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (44ms)
-		EndReloadAssembly (1067ms)
-			LoadAssemblies (96ms)
+			CreateAndSetChildDomain (60ms)
+		EndReloadAssembly (1123ms)
+			LoadAssemblies (182ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (305ms)
+			SetupTypeCache (404ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (49ms)
-			SetupLoadedEditorAssemblies (493ms)
+			RebuildScriptCaches (38ms)
+			SetupLoadedEditorAssemblies (433ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (7ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (78ms)
-				ProcessInitializeOnLoadAttributes (392ms)
-				ProcessInitializeOnLoadMethodAttributes (10ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2777.
-Total: 3.421800 ms (FindLiveObjects: 0.227600 ms CreateObjectMapping: 0.102000 ms MarkObjects: 3.065700 ms  DeleteObjects: 0.025400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007747 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.67 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.340 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1341ms)
-		BeginReloadAssembly (108ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (36ms)
-		EndReloadAssembly (1177ms)
-			LoadAssemblies (88ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (436ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (64ms)
-			SetupLoadedEditorAssemblies (428ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (78ms)
-				ProcessInitializeOnLoadAttributes (328ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.85 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.20 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2779.
-Total: 3.658600 ms (FindLiveObjects: 0.224900 ms CreateObjectMapping: 0.096200 ms MarkObjects: 3.306900 ms  DeleteObjects: 0.028400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007630 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.88 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.304 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1305ms)
-		BeginReloadAssembly (116ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (40ms)
-		EndReloadAssembly (1124ms)
-			LoadAssemblies (94ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (328ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (91ms)
-			SetupLoadedEditorAssemblies (440ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (85ms)
-				ProcessInitializeOnLoadAttributes (333ms)
+				BeforeProcessingInitializeOnLoad (81ms)
+				ProcessInitializeOnLoadAttributes (329ms)
 				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (7ms)
+				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 0.52 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2781.
-Total: 4.674500 ms (FindLiveObjects: 0.213000 ms CreateObjectMapping: 0.089600 ms MarkObjects: 4.346500 ms  DeleteObjects: 0.024200 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2741.
+Total: 5.918700 ms (FindLiveObjects: 0.516400 ms CreateObjectMapping: 0.193100 ms MarkObjects: 5.177000 ms  DeleteObjects: 0.030000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -2197,11 +458,11 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007166 seconds.
+Registered in 0.009269 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 1.07 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
 Preloading 1 native plugins for Editor in 0.08 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -2231,126 +492,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.371 seconds
+- Completed reload, in  1.149 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1372ms)
-		BeginReloadAssembly (123ms)
+	ReloadAssembly (1150ms)
+		BeginReloadAssembly (138ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (1082ms)
-			LoadAssemblies (137ms)
+			CreateAndSetChildDomain (41ms)
+		EndReloadAssembly (945ms)
+			LoadAssemblies (101ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (359ms)
+			SetupTypeCache (300ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (450ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (417ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (77ms)
-				ProcessInitializeOnLoadAttributes (350ms)
+				BeforeProcessingInitializeOnLoad (75ms)
+				ProcessInitializeOnLoadAttributes (320ms)
 				ProcessInitializeOnLoadMethodAttributes (8ms)
 				AfterProcessingInitializeOnLoad (8ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.62 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2783.
-Total: 4.544900 ms (FindLiveObjects: 0.434700 ms CreateObjectMapping: 0.209400 ms MarkObjects: 3.873500 ms  DeleteObjects: 0.025800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007754 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.11 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.390 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1390ms)
-		BeginReloadAssembly (136ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (42ms)
-		EndReloadAssembly (1198ms)
-			LoadAssemblies (102ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (516ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (441ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (75ms)
-				ProcessInitializeOnLoadAttributes (345ms)
-				ProcessInitializeOnLoadMethodAttributes (8ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.53 ms, found 4 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2785.
-Total: 3.849100 ms (FindLiveObjects: 0.241000 ms CreateObjectMapping: 0.092200 ms MarkObjects: 3.482500 ms  DeleteObjects: 0.032400 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2743.
+Total: 3.313800 ms (FindLiveObjects: 0.226300 ms CreateObjectMapping: 0.097800 ms MarkObjects: 2.970600 ms  DeleteObjects: 0.018200 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -2363,38 +540,14 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
-Received Import Request.
-  Time since last request: 6050.604633 seconds.
-  path: Assets/Scripts/Job Types
-  artifactKey: Guid(6d7f5084af3827249ab5b8911bb6f33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Job Types using Guid(6d7f5084af3827249ab5b8911bb6f33e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '890265a260e9148a0e6bb6ed82c31418') in 0.007955 seconds 
-  Import took 0.012495 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.687706 seconds.
-  path: Assets/Scripts/Behaviors/WandererBehavior.cs
-  artifactKey: Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Behaviors/WandererBehavior.cs using Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d76c33180140c64bfc52ece980137b1') in 0.002429 seconds 
-  Import took 0.007402 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 15.504010 seconds.
-  path: Assets/Scripts/Behaviors/WandererBehavior.cs
-  artifactKey: Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Behaviors/WandererBehavior.cs using Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2990ae8d639a432bd53aa5747020727') in 0.002464 seconds 
-  Import took 0.007417 seconds .
-
-========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.007387 seconds.
+Registered in 0.009853 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
+Refreshing native plugins compatible for Editor in 0.81 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.18 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
@@ -2423,134 +576,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.343 seconds
+- Completed reload, in  1.489 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1343ms)
-		BeginReloadAssembly (250ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (138ms)
-		EndReloadAssembly (1000ms)
-			LoadAssemblies (136ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (336ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (410ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (72ms)
-				ProcessInitializeOnLoadAttributes (316ms)
-				ProcessInitializeOnLoadMethodAttributes (9ms)
-				AfterProcessingInitializeOnLoad (7ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2787.
-Total: 3.544800 ms (FindLiveObjects: 0.229400 ms CreateObjectMapping: 0.092600 ms MarkObjects: 3.203500 ms  DeleteObjects: 0.018400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 40.868023 seconds.
-  path: Assets/Scripts/Behaviors/WandererBehavior.cs
-  artifactKey: Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Behaviors/WandererBehavior.cs using Guid(9a2b7dfbfe3b77b4cb0ed094b825398a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '934c653786de7640b9fdcdd7ac65268d') in 0.009864 seconds 
-  Import took 0.015634 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007791 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 0.54 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Stream Deck - Connecting to 127.0.0.1:18084...
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
-UnityStreamDeck.StreamDeckLink:Initialize ()
-UnityStreamDeck.StreamDeckLink:.cctor ()
-System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Stream Deck - Connected
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:Log (object)
-UnityStreamDeck.StreamDeckLink:Log (string,bool)
-UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
-UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
-WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
-WebSocketSharp.WebSocket:open ()
-WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
-System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
-System.Threading.ThreadPoolWorkQueue:Dispatch ()
-System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.378 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1379ms)
+	ReloadAssembly (1489ms)
 		BeginReloadAssembly (131ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (40ms)
-		EndReloadAssembly (1182ms)
-			LoadAssemblies (94ms)
+			CreateAndSetChildDomain (50ms)
+		EndReloadAssembly (1290ms)
+			LoadAssemblies (175ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (486ms)
+			SetupTypeCache (510ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (41ms)
-			SetupLoadedEditorAssemblies (425ms)
+			RebuildScriptCaches (46ms)
+			SetupLoadedEditorAssemblies (439ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (71ms)
-				ProcessInitializeOnLoadAttributes (331ms)
-				ProcessInitializeOnLoadMethodAttributes (9ms)
-				AfterProcessingInitializeOnLoad (7ms)
+				BeforeProcessingInitializeOnLoad (79ms)
+				ProcessInitializeOnLoadAttributes (339ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 0.51 ms, found 4 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2789.
-Total: 3.486600 ms (FindLiveObjects: 0.215600 ms CreateObjectMapping: 0.087200 ms MarkObjects: 3.160800 ms  DeleteObjects: 0.021600 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2745.
+Total: 4.654900 ms (FindLiveObjects: 0.227000 ms CreateObjectMapping: 0.079700 ms MarkObjects: 4.325900 ms  DeleteObjects: 0.021100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -2565,12 +626,12 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.011155 seconds.
+Registered in 0.008189 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 1.19 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.11 ms.
+Refreshing native plugins compatible for Editor in 0.55 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.13 ms.
 Stream Deck - Connecting to 127.0.0.1:18084...
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
@@ -2599,42 +660,42 @@ System.Threading.ThreadPoolWorkQueue:Dispatch ()
 System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.464 seconds
+- Completed reload, in  1.196 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1464ms)
-		BeginReloadAssembly (121ms)
+	ReloadAssembly (1196ms)
+		BeginReloadAssembly (119ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (6ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (43ms)
-		EndReloadAssembly (1281ms)
-			LoadAssemblies (94ms)
+			CreateAndSetChildDomain (41ms)
+		EndReloadAssembly (1016ms)
+			LoadAssemblies (98ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (418ms)
+			SetupTypeCache (300ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (72ms)
-			SetupLoadedEditorAssemblies (486ms)
+			RebuildScriptCaches (42ms)
+			SetupLoadedEditorAssemblies (461ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
-				SetLoadedEditorAssemblies (1ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (120ms)
-				ProcessInitializeOnLoadAttributes (341ms)
-				ProcessInitializeOnLoadMethodAttributes (7ms)
+				BeforeProcessingInitializeOnLoad (84ms)
+				ProcessInitializeOnLoadAttributes (356ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
 				AfterProcessingInitializeOnLoad (7ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 0.58 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 117.3 MB.
-System memory in use after: 117.5 MB.
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2791.
-Total: 4.772800 ms (FindLiveObjects: 0.231000 ms CreateObjectMapping: 0.082900 ms MarkObjects: 4.437000 ms  DeleteObjects: 0.020700 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2747.
+Total: 6.015000 ms (FindLiveObjects: 0.276900 ms CreateObjectMapping: 0.164600 ms MarkObjects: 5.526300 ms  DeleteObjects: 0.045000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -2646,7 +707,527 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-1/27/2022 5:17:18 PM|Fatal|WebSocket.<startReceiving>b__176_2|System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host.
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.029855 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.77 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.15 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.146 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1146ms)
+		BeginReloadAssembly (121ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (36ms)
+		EndReloadAssembly (959ms)
+			LoadAssemblies (92ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (289ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (409ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (78ms)
+				ProcessInitializeOnLoadAttributes (310ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2749.
+Total: 4.267300 ms (FindLiveObjects: 0.221800 ms CreateObjectMapping: 0.109300 ms MarkObjects: 3.912200 ms  DeleteObjects: 0.022600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 641.899833 seconds.
+  path: Assets/Scripts/Behaviors/HealthBehavior.cs
+  artifactKey: Guid(e92d405465fa12c4781b482ff7fac40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Behaviors/HealthBehavior.cs using Guid(e92d405465fa12c4781b482ff7fac40a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97f5fb6fd08f891cc926d67444042589') in 0.007835 seconds 
+  Import took 0.013347 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008049 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.80 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.14 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.290 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1290ms)
+		BeginReloadAssembly (135ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (42ms)
+		EndReloadAssembly (1084ms)
+			LoadAssemblies (122ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (375ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (45ms)
+			SetupLoadedEditorAssemblies (421ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (79ms)
+				ProcessInitializeOnLoadAttributes (320ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2751.
+Total: 3.928300 ms (FindLiveObjects: 0.226600 ms CreateObjectMapping: 0.097800 ms MarkObjects: 3.575200 ms  DeleteObjects: 0.027400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010967 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.10 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.127 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1127ms)
+		BeginReloadAssembly (124ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (42ms)
+		EndReloadAssembly (925ms)
+			LoadAssemblies (101ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (301ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (400ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (304ms)
+				ProcessInitializeOnLoadMethodAttributes (8ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2753.
+Total: 3.561400 ms (FindLiveObjects: 0.302600 ms CreateObjectMapping: 0.127800 ms MarkObjects: 3.102200 ms  DeleteObjects: 0.027700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 193.173001 seconds.
+  path: Assets/Scripts/Pathfinding/IGrid.cs
+  artifactKey: Guid(3c6e7c9b7dbad7e4aba7b46372ef19a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Pathfinding/IGrid.cs using Guid(3c6e7c9b7dbad7e4aba7b46372ef19a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '739ed17c60555242b7fc66944a62bdd4') in 0.007508 seconds 
+  Import took 0.012011 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007652 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.49 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.190 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1190ms)
+		BeginReloadAssembly (160ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (66ms)
+		EndReloadAssembly (968ms)
+			LoadAssemblies (112ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (305ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (36ms)
+			SetupLoadedEditorAssemblies (431ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (71ms)
+				ProcessInitializeOnLoadAttributes (339ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.57 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.4 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2755.
+Total: 3.686000 ms (FindLiveObjects: 0.234200 ms CreateObjectMapping: 0.097200 ms MarkObjects: 3.332300 ms  DeleteObjects: 0.021400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.009699 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.79 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.10 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.366 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1366ms)
+		BeginReloadAssembly (123ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (1179ms)
+			LoadAssemblies (94ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (388ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (61ms)
+			SetupLoadedEditorAssemblies (481ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (98ms)
+				ProcessInitializeOnLoadAttributes (361ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.59 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2757.
+Total: 3.874600 ms (FindLiveObjects: 0.237700 ms CreateObjectMapping: 0.096700 ms MarkObjects: 3.511100 ms  DeleteObjects: 0.027800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008041 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.10 ms.
+Stream Deck - Connecting to 127.0.0.1:18084...
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:ConnectToMessageServer ()
+UnityStreamDeck.StreamDeckLink:Initialize ()
+UnityStreamDeck.StreamDeckLink:.cctor ()
+System.Runtime.CompilerServices.RuntimeHelpers:RunClassConstructor (System.RuntimeTypeHandle)
+UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
+
+Stream Deck - Connected
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityStreamDeck.StreamDeckLink:Log (string,bool)
+UnityStreamDeck.StreamDeckLink:OnConnectedToMessageServer ()
+UnityStreamDeck.StreamDeckLink:<ConnectToMessageServer>b__20_3 (object,System.EventArgs)
+WebSocketSharp.Ext:Emit (System.EventHandler,object,System.EventArgs)
+WebSocketSharp.WebSocket:open ()
+WebSocketSharp.WebSocket/<>c__DisplayClass207_0:<ConnectAsync>b__0 (System.IAsyncResult)
+System.Runtime.Remoting.Messaging.AsyncResult:System.Threading.IThreadPoolWorkItem.ExecuteWorkItem ()
+System.Threading.ThreadPoolWorkQueue:Dispatch ()
+System.Threading._ThreadPoolWaitCallback:PerformWaitCallback ()
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.142 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1142ms)
+		BeginReloadAssembly (127ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (45ms)
+		EndReloadAssembly (957ms)
+			LoadAssemblies (95ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (320ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (37ms)
+			SetupLoadedEditorAssemblies (409ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (73ms)
+				ProcessInitializeOnLoadAttributes (316ms)
+				ProcessInitializeOnLoadMethodAttributes (7ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.50 ms, found 4 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Unloading 2286 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 117.2 MB.
+System memory in use after: 117.5 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2759.
+Total: 3.687000 ms (FindLiveObjects: 0.220800 ms CreateObjectMapping: 0.101600 ms MarkObjects: 3.341400 ms  DeleteObjects: 0.022100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+1/27/2022 9:42:56 PM|Fatal|WebSocket.<startReceiving>b__176_2|System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host.
                            Stream Deck - Disconnected (1006/An exception has occurred while receiving.)
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
 UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])

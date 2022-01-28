@@ -5,9 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PathFollowerBehavior))]
 public class WandererBehavior : Behavior
 {
-
-	public float maxWanderTime = 6f;
-	public float minWanderTime = 3f;
+	public float maxWanderTime = 3f;
+	public float minWanderTime = 1f;
 	public float maxWanderRange = 5f;
 	public float minWanderRange = 2f;
 	protected PathFollowerBehavior pathFollowerBehavior;
