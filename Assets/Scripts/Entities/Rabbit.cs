@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MovementBehavior))]
 [RequireComponent(typeof(DirectionBehavior))]
 [RequireComponent(typeof(PathFollowerBehavior))]
+[RequireComponent(typeof(WandererBehavior))]
 public class Rabbit : Entity
 {
 	public Transform target; 
@@ -25,8 +26,6 @@ public class Rabbit : Entity
 	protected override void MoveEntity()
 	{
 		base.MoveEntity();
-		pathFollowerBehavior.FindPath(target.position);
-
 		//movementBehavior.Move(directionBehavior.HorizontalDirection());
 	}
 

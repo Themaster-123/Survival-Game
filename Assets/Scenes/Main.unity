@@ -1137,6 +1137,7 @@ GameObject:
   - component: {fileID: 1301190592}
   - component: {fileID: 1301190585}
   - component: {fileID: 1301190594}
+  - component: {fileID: 1301190595}
   m_Layer: 0
   m_Name: Rabbit
   m_TagString: Untagged
@@ -1315,8 +1316,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356bf47b809274c419a1314abb5148af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPathDistance: 1
+  maxConsumePointDistance: 1
   steeringStrength: 25
+  maxSlowDownDistance: 1
+  minSlowDownDistance: 0.5
+--- !u!114 &1301190595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301190584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2b7dfbfe3b77b4cb0ed094b825398a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxWanderTime: 1
+  minWanderTime: 0
+  maxWanderRange: 5
+  minWanderRange: 1
 --- !u!1 &1403397047
 GameObject:
   m_ObjectHideFlags: 0
