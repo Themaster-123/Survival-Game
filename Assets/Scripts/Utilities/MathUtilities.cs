@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class MathUtilities
 {
@@ -70,5 +71,18 @@ public static class MathUtilities
 		float newRange = (newMax - newMin);
 		float newValue = (((oldValue - oldMin) * newRange) / oldRange) + newMin;
 		return newValue;
+	}
+
+	public static Vector2 GenerateRandomPointOnAnnulus(Vector2 center, float smallerRadius, float biggerRadius)
+	{
+		float theta = 2 * (float)Math.PI * Random.value;
+		float radius = Mathf.Sqrt(Random.value * (biggerRadius * biggerRadius - smallerRadius * smallerRadius) + smallerRadius * smallerRadius);
+		return new Vector2(radius * Mathf.Cos(theta), radius * Mathf.Sin(theta)) + center;
+	}
+
+	public static Vector3 GenerateRandomPointOnAnnulus(Vector3 center, float smallerRadius, float biggerRadius)
+	{
+		Vector2 point = GenerateRandomPointOnAnnulus(Flatten(center), smallerRadius, biggerRadius);
+		return new Vector3(point.x, center.y, point.y);
 	}
 }
