@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(MovementBehavior))]
 public class PathFollowerBehavior : Behavior
 {
-	public float maxPathDistance = 1f;
+	public float maxConsumePointDistance = 1f;
 	[Range(0, 100)]
 	public float steeringStrength = 25f;
 	public float maxSlowDownDistance = 1f;
@@ -35,7 +35,7 @@ public class PathFollowerBehavior : Behavior
 	{
 		if (CurrentPath == null || CurrentPath.Length == 0) return;
 
-		if (currentPathIndex < CurrentPath.Length - 1 && (MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position)).sqrMagnitude < maxPathDistance * maxPathDistance)
+		if (currentPathIndex < CurrentPath.Length - 1 && (MathUtilities.Flatten(CurrentPath[currentPathIndex]) - MathUtilities.Flatten(transform.position)).sqrMagnitude < maxConsumePointDistance * maxConsumePointDistance)
 		{
 			currentPathIndex++;
 		}
