@@ -25,10 +25,6 @@ public class PhysicalGrid : MonoBehaviour
 
     public Pathfinding pathfinding;
 
-	[Header("testing")]
-	public Transform target;
-	public Transform seeker;
-	protected Vector3[] path = new Vector3[0];
 	[SerializeField]
 	protected World world;
 
@@ -37,27 +33,8 @@ public class PhysicalGrid : MonoBehaviour
 		InitializeFields();
 	}
 
-	protected void OnDrawGizmos()
-	{
-		DrawGrid();
-	}
-
 	protected void InitializeFields()
 	{
 		pathfinding = new Pathfinding(World);
-	}
-
-	protected void DrawGrid()
-	{
-		Gizmos.color = Color.white;
-		Gizmos.matrix = transform.localToWorldMatrix;
-
-		DebugUtilities.DrawPath(path);
-	}
-
-	protected void GetPath()
-	{
-		PathRequestManager.GetPath(seeker.position, target.position, 65, (Vector3[] path) => { this.path = path; GetPath(); });
-
 	}
 }
