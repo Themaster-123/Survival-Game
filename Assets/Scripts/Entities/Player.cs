@@ -14,40 +14,37 @@ public class Player : Entity
     public Camera playerCamera;
     public Voxel modifyVoxel;
 
-    protected InputMaster inputMaster;
     protected MovementBehavior movementBehavior;
     protected DirectionBehavior directionBehavior;
     protected CasterModifierBehavior casterModifierBehavior;
     protected InventoryBehavior inventoryBehavior;
     protected InventoryGuiBehavior inventoryGuiBehavior;
+    protected InputBehavior inputBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
-        return inputMaster.Player.Movement.ReadValue<Vector2>();
+        return inputBehavior.inputMaster.Player.Movement.ReadValue<Vector2>();
     }
 
     public virtual Vector2 GetMouseMovement()
     {
-        return inputMaster.Player.MouseMovement.ReadValue<Vector2>();
+        return inputBehavior.inputMaster.Player.MouseMovement.ReadValue<Vector2>();
     }
 
 	protected override void Awake()
 	{
         base.Awake();
-        inputMaster = new InputMaster();
 	}
 
 	protected override void OnEnable()
 	{
         base.OnEnable();
-        inputMaster.Enable();
         GameUtils.LockMouse();
     }
 
 	protected override void OnDisable()
 	{
         base.OnDisable();
-        inputMaster.Disable();
         GameUtils.UnlockMouse();
     }
 
@@ -84,7 +81,7 @@ public class Player : Entity
     // jumps if the player is holding jump
     protected virtual void CheckIsHoldingJump()
 	{
-        if (inputMaster.Player.Jump.ReadValue<float>() > .5f)
+        if (inputBehavior.inputMaster.Player.Jump.ReadValue<float>() > .5f)
 		{
             movementBehavior.Jump();
 		}
@@ -92,9 +89,9 @@ public class Player : Entity
 
     protected virtual void RegisterInteractInput()
 	{
-        inputMaster.Player.Interact.performed += context => OnInteract();
-        inputMaster.Player.StopInteract.performed += context => OnStopInteract();
-        inputMaster.Player.ToggleInventory.performed += context => inventoryGuiBehavior.Toggle();
+        inputBehavior.inputMaster.Player.Interact.performed += context => OnInteract();
+        inputBehavior.inputMaster.Player.StopInteract.performed += context => OnStopInteract();
+        inputBehavior.inputMaster.Player.ToggleInventory.performed += context => inventoryGuiBehavior.Toggle();
     }
 
 	protected override void AddEntityToWorld()
@@ -127,5 +124,6 @@ public class Player : Entity
         casterModifierBehavior = GetComponent<CasterModifierBehavior>();
         inventoryBehavior = GetComponent<InventoryBehavior>();
         inventoryGuiBehavior = GetComponent<InventoryGuiBehavior>();
+        inputBehavior = GetComponent<InputBehavior>();
     }
 }
