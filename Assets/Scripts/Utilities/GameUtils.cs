@@ -14,4 +14,9 @@ public static class GameUtils
     {
         Cursor.lockState = CursorLockMode.None;
     }
+
+    public static void ShowCursor(bool show)
+	{
+        Cursor.visible = show;
+	}
 }
