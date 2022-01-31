@@ -31,7 +31,7 @@ public class Chunk : MonoBehaviour
        // print(position);
         int index = GetVoxelIndex(position);
         voxel.position = voxels[index].position;
-        voxel.value = VoxelUtilities.ClampVoxelValue(voxel.value);
+        voxel.value = VoxelUtils.ClampVoxelValue(voxel.value);
         voxels[index] = voxel;
         voxelsChanged = true;
     }
@@ -200,7 +200,7 @@ public class Chunk : MonoBehaviour
                     Voxel voxel = GetVoxel(new Vector3Int(x, y, z));
                     if (OnlyShowGroundVoxels && voxel.value <= 0) continue;
                     Gizmos.color = voxel.value <= 0 ? Color.white : Color.gray;
-                    Gizmos.DrawWireCube(VoxelUtilities.ToWorldPosition(GetWorldVoxelPosition(x, y, z), world), Vector3.one * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution);
+                    Gizmos.DrawWireCube(VoxelUtils.ToWorldPosition(GetWorldVoxelPosition(x, y, z), world), Vector3.one * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution);
                 }
             }
         }
@@ -252,9 +252,9 @@ public class Chunk : MonoBehaviour
                     continue;
                     LeaveNeighbourCheck:
 
-                    Vector3 vector = MathUtilities.FindGradientVector(new Vector3Int(x, y, z), (Vector3Int pos) => world.GetVoxel(position * world.worldSettings.ChunkResolution + pos).value);
+                    Vector3 vector = MathUtils.FindGradientVector(new Vector3Int(x, y, z), (Vector3Int pos) => world.GetVoxel(position * world.worldSettings.ChunkResolution + pos).value);
                     Gizmos.color = Color.green;
-                    Gizmos.DrawRay(VoxelUtilities.ToWorldPosition(pos, world), -vector.normalized);
+                    Gizmos.DrawRay(VoxelUtils.ToWorldPosition(pos, world), -vector.normalized);
 
                 }
             }
@@ -295,7 +295,7 @@ public class Chunk : MonoBehaviour
                 {
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
-                    voxel.value = VoxelUtilities.ClampVoxelValue(-voxelData[index]);
+                    voxel.value = VoxelUtils.ClampVoxelValue(-voxelData[index]);
                     voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxels[index] = voxel;
                 }

@@ -18,7 +18,7 @@ public class BoundsBehavior : Behavior
 
 	protected virtual void CheckGroundneath()
 	{
-		Vector3Int pos = VoxelUtilities.ToVoxelPosition(transform.position + checkPosition, entity.world);
+		Vector3Int pos = VoxelUtils.ToVoxelPosition(transform.position + checkPosition, entity.world);
 		if (entity.world.IsVoxelSurrounded(pos)/* || entity.world.GetVoxel(pos).value > 0*/)
 		{
 			if (Physics.Raycast(transform.position + checkPosition, Vector3.up, out RaycastHit hit, float.PositiveInfinity, groundMask))

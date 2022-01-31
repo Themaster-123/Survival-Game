@@ -70,12 +70,12 @@ public class PathRequestManager : MonoBehaviour
 
 			if (directionNew != directionOld)
 			{
-				waypoints.Add(VoxelUtilities.ToWorldPosition(path[i - 1].gridPosition, instance.physicalGrid.World));
+				waypoints.Add(VoxelUtils.ToWorldPosition(path[i - 1].gridPosition, instance.physicalGrid.World));
 			}
 
 			directionOld = directionNew;
 		}
-		waypoints.Add(VoxelUtilities.ToWorldPosition(path[path.Count - 1].gridPosition, instance.physicalGrid.World));
+		waypoints.Add(VoxelUtils.ToWorldPosition(path[path.Count - 1].gridPosition, instance.physicalGrid.World));
 
 		return waypoints.ToArray();
 	}
@@ -106,7 +106,7 @@ public class PathRequestManager : MonoBehaviour
 		{
 			while (pathRequestQueue.TryDequeue(out PathRequest pathRequest))
 			{
-				List<PathNode> path = pathRequest.findPath(VoxelUtilities.ToVoxelPosition(pathRequest.start, instance.physicalGrid.World), VoxelUtilities.ToVoxelPosition(pathRequest.end, instance.physicalGrid.World));
+				List<PathNode> path = pathRequest.findPath(VoxelUtils.ToVoxelPosition(pathRequest.start, instance.physicalGrid.World), VoxelUtils.ToVoxelPosition(pathRequest.end, instance.physicalGrid.World));
 
 				Vector3[] simplifedPath;
 

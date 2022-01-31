@@ -12,10 +12,10 @@ public class Path
 		waypoints = pWaypoints;
 		turnBoundaries = new Line[waypoints.Length];
 
-		Vector2 prevPoint = MathUtilities.Flatten(startPos);
+		Vector2 prevPoint = MathUtils.Flatten(startPos);
 		for (int i = 0; i < waypoints.Length; i++)
 		{
-			Vector2 currPoint = MathUtilities.Flatten(waypoints[i]);
+			Vector2 currPoint = MathUtils.Flatten(waypoints[i]);
 			// direction to current point
 			Vector2 dir = (currPoint - prevPoint).normalized;
 			Vector2 turnBoundPoint = i == waypoints.Length - 1 ? currPoint : currPoint - dir * turnDistance;

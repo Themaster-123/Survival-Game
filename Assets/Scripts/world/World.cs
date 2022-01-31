@@ -110,7 +110,7 @@ public class World : MonoBehaviour
 
 	public virtual void SetVoxel(in Voxel voxel, Vector3Int pos)
 	{
-		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
+		Vector3Int chunkPos = ChunkPositionUtils.VoxelToChunkPosition(pos, this);
 		if (IsChunkLoaded(chunkPos))
 		{
 			Vector3Int localPos = GetLocalVoxelPos(pos);
@@ -157,7 +157,7 @@ public class World : MonoBehaviour
 
 	public virtual Voxel GetVoxel(Vector3Int pos)
 	{
-		Vector3Int chunkPos = ChunkPositionUtilities.VoxelToChunkPosition(pos, this);
+		Vector3Int chunkPos = ChunkPositionUtils.VoxelToChunkPosition(pos, this);
 		return GetVoxelAtChunk(GetLocalVoxelPos(pos), chunkPos);
 	}
 
@@ -175,14 +175,14 @@ public class World : MonoBehaviour
 
 		GenerateNoise(data, (Vector3Int.FloorToInt(noiseSettings.offset) + chunkPos * noiseSettings.resolution) + pos, Vector3Int.one);
 
-		return new Voxel((Vector3)pos * worldSettings.InverseChunkResolution * worldSettings.ChunkSize, VoxelUtilities.ClampVoxelValue(-data[0]));
+		return new Voxel((Vector3)pos * worldSettings.InverseChunkResolution * worldSettings.ChunkSize, VoxelUtils.ClampVoxelValue(-data[0]));
 	}
 
 	public virtual Vector3Int GetLocalVoxelPos(Vector3Int position)
 	{
-		position.x = MathUtilities.Mod(position.x, worldSettings.ChunkResolution);
-		position.y = MathUtilities.Mod(position.y, worldSettings.ChunkResolution);
-		position.z = MathUtilities.Mod(position.z, worldSettings.ChunkResolution);
+		position.x = MathUtils.Mod(position.x, worldSettings.ChunkResolution);
+		position.y = MathUtils.Mod(position.y, worldSettings.ChunkResolution);
+		position.z = MathUtils.Mod(position.z, worldSettings.ChunkResolution);
 
 		return position;
 	}
@@ -209,7 +209,7 @@ public class World : MonoBehaviour
 
 	public virtual Vector3 GetNearestPoint(Vector3 position)
 	{
-		Vector3Int chunkPosition = ChunkPositionUtilities.ToChunkPosition(position, this); ;
+		Vector3Int chunkPosition = ChunkPositionUtils.ToChunkPosition(position, this); ;
 		Vector3 closestPoint = position;
 		float closestDistance = float.PositiveInfinity;
 		for (int x = -1; x <= 1; x++)
@@ -361,7 +361,7 @@ public class World : MonoBehaviour
 
 			foreach (Player player in Players)
 			{
-				uint tempDistance = ChunkPositionUtilities.Distance(player.GetChunkPosition(), chunkPos);
+				uint tempDistance = ChunkPositionUtils.Distance(player.GetChunkPosition(), chunkPos);
 				if (minDistance > tempDistance)
 				{
 					minDistance = tempDistance;

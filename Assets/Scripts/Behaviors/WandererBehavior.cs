@@ -14,7 +14,7 @@ public class WandererBehavior : Behavior
 
 	public virtual void Wander()
 	{
-		Vector3 wanderPoint = MathUtilities.GenerateRandomPointOnAnnulus(transform.position, minWanderRange, maxWanderRange);
+		Vector3 wanderPoint = MathUtils.GenerateRandomPointOnAnnulus(transform.position, minWanderRange, maxWanderRange);
 		pathFollowerBehavior.FindPath(wanderPoint);
 	}
 

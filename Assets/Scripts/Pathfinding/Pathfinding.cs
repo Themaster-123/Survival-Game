@@ -1,4 +1,4 @@
-#define TIME_PATHFINDING
+//#define TIME_PATHFINDING
 
 using System.Collections;
 using System.Collections.Generic;
@@ -185,7 +185,7 @@ public class Pathfinding
 
 	protected int CalculateDistanceCost(PathNode a, PathNode b)
 	{
-		Vector3Int distance = MathUtilities.Abs(a.gridPosition - b.gridPosition);
+		Vector3Int distance = MathUtils.Abs(a.gridPosition - b.gridPosition);
 		int min = Mathf.Min(distance.x, distance.y, distance.z);
 		int max = Mathf.Max(distance.x, distance.y, distance.z);
 		int mid = distance.x + distance.y + distance.z - min - max;
@@ -288,7 +288,7 @@ public class Pathfinding
 
 					if (world.GetVoxel(offsetPos).value <= 0f)
 					{
-						Vector3 normal = -MathUtilities.FindGradientVector(pos, (Vector3Int pos) => world.GetVoxel(pos).value);
+						Vector3 normal = -MathUtils.FindGradientVector(pos, (Vector3Int pos) => world.GetVoxel(pos).value);
 						normal.Normalize();
 						if (normal != Vector3.zero && Vector3.Angle(Vector3.up, normal) <= maxSlope) return true;
 						return false;

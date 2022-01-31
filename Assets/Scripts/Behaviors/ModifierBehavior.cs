@@ -11,7 +11,7 @@ public class ModifierBehavior : Behavior
     // digs into terrain with the shape of the stencil
     public virtual void Modify(Vector3 position, in Voxel voxel)
     {
-        Vector3Int voxelPosition = VoxelUtilities.ToVoxelPosition(position, entity.world);
+        Vector3Int voxelPosition = VoxelUtils.ToVoxelPosition(position, entity.world);
         stencil.AddVoxel(voxel, voxelPosition, entity.world);
     }
 
