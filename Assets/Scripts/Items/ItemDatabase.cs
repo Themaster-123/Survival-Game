@@ -41,6 +41,7 @@ public class ItemDatabase : MonoBehaviour
 			{ItemType.Sword, new Item(itemsSettings[ItemType.Sword])},
 			{ItemType.Axe, new Item(itemsSettings[ItemType.Axe])},
 			{ItemType.Shovel, new Item(itemsSettings[ItemType.Shovel])},
+			{ItemType.Air, new Item(itemsSettings[ItemType.Air])},
 		};
 	}
 
@@ -59,5 +60,5 @@ public struct ItemSettings
 	public ItemType itemType;
 	public string name;
 	public string description;
-	public Mesh mesh;
+	public Sprite sprite;
 }
