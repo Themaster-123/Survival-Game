@@ -7,14 +7,14 @@ public class Item : ICloneable
 {
 	public string name;
 	public string description;
-	public Mesh mesh;
+	public Sprite sprite;
 	public ItemType Type { get; protected set; }
 
 	public Item(ItemSettings itemSettings)
 	{
 		name = itemSettings.name;
 		description = itemSettings.description;
-		mesh = itemSettings.mesh;
+		sprite = itemSettings.sprite;
 		Type = itemSettings.itemType;
 	}
 
