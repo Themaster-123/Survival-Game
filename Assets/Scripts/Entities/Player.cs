@@ -40,14 +40,14 @@ public class Player : Entity
 	{
         base.OnEnable();
         inputMaster.Enable();
-        LockMouse();
+        GameUtils.LockMouse();
     }
 
 	protected override void OnDisable()
 	{
         base.OnDisable();
         inputMaster.Disable();
-        UnlockMouse();
+        GameUtils.UnlockMouse();
     }
 
     protected override void Start()

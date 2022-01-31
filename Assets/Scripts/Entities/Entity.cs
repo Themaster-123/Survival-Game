@@ -10,22 +10,10 @@ public class Entity : MonoBehaviour
     [Header("Misc")]
     public World world;
 
-    public virtual void LockMouse()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-
-    }
-
-    public virtual void UnlockMouse()
-    {
-        Cursor.lockState = CursorLockMode.None;
-
-    }
-
     // converts position to Chunk Position
     public virtual Vector3Int GetChunkPosition()
     {
-        return ChunkPositionUtilities.ToChunkPosition(transform.position, world);
+        return ChunkPositionUtils.ToChunkPosition(transform.position, world);
     }
 
     protected virtual void Awake()
