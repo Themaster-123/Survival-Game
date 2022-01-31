@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : ICloneable
+public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 {
 	public string name;
 	public string description;
@@ -21,6 +21,36 @@ public class Item : ICloneable
 	public object Clone()
 	{
 		return MemberwiseClone();
+	}
+
+	public bool Equals(Item other)
+	{
+		return Type == other.Type && name == other.name && description == other.description;
+	}
+
+	public bool Equals(ItemType other)
+	{
+		return Type == other;
+	}
+
+	public static bool operator ==(Item a, Item b)
+	{
+		return a.Equals(b);
+	}
+
+	public static bool operator !=(Item a, Item b)
+	{
+		return !a.Equals(b);
+	}
+
+	public static bool operator ==(Item a, ItemType b)
+	{
+		return a.Equals(b);
+	}
+
+	public static bool operator !=(Item a, ItemType b)
+	{
+		return !a.Equals(b);
 	}
 }
 
