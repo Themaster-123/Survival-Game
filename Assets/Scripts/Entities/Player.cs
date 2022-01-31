@@ -19,6 +19,7 @@ public class Player : Entity
     protected DirectionBehavior directionBehavior;
     protected CasterModifierBehavior casterModifierBehavior;
     protected InventoryBehavior inventoryBehavior;
+    protected InventoryGuiBehavior inventoryGuiBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
@@ -93,6 +94,7 @@ public class Player : Entity
 	{
         inputMaster.Player.Interact.performed += context => OnInteract();
         inputMaster.Player.StopInteract.performed += context => OnStopInteract();
+        inputMaster.Player.ToggleInventory.performed += context => inventoryGuiBehavior.Toggle();
     }
 
 	protected override void AddEntityToWorld()
@@ -124,5 +126,6 @@ public class Player : Entity
         movementBehavior = GetComponent<MovementBehavior>();
         casterModifierBehavior = GetComponent<CasterModifierBehavior>();
         inventoryBehavior = GetComponent<InventoryBehavior>();
-	}
+        inventoryGuiBehavior = GetComponent<InventoryGuiBehavior>();
+    }
 }
