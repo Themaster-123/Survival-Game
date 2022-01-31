@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class VoxelUtilities
+public static class VoxelUtils
 {
 	public static Vector3Int ToVoxelPosition(Vector3 pos, World world)
 	{

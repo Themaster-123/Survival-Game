@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class ChunkPositionUtilities
+public static class ChunkPositionUtils
 {
 	public static uint Distance(Vector3Int pos1, Vector3Int pos2)
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class ThreadUtilities : MonoBehaviour
+public class ThreadUtils : MonoBehaviour
 {
 	static Thread mainThread;
 

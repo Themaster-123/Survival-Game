@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public static class MathUtilities
+public static class MathUtils
 {
 	public static float limit = 0.000001f;
 
