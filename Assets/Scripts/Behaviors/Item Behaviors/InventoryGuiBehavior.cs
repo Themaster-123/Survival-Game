@@ -6,14 +6,50 @@ using UnityEngine.UI;
 [RequireComponent(typeof(InventoryBehavior))]
 public class InventoryGuiBehavior : Behavior
 {
+	public bool Opened 
+	{ 
+		get
+		{
+			return inventoryUI.gameObject.activeSelf;
+		} 
+	}
+
 	public Transform inventoryUI;
+	public Item cursorItem;
 	protected InventoryBehavior inventoryBehavior;
 	protected Button[,] slots;
 	protected Image[,] slotSprites;
 
+	public void Open()
+	{
+		inventoryUI.gameObject.SetActive(true);
+		GameUtils.UnlockMouse();
+	}
+
+	public void Close()
+	{
+		inventoryUI.gameObject.SetActive(false);
+		GameUtils.LockMouse();
+	}
+
+	public void Toggle()
+	{
+		if (Opened) Close();
+		else Open();
+	}
+
+	public void OnClickSlot(Vector2Int slot)
+	{
+		Item oldItem = inventoryBehavior.inventory[slot];
+		inventoryBehavior.inventory[slot] = cursorItem;
+		cursorItem = oldItem;
+	}
+
 	protected virtual void Start()
 	{
 		GetSlots();
+		InitializeCursor();
+		Close();
 	}
 
 	protected virtual void Update()
@@ -29,6 +65,8 @@ public class InventoryGuiBehavior : Behavior
 
 	protected virtual void UpdateGui()
 	{
+		if (!Opened) return;
+
 		for (int x = 0; x < inventoryBehavior.size.x; x++)
 		{
 			for (int y = 0; y < inventoryBehavior.size.y; y++)
@@ -52,6 +90,12 @@ public class InventoryGuiBehavior : Behavior
 			Transform slot = inventoryUI.GetChild(i);
 			slots[x, y] = slot.GetComponent<Button>();
 			slotSprites[x, y] = slot.GetChild(0).GetComponent<Image>();
+			slots[x, y].onClick.AddListener(() => { OnClickSlot(new Vector2Int(x, y)); });
 		}
+	}
+	
+	protected virtual void InitializeCursor()
+	{
+		cursorItem = ItemDatabase.GetItem(ItemType.Air);
 	}
 }
