@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(MovementBehavior))]
 [RequireComponent(typeof(DirectionBehavior))]
 [RequireComponent(typeof(CasterModifierBehavior))]
+[RequireComponent(typeof(InventoryGuiBehavior))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
@@ -17,6 +18,7 @@ public class Player : Entity
     protected MovementBehavior movementBehavior;
     protected DirectionBehavior directionBehavior;
     protected CasterModifierBehavior casterModifierBehavior;
+    protected InventoryBehavior inventoryBehavior;
 
     public virtual Vector2 GetPlayerMovement()
     {
@@ -52,6 +54,9 @@ public class Player : Entity
     {
         base.Start();
         RegisterInteractInput();
+        inventoryBehavior.inventory[0, 0] = ItemDatabase.GetItem(ItemType.Axe);
+        inventoryBehavior.inventory[0, 1] = ItemDatabase.GetItem(ItemType.Sword);
+        inventoryBehavior.inventory[0, 2] = ItemDatabase.GetItem(ItemType.Shovel);
     }
 
     protected override void Update()
@@ -118,5 +123,6 @@ public class Player : Entity
         directionBehavior = GetComponent<DirectionBehavior>();
         movementBehavior = GetComponent<MovementBehavior>();
         casterModifierBehavior = GetComponent<CasterModifierBehavior>();
+        inventoryBehavior = GetComponent<InventoryBehavior>();
 	}
 }
