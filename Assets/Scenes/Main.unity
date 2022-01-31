@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 461834965}
   - component: {fileID: 461834967}
   - component: {fileID: 461834966}
+  - component: {fileID: 461834968}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -464,6 +465,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 236589979}
+  cursorSlot: {fileID: 2080968606}
+--- !u!114 &461834968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461834952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b50cbabb698ff4982819a61f7caca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704900412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,6 +1439,11 @@ Transform:
   m_Father: {fileID: 1061967222}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 82.91}
+--- !u!224 &2080968606 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
+  m_PrefabInstance: {fileID: 3137598326432010770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3137598326432010770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1432,6 +1451,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -110
+      objectReference: {fileID: 0}
     - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
