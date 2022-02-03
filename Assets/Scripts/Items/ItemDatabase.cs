@@ -17,6 +17,13 @@ public class ItemDatabase : MonoBehaviour
 		return (Item)instance.items[itemType].Clone();
 	}
 
+	public static Item GetItem(ItemType itemType, int stackSize)
+	{
+		Item item = GetItem(itemType);
+		item.StackSize = stackSize;
+		return item;
+	}
+
 	protected void Awake()
 	{
 		CreateItemSettingsDictionary();
@@ -61,4 +68,5 @@ public struct ItemSettings
 	public string name;
 	public string description;
 	public Sprite sprite;
+	public int maxStackSize;
 }
