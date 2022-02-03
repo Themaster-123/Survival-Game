@@ -31,7 +31,7 @@ public class Inventory
 
 	public void SetItem(int x, int y, Item item)
 	{
-		items[x, y] = item;
+		items[x, y] = (Item)item.Clone();
 	}
 
 	public void SetItem(Vector2Int pos, Item item)
@@ -47,6 +47,38 @@ public class Inventory
 			{
 				items[x, y] = ItemDatabase.GetItem(ItemType.Air);
 			}
+		}
+	}
+
+	// adds the item to the slot and returns the remaining stack size
+	public int AddItem(Vector2Int pos, Item item)
+	{
+		Item posItem = GetItem(pos);
+		if (item != ItemType.Air && (posItem == ItemType.Air || posItem.EqualsIgnoreStackSize(item)))
+		{
+			int oldStackSize = posItem.StackSize;
+			if (posItem == ItemType.Air)
+			{
+				posItem = (Item)item.Clone();
+				posItem.StackSize = 1;
+				oldStackSize = 0;
+			}
+			posItem.StackSize = oldStackSize + item.StackSize;
+			SetItem(pos, posItem);
+			return Mathf.Max((oldStackSize + item.StackSize) - item.MaxStackSize, 0);
+		}
+
+		return item.StackSize;
+	}
+
+	public void RemoveItem(Vector2Int pos, int amount)
+	{
+		Item posItem = GetItem(pos);
+		int oldStackSize = posItem.StackSize;
+		posItem.StackSize -= amount;
+		if (oldStackSize - amount <= 0)
+		{
+			SetItem(pos, ItemDatabase.GetItem(ItemType.Air));
 		}
 	}
 
