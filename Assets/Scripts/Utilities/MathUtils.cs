@@ -85,4 +85,10 @@ public static class MathUtils
 		Vector2 point = GenerateRandomPointOnAnnulus(Flatten(center), smallerRadius, biggerRadius);
 		return new Vector3(point.x, center.y, point.y);
 	}
+
+	public static void DivideIntIntoTwoParts(int number, out int a, out int b)
+	{
+		a = number / 2;
+		b = number - a;
+	}
 }
