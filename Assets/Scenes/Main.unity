@@ -328,6 +328,7 @@ MonoBehaviour:
   modifyVoxel:
     position: {x: 0, y: 0, z: 0}
     value: 1
+  stopInput: 0
 --- !u!114 &461834959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 236589979}
-  cursorSlot: {fileID: 2080968606}
+  cursorSlot: {fileID: 504236057}
 --- !u!114 &461834968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b50cbabb698ff4982819a61f7caca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &504236057 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5625099412210625816, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
+  m_PrefabInstance: {fileID: 3137598326432010770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &704900412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,18 +1040,22 @@ MonoBehaviour:
     name: Sword
     description: Stabby
     sprite: {fileID: 21300000, guid: f924ca9f27255b2448eff45b1a67b69d, type: 3}
+    maxStackSize: 1
   - itemType: 2
     name: Axe
     description: Slicey
     sprite: {fileID: 21300000, guid: 0821d33d083d1094c93ef9f15f8cf12a, type: 3}
+    maxStackSize: 2
   - itemType: 3
     name: Shovel
     description: Scoopy
     sprite: {fileID: 21300000, guid: cb644e18d09dd934194ce1273c8440ff, type: 3}
+    maxStackSize: 64
   - itemType: 0
     name: 
     description: 
     sprite: {fileID: 0}
+    maxStackSize: 1
 --- !u!1 &1301190584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,11 +1449,6 @@ Transform:
   m_Father: {fileID: 1061967222}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 82.91}
---- !u!224 &2080968606 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-  m_PrefabInstance: {fileID: 3137598326432010770}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3137598326432010770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1451,46 +1456,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2841212485054138605, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -110
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 461834967}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnClickSlot
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InventoryGuiBehavior, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292642, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3137598325576292668, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
-      propertyPath: m_Name
-      value: Slot (0)
-      objectReference: {fileID: 0}
     - target: {fileID: 3137598325576292669, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1563,6 +1528,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3137598326489792537, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 5842072657125546727, guid: dcb5ad7fc348ca54590d6300a61ba80d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
