@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(DirectionBehavior))]
 [RequireComponent(typeof(CasterModifierBehavior))]
 [RequireComponent(typeof(InventoryGuiBehavior))]
+[RequireComponent(typeof(ItemCollector))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {
