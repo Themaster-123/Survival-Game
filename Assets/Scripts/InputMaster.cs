@@ -81,6 +81,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec6dc395-6b34-4134-8215-e0b7ce2d6e40"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -215,6 +223,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""SecondaryInteract "",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f27d7604-c5c1-4ab7-84f4-a0499f88e113"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -296,6 +315,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_ToggleInventory = m_Player.FindAction("ToggleInventory", throwIfNotFound: true);
         m_Player_UIMousePosition = m_Player.FindAction("UIMousePosition", throwIfNotFound: true);
         m_Player_SecondaryInteract = m_Player.FindAction("SecondaryInteract ", throwIfNotFound: true);
+        m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_MousePosition = m_Testing.FindAction("MousePosition", throwIfNotFound: true);
@@ -358,6 +378,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_ToggleInventory;
     private readonly InputAction m_Player_UIMousePosition;
     private readonly InputAction m_Player_SecondaryInteract;
+    private readonly InputAction m_Player_Drop;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -370,6 +391,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @ToggleInventory => m_Wrapper.m_Player_ToggleInventory;
         public InputAction @UIMousePosition => m_Wrapper.m_Player_UIMousePosition;
         public InputAction @SecondaryInteract => m_Wrapper.m_Player_SecondaryInteract;
+        public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -403,6 +425,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SecondaryInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryInteract;
                 @SecondaryInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryInteract;
                 @SecondaryInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryInteract;
+                @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -431,6 +456,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @SecondaryInteract.started += instance.OnSecondaryInteract;
                 @SecondaryInteract.performed += instance.OnSecondaryInteract;
                 @SecondaryInteract.canceled += instance.OnSecondaryInteract;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
         }
     }
@@ -494,6 +522,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnToggleInventory(InputAction.CallbackContext context);
         void OnUIMousePosition(InputAction.CallbackContext context);
         void OnSecondaryInteract(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

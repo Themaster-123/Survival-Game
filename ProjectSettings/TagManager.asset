@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Slot
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Terrain
   - Player
   - Wall
-  - 
+  - Item
   - 
   - 
   - 
