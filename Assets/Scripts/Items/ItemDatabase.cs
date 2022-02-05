@@ -68,5 +68,6 @@ public struct ItemSettings
 	public string name;
 	public string description;
 	public Sprite sprite;
+	public Mesh mesh;
 	public int maxStackSize;
 }

@@ -24,6 +24,7 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 	public string name;
 	public string description;
 	public Sprite sprite;
+	public Mesh mesh;
 
 	protected int stackSize;
 
@@ -34,6 +35,7 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 		sprite = itemSettings.sprite;
 		Type = itemSettings.itemType;
 		MaxStackSize = itemSettings.maxStackSize;
+		mesh = itemSettings.mesh;
 		StackSize = 1;
 	}
 
