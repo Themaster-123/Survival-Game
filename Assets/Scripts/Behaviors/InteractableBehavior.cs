@@ -6,6 +6,7 @@ using UnityEngine;
 public class InteractableBehavior : Behavior
 {
     public Vector3 rayPosition;
+    public float defaultMaxDistance;
     protected DirectionBehavior directionBehavior;
 
     public virtual RaycastHit Raycast(LayerMask mask, float maxDistance)
@@ -17,6 +18,11 @@ public class InteractableBehavior : Behavior
 
         return hit;
     }
+
+    public virtual RaycastHit Raycast(LayerMask mask)
+	{
+        return Raycast(mask, defaultMaxDistance);
+	}
 
 	protected override void GetComponents()
 	{
