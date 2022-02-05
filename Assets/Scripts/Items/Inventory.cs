@@ -53,7 +53,12 @@ public class Inventory
 	// adds the item to the slot and returns the remaining stack size
 	public int AddItem(Vector2Int pos, Item item)
 	{
-		Item posItem = GetItem(pos);
+		return AddItem(pos.x, pos.y, item);
+	}
+
+	public int AddItem(int x, int y, Item item)
+	{
+		Item posItem = GetItem(x, y);
 		if (item != ItemType.Air && (posItem == ItemType.Air || posItem.EqualsIgnoreStackSize(item)))
 		{
 			int oldStackSize = posItem.StackSize;
@@ -64,8 +69,30 @@ public class Inventory
 				oldStackSize = 0;
 			}
 			posItem.StackSize = oldStackSize + item.StackSize;
-			SetItem(pos, posItem);
+			SetItem(x, y, posItem);
 			return Mathf.Max((oldStackSize + item.StackSize) - item.MaxStackSize, 0);
+		}
+
+		return item.StackSize;
+	}
+
+	// adds the item to the first slots and returns the remaining stack size
+	public int AddItem(Item item)
+	{
+		item = (Item)item.Clone();
+		for (int y = Size.y - 1; y >= 0; y++)
+		{
+			for (int x = 0; x < Size.x; x++)
+			{
+				int remaining = AddItem(x, y, item);
+
+				if (remaining == 0)
+				{
+					return 0;
+				}
+
+				item.StackSize = remaining;
+			}
 		}
 
 		return item.StackSize;
