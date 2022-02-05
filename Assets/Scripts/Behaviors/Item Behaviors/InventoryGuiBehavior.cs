@@ -94,6 +94,17 @@ public class InventoryGuiBehavior : Behavior
 		}		
 	}
 
+	public virtual void DropItemInSlot(Vector2Int slot)
+	{
+		if (IsInBounds(slot) && inventoryBehavior.inventory[slot] != ItemType.Air)
+		{
+			Item item = inventoryBehavior.inventory[slot];
+			inventoryBehavior.inventory.RemoveItem(slot, 1);
+			Transform itemBehavior = GameUtils.CreateWorldItem(item).transform;
+			itemBehavior.position = transform.position;
+		}
+	}
+
 	protected virtual void Start()
 	{
 		GetSlots();
@@ -190,6 +201,7 @@ public class InventoryGuiBehavior : Behavior
 	{
 		inputBehavior.inputMaster.Player.Interact.performed += context => OnClickSlot(GetMouseSlot());
 		inputBehavior.inputMaster.Player.SecondaryInteract.performed += context => OnRightClickSlot(GetMouseSlot());
+		inputBehavior.inputMaster.Player.Drop.performed += context => DropItemInSlot(GetMouseSlot());
 	}
 
 	protected virtual bool IsInBounds(Vector2Int slot)
