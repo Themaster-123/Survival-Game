@@ -16,6 +16,11 @@ public class InteractableBehavior : Behavior
 
         Physics.Raycast(origin, direction, out RaycastHit hit, maxDistance, mask, QueryTriggerInteraction.Ignore);
 
+        if (hit.collider == null)
+		{
+            hit.point = origin + direction * maxDistance;
+		}
+
         return hit;
     }
 
@@ -23,6 +28,7 @@ public class InteractableBehavior : Behavior
 	{
         return Raycast(mask, defaultMaxDistance);
 	}
+
 
 	protected override void GetComponents()
 	{
