@@ -3,7 +3,11 @@ guid: 1f543d65c2e266440b489fba5ea9467c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - inventoryUI: {instanceID: 0}
+  - hotbarUI: {instanceID: 0}
+  - slotSprite: {fileID: 21300000, guid: a0155041f432b6b46aaaed022c0802c8, type: 3}
+  - slotSelectedSprite: {fileID: 21300000, guid: c3ecba451a323c64c8948f70a877380f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

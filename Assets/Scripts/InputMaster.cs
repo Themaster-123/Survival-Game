@@ -89,6 +89,22 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SlotChange"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""550fd130-fc88-4029-a754-020d1461ba34"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""InstantSlotChange"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""03a9c8ad-5083-4ad7-85b1-9592000bfe78"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -234,6 +250,116 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95069187-3f0b-477a-8a1b-9c33071705d2"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=-1,max=1),Normalize(min=-1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""SlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51cace0f-5bef-4c37-92cb-5a664d66ad42"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e17b8776-bdc7-4d07-ae32-a2410857f254"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36c7ae39-a216-4b71-9f12-330bd9ce8a63"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8958b547-3fa8-4a13-ac08-5675206ecf0e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=4)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef1e833-776e-4457-8935-12d4eb7c3873"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=5)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65c43792-a115-4a2d-b0e8-1e290b2b2b10"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=6)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b9cc670-95c5-48df-b77e-9be8db6a4c46"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=7)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""050751af-1182-4b96-9401-093dc84776d2"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=8)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""060e70a3-43ea-41b3-abff-3037aed50f80"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=9)"",
+                    ""groups"": """",
+                    ""action"": ""InstantSlotChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -316,6 +442,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_UIMousePosition = m_Player.FindAction("UIMousePosition", throwIfNotFound: true);
         m_Player_SecondaryInteract = m_Player.FindAction("SecondaryInteract ", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
+        m_Player_SlotChange = m_Player.FindAction("SlotChange", throwIfNotFound: true);
+        m_Player_InstantSlotChange = m_Player.FindAction("InstantSlotChange", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_MousePosition = m_Testing.FindAction("MousePosition", throwIfNotFound: true);
@@ -379,6 +507,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_UIMousePosition;
     private readonly InputAction m_Player_SecondaryInteract;
     private readonly InputAction m_Player_Drop;
+    private readonly InputAction m_Player_SlotChange;
+    private readonly InputAction m_Player_InstantSlotChange;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -392,6 +522,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @UIMousePosition => m_Wrapper.m_Player_UIMousePosition;
         public InputAction @SecondaryInteract => m_Wrapper.m_Player_SecondaryInteract;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
+        public InputAction @SlotChange => m_Wrapper.m_Player_SlotChange;
+        public InputAction @InstantSlotChange => m_Wrapper.m_Player_InstantSlotChange;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -428,6 +560,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Drop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 @Drop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
                 @Drop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDrop;
+                @SlotChange.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlotChange;
+                @SlotChange.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlotChange;
+                @SlotChange.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlotChange;
+                @InstantSlotChange.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
+                @InstantSlotChange.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
+                @InstantSlotChange.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -459,6 +597,12 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Drop.started += instance.OnDrop;
                 @Drop.performed += instance.OnDrop;
                 @Drop.canceled += instance.OnDrop;
+                @SlotChange.started += instance.OnSlotChange;
+                @SlotChange.performed += instance.OnSlotChange;
+                @SlotChange.canceled += instance.OnSlotChange;
+                @InstantSlotChange.started += instance.OnInstantSlotChange;
+                @InstantSlotChange.performed += instance.OnInstantSlotChange;
+                @InstantSlotChange.canceled += instance.OnInstantSlotChange;
             }
         }
     }
@@ -523,6 +667,8 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnUIMousePosition(InputAction.CallbackContext context);
         void OnSecondaryInteract(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+        void OnSlotChange(InputAction.CallbackContext context);
+        void OnInstantSlotChange(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {
