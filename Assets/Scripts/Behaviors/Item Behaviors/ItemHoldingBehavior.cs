@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemHoldingBehavior : MonoBehaviour
+public class ItemHoldingBehavior : Behavior
 {
+	public Item CurrentHeldItem
+	{
+		get
+		{
+			return currentHeldItemObject.item;
+		}
+	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Transform itemHoldingTransform;
+	protected ItemBehavior currentHeldItemObject;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void HoldItem(Item item)
+	{
+		if (currentHeldItemObject != null)
+		{
+			Destroy(currentHeldItemObject.gameObject);
+		}
+
+		currentHeldItemObject = GameUtils.CreateWorldItem(item, false);
+		currentHeldItemObject.transform.parent = itemHoldingTransform;
+		currentHeldItemObject.transform.localPosition = Vector3.zero;
+		currentHeldItemObject.transform.localRotation = Quaternion.identity;
+	}
 }
