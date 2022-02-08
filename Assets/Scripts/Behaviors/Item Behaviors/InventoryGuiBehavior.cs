@@ -22,6 +22,18 @@ public class InventoryGuiBehavior : Behavior
 	public int SelectedHotbarIndex { get; protected set; }
 	public Vector2Int SelectedHotbarSlot { get { return new Vector2Int(SelectedHotbarIndex, inventoryBehavior.size.y - 1); } }
 
+	public Item CurrentSelectedHotbarItem 
+	{ 
+		get 
+		{ 
+			return inventoryBehavior.inventory[SelectedHotbarSlot]; 
+		} 
+		set 
+		{
+			inventoryBehavior.inventory[SelectedHotbarSlot] = value;
+		}
+	}
+
 	public Transform inventoryUI;
 	public Transform hotbarUI;
 
