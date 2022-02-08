@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemBehavior : Behavior 
 {
     public Item item;
+	public bool collectable = true;
     protected MeshFilter meshFilter;
 	protected MeshCollider meshCollider;
 
@@ -16,6 +17,7 @@ public class ItemBehavior : Behavior
 	protected virtual void Start()
 	{
 		SetMeshFilterToItemMesh();
+		SetInteractable();
 	}
 
 	protected override void GetComponents()
@@ -29,5 +31,15 @@ public class ItemBehavior : Behavior
 	{
 		meshFilter.mesh = item.mesh;
 		meshCollider.sharedMesh = item.mesh;
+	}
+
+	protected void SetInteractable()
+	{
+		if (!collectable)
+		{
+			gameObject.layer = LayerMask.NameToLayer("Default");
+			Destroy(gameObject.GetComponent<Rigidbody>());
+			Destroy(meshCollider);
+		}
 	}
 }
