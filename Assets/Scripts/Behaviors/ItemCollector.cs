@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(InteractableBehavior))]
 [RequireComponent(typeof(InputBehavior))]
+[RequireComponent(typeof(InventoryBehavior))]
 public class ItemCollector : Behavior
 {
 	public LayerMask itemMask;
@@ -21,7 +22,11 @@ public class ItemCollector : Behavior
 		RaycastHit raycastHit = interactableBehavior.Raycast(itemMask);
 		if (raycastHit.collider != null)
 		{
-			inventoryBehavior.inventory.AddItem(raycastHit.transform.gameObject.GetComponent<ItemBehavior>().item);
+			ItemBehavior itemBehavior = raycastHit.transform.gameObject.GetComponent<ItemBehavior>();
+
+			if (!itemBehavior.collectable) return;
+
+			inventoryBehavior.inventory.AddItem(itemBehavior.item);
 			Destroy(raycastHit.transform.gameObject);
 		}
 	}
