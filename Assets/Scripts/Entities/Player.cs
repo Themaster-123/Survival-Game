@@ -7,6 +7,8 @@ using UnityEngine;
 [RequireComponent(typeof(CasterModifierBehavior))]
 [RequireComponent(typeof(InventoryGuiBehavior))]
 [RequireComponent(typeof(ItemCollector))]
+[RequireComponent(typeof(HotbarHoldingBehavior))]
+[RequireComponent(typeof(RotatorBehavior))]
 [AddComponentMenu("Survival Game/Entities/Player")]
 public class Player : Entity
 {

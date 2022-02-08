@@ -19,31 +19,37 @@ public class GameUtils : MonoBehaviour
     }
 
     public static void ShowCursor(bool show)
-	{
+    {
         Cursor.visible = show;
+    }
+
+    public static ItemBehavior CreateWorldItem(Item item, bool collectable)
+	{
+        return instance.InstanceCreateWorldItem(item, collectable);
 	}
 
     public static ItemBehavior CreateWorldItem(Item item)
-	{
-        return instance.InstanceCreateWorldItem(item);
-	}
+    {
+        return CreateWorldItem(item, true);
+    }
 
-	protected void Awake()
-	{
-		if (instance == null)
-		{
+    protected void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
-		}
-	}
+        }
+    }
 
-	protected ItemBehavior InstanceCreateWorldItem(Item item)
-	{
+    protected ItemBehavior InstanceCreateWorldItem(Item item, bool collectable)
+    {
         item = (Item)item.Clone();
         item.StackSize = 1;
 
         GameObject gameObject = Instantiate(itemBehaviorPrefab, Vector3.zero, Quaternion.identity);
         ItemBehavior itemBehavior = gameObject.GetComponent<ItemBehavior>();
+        itemBehavior.collectable = collectable;
         itemBehavior.item = item;
         return itemBehavior;
-	}
+    }
 }
