@@ -51,7 +51,7 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 
 	public bool EqualsIgnoreStackSize(Item other)
 	{
-		return Type == other.Type && name == other.name && description == other.description;
+		return !(other is null) && Type == other.Type && name == other.name && description == other.description;
 	}
 
 	public bool Equals(ItemType other)
