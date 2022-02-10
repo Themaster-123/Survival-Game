@@ -24,6 +24,11 @@ public class ItemDatabase : MonoBehaviour
 		return item;
 	}
 
+	public static ItemSettings GetItemSettings(ItemType itemType)
+	{
+		return instance.itemsSettings[itemType];
+	}
+
 	protected void Awake()
 	{
 		CreateItemSettingsDictionary();
@@ -45,7 +50,7 @@ public class ItemDatabase : MonoBehaviour
 	{
 		items = new Dictionary<ItemType, Item>
 		{
-			{ItemType.Sword, new Item(itemsSettings[ItemType.Sword])},
+			{ItemType.Sword, new Weapon(itemsSettings[ItemType.Sword], 10)},
 			{ItemType.Axe, new Item(itemsSettings[ItemType.Axe])},
 			{ItemType.Shovel, new Item(itemsSettings[ItemType.Shovel])},
 			{ItemType.Air, new Item(itemsSettings[ItemType.Air])},
@@ -67,7 +72,8 @@ public struct ItemSettings
 	public ItemType itemType;
 	public string name;
 	public string description;
+	public int maxStackSize;
 	public Sprite sprite;
 	public Mesh mesh;
-	public int maxStackSize;
+	public Vector3 rotation;
 }

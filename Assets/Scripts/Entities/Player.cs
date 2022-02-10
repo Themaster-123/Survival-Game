@@ -24,6 +24,7 @@ public class Player : Entity
     protected CasterModifierBehavior casterModifierBehavior;
     protected InventoryBehavior inventoryBehavior;
     protected InventoryGuiBehavior inventoryGuiBehavior;
+    protected ItemHoldingBehavior itemHoldingBehavior;
     protected InputBehavior inputBehavior;
 
     public virtual Vector2 GetPlayerMovement()
@@ -101,6 +102,7 @@ public class Player : Entity
     protected virtual void RegisterInteractInput()
 	{
         inputBehavior.inputMaster.Player.Interact.performed += context => OnInteract();
+        inputBehavior.inputMaster.Player.Interact.performed += context => itemHoldingBehavior.UseItem();
         inputBehavior.inputMaster.Player.StopInteract.performed += context => OnStopInteract();
         inputBehavior.inputMaster.Player.ToggleInventory.performed += context => ToggleInventory();
     }
@@ -138,6 +140,7 @@ public class Player : Entity
         inventoryBehavior = GetComponent<InventoryBehavior>();
         inventoryGuiBehavior = GetComponent<InventoryGuiBehavior>();
         inputBehavior = GetComponent<InputBehavior>();
+        itemHoldingBehavior = GetComponent<ItemHoldingBehavior>();
     }
 
     protected virtual void ToggleInventory()

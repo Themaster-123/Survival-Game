@@ -25,7 +25,7 @@ public class ItemHoldingBehavior : Behavior
 		currentHeldItemObject = GameUtils.CreateWorldItem(item, false);
 		currentHeldItemObject.transform.parent = itemHoldingTransform;
 		currentHeldItemObject.transform.localPosition = Vector3.zero;
-		currentHeldItemObject.transform.localRotation = Quaternion.identity;
+		currentHeldItemObject.transform.localRotation = Quaternion.Euler(ItemDatabase.GetItemSettings(item.Type).rotation);
 	}
 
 	public void UseItem()
