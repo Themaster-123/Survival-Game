@@ -39,6 +39,11 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 		StackSize = 1;
 	}
 
+	public virtual void Use(ItemBehavior itemBehavior, GameObject caller)
+	{
+		MonoBehaviour.print(itemBehavior.transform.position);
+	}
+
 	public object Clone()
 	{
 		return MemberwiseClone();

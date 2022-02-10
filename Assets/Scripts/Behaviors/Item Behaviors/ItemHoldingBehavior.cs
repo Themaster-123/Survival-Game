@@ -27,4 +27,9 @@ public class ItemHoldingBehavior : Behavior
 		currentHeldItemObject.transform.localPosition = Vector3.zero;
 		currentHeldItemObject.transform.localRotation = Quaternion.identity;
 	}
+
+	public void UseItem()
+	{
+		CurrentHeldItem.Use(currentHeldItemObject, gameObject);
+	}
 }
