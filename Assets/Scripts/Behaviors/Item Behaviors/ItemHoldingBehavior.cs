@@ -32,4 +32,15 @@ public class ItemHoldingBehavior : Behavior
 	{
 		CurrentHeldItem.Use(currentHeldItemObject, gameObject);
 	}
+
+	protected virtual void Start()
+	{
+		SetDefaultItem();
+	}
+
+	protected virtual void SetDefaultItem()
+	{
+		HoldItem(ItemDatabase.GetItem(ItemType.Air));
+
+	}
 }
