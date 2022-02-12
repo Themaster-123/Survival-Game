@@ -27,6 +27,7 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 	public Mesh mesh;
 
 	protected int stackSize;
+	protected ItemSettings itemSettings;
 
 	public Item(ItemSettings itemSettings)
 	{
@@ -37,6 +38,7 @@ public class Item : ICloneable, IEquatable<Item>, IEquatable<ItemType>
 		MaxStackSize = itemSettings.maxStackSize;
 		mesh = itemSettings.mesh;
 		StackSize = 1;
+		this.itemSettings = itemSettings;
 	}
 
 	public virtual void Use(ItemBehavior itemBehavior, GameObject caller)
