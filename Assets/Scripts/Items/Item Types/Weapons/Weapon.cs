@@ -15,8 +15,10 @@ public class Weapon : Item
 		InteractableBehavior interactableBehavior = caller.GetComponent<InteractableBehavior>();
 		if (interactableBehavior != null)
 		{
+			AnimationUtils.StopAnimation(itemBehavior.transform);
+			AnimationUtils.PingPongRotate(itemBehavior.transform, Vector3.right, 4f, 45);
+			AnimationUtils.PingPongMove(itemBehavior.transform, Vector3.forward, .5f, 4f);
 			RaycastHit hit = interactableBehavior.Raycast(~0);
-			MonoBehaviour.print(hit.collider);
 			if (hit.collider == null) return;
 			HealthBehavior entityHealthBehavior = hit.transform.gameObject.GetComponent<HealthBehavior>();
 			if (entityHealthBehavior != null)
