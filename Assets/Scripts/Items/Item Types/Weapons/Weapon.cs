@@ -16,7 +16,7 @@ public class Weapon : Item
 		if (interactableBehavior != null)
 		{
 			AnimationUtils.StopAnimation(itemBehavior.transform);
-			AnimationUtils.PingPongRotate(itemBehavior.transform, Vector3.right, 4f, 45);
+			AnimationUtils.PingPongRotate(itemBehavior.transform, Vector3.right, 45, 4f);
 			AnimationUtils.PingPongMove(itemBehavior.transform, Vector3.forward, .5f, 4f);
 			RaycastHit hit = interactableBehavior.Raycast(~0);
 			if (hit.collider == null) return;
