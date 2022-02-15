@@ -30,7 +30,6 @@ public class Chunk : MonoBehaviour
 	{
        // print(position);
         int index = GetVoxelIndex(position);
-        voxel.position = voxels[index].position;
         voxel.value = VoxelUtils.ClampVoxelValue(voxel.value);
         voxels[index] = voxel;
         voxelsChanged = true;
@@ -112,7 +111,6 @@ public class Chunk : MonoBehaviour
                 for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
                 {
                     int index = (z * world.worldSettings.ChunkResolution * world.worldSettings.ChunkResolution) + (y * world.worldSettings.ChunkResolution) + x;
-                    voxels[index].position = new Vector3(x, y, z) * world.worldSettings.InverseChunkResolution * world.worldSettings.ChunkSize;
                 }
             }
         }
@@ -296,7 +294,6 @@ public class Chunk : MonoBehaviour
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
                     Voxel voxel;
                     voxel.value = VoxelUtils.ClampVoxelValue(-voxelData[index]);
-                    voxel.position = new Vector3(x, y, z) / worldSettings.ChunkResolution * worldSettings.ChunkSize;
                     voxels[index] = voxel;
                 }
             }

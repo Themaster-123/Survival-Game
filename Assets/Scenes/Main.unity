@@ -514,8 +514,7 @@ MonoBehaviour:
   mouseSensitivity: 0.1
   playerCamera: {fileID: 963194227}
   modifyVoxel:
-    position: {x: 0, y: 0, z: 0}
-    value: -1
+    value: 1
   stopInput: 0
 --- !u!114 &461834959
 MonoBehaviour:
@@ -566,7 +565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stencil: {fileID: 461834963}
-  maxInteractionDistance: 5
+  maxInteractionDistance: Infinity
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
