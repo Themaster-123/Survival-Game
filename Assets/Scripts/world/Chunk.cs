@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 [AddComponentMenu("Survival Game/World/Chunk")]
 public class Chunk : MonoBehaviour
@@ -127,6 +128,7 @@ public class Chunk : MonoBehaviour
 
     protected void OnDrawGizmosSelected()
     {
+        if (!Selection.Contains(gameObject) || Selection.objects.Length > 1) return;
         DrawVoxels();
         DrawNormals();
     }
@@ -292,8 +294,7 @@ public class Chunk : MonoBehaviour
                 for (int z = 0; z < resolution.z; z++)
                 {
                     int index = (z * resolution.x * resolution.y) + (y * resolution.x) + x;
-                    Voxel voxel;
-                    voxel.value = VoxelUtils.ClampVoxelValue(-voxelData[index]);
+                    Voxel voxel = new Voxel(VoxelUtils.ClampVoxelValue(-voxelData[index]));
                     voxels[index] = voxel;
                 }
             }

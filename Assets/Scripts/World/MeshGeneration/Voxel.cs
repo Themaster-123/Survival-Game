@@ -8,9 +8,14 @@ using System;
 public struct Voxel
 {
 	public float value;
+	public bool isBuilding;
 
-	public Voxel(float value)
+	public Voxel(float value, bool isBuilding)
 	{
 		this.value = value;
+		this.isBuilding = isBuilding;
+	}
+
+	public Voxel(float value) : this(value, false) { 
 	}
 }
