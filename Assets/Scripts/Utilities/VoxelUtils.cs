@@ -14,10 +14,16 @@ public static class VoxelUtils
 		return Mathf.Clamp(value, -1, 1);
 	}
 
-	public static Vector3 ToWorldPosition(Vector3Int pos, World world)
+	public static Vector3 ToWorldPosition(Vector3 pos, World world)
 	{
 		return (pos + new Vector3(.5f, .5f, .5f)) * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution;
 	}
+
+	public static Vector3 ToWorldPosition(Vector3Int pos, World world)
+	{
+		return ToWorldPosition((Vector3)pos, world);
+	}
+
 	public static Vector3 ToWorldPosition(int x, int y, int z, World world)
 	{
 		return ToWorldPosition(new Vector3Int(x, y, z), world);
