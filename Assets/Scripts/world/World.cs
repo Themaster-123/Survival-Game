@@ -22,6 +22,7 @@ public class World : MonoBehaviour
 	protected Dictionary<Vector3Int, ChunkData> chunkDataList;
 	protected Vector3Int[] playerChunkPositions;
 	protected FastNoise noise;
+	protected Dictionary<Building, Vector3Int[]> buildings = new Dictionary<Building, Vector3Int[]>();
 
 	public List<Player> Players { get; protected set; }
 	public List<Entity> Entities { get; protected set; }
@@ -140,10 +141,33 @@ public class World : MonoBehaviour
 					}
 				}
 			}
-			
 
+			Voxel chunkVoxel = chunks[chunkPos].GetVoxel(localPos);
+
+			if (chunkVoxel.isBuilding) return;
+
+			Voxel newVoxel = voxel;
+			newVoxel.isBuilding = chunkVoxel.isBuilding;
 
 			chunks[chunkPos].SetVoxel(localPos, voxel);
+		}
+	}
+
+	public virtual void SetVoxelBuilding(Vector3Int pos, bool isBuilding)
+	{
+		Vector3Int chunkPos = ChunkPositionUtils.VoxelToChunkPosition(pos, this);
+		if (IsChunkLoaded(chunkPos))
+		{
+			Vector3Int localPos = GetLocalVoxelPos(pos);
+
+			Chunk chunk = chunks[chunkPos];
+
+			Voxel voxel = chunk.GetVoxel(localPos);
+
+			voxel.isBuilding = isBuilding;
+
+			chunk.SetVoxel(localPos, voxel);
+
 		}
 	}
 
@@ -235,6 +259,64 @@ public class World : MonoBehaviour
 	public virtual FastNoise.OutputMinMax GenerateNoise(in float[] voxelData, Vector3Int offset, Vector3Int resolution)
 	{
 		return noise.GenUniformGrid3D(voxelData, offset.x, offset.y, offset.z, resolution.x, resolution.y, resolution.z, noiseSettings.size.x, (int)noiseSettings.seed);
+	}
+
+	public virtual Building PlaceBuilding(Vector3 position, Quaternion rotation, Building building)
+	{
+		Quaternion snappedRotation = MathUtils.SnapToNearestBasisAxis(rotation);
+		Vector3Int voxelPos = VoxelUtils.ToVoxelPosition(position, this);
+
+
+		Vector3Int[] voxels = new Vector3Int[building.size.x * building.size.y * building.size.z];
+
+		for (int x = 0; x < building.size.x; x++)
+		{
+			for (int y = 0; y < building.size.y; y++)
+			{
+				for (int z = 0; z < building.size.z; z++)
+				{
+					Vector3Int newPos = voxelPos + Vector3Int.RoundToInt(snappedRotation * (new Vector3(x, y, z) - building.center / 2));
+					Voxel voxel = GetVoxel(newPos);
+
+					if (voxel.isBuilding == true)
+					{
+						return null;
+					}
+
+					voxels[z * building.size.x * building.size.y + y * building.size.x + x] = newPos;
+				}
+			}
+		}
+
+		for (int i = 0; i < voxels.Length; i++)
+		{
+			Voxel voxel = GetVoxel(voxels[i]);
+
+			voxel.value = -1;
+
+			SetVoxel(voxel, voxels[i]);
+			SetVoxelBuilding(voxels[i], true);
+		}
+
+		building = Instantiate(building.gameObject, VoxelUtils.ToWorldPosition(voxelPos, this), snappedRotation).GetComponent<Building>();
+
+
+		buildings.Add(building, voxels);
+
+		return building;
+	}
+
+	public virtual void RemoveBuilding(Building building)
+	{
+		if (buildings.TryGetValue(building, out Vector3Int[] voxels)) {
+			for (int i = 0; i < voxels.Length; i++)
+			{
+				Voxel voxel = GetVoxel(voxels[i]);
+				SetVoxelBuilding(voxels[i], false);
+			}
+			buildings.Remove(building);
+			building.Destroy();
+		}
 	}
 
 	protected virtual void Awake()

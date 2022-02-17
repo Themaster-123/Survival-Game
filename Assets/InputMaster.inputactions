@@ -92,6 +92,14 @@
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RemoveBuilding",
+                    "type": "PassThrough",
+                    "id": "89203782-9ab0-40cc-802a-92309f7c5853",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -347,6 +355,17 @@
                     "action": "InstantSlotChange",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b5225a59-514e-4204-837f-ef9944b660d3",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RemoveBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -374,6 +393,14 @@
                     "name": "Right Click",
                     "type": "PassThrough",
                     "id": "525fb795-7eba-4007-a3d8-f9e5db36aa39",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "G",
+                    "type": "Button",
+                    "id": "b042ec12-994c-4e66-991a-39fe7aaca04e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -410,6 +437,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Right Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51698996-b8e2-486f-aa30-580954e37031",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "G",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -105,6 +105,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RemoveBuilding"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""89203782-9ab0-40cc-802a-92309f7c5853"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -360,6 +368,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""InstantSlotChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5225a59-514e-4204-837f-ef9944b660d3"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RemoveBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -387,6 +406,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""name"": ""Right Click"",
                     ""type"": ""PassThrough"",
                     ""id"": ""525fb795-7eba-4007-a3d8-f9e5db36aa39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""G"",
+                    ""type"": ""Button"",
+                    ""id"": ""b042ec12-994c-4e66-991a-39fe7aaca04e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
@@ -425,6 +452,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Right Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51698996-b8e2-486f-aa30-580954e37031"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""G"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -444,11 +482,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_SlotChange = m_Player.FindAction("SlotChange", throwIfNotFound: true);
         m_Player_InstantSlotChange = m_Player.FindAction("InstantSlotChange", throwIfNotFound: true);
+        m_Player_RemoveBuilding = m_Player.FindAction("RemoveBuilding", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_MousePosition = m_Testing.FindAction("MousePosition", throwIfNotFound: true);
         m_Testing_LeftClick = m_Testing.FindAction("Left Click", throwIfNotFound: true);
         m_Testing_RightClick = m_Testing.FindAction("Right Click", throwIfNotFound: true);
+        m_Testing_G = m_Testing.FindAction("G", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -509,6 +549,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_SlotChange;
     private readonly InputAction m_Player_InstantSlotChange;
+    private readonly InputAction m_Player_RemoveBuilding;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -524,6 +565,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @SlotChange => m_Wrapper.m_Player_SlotChange;
         public InputAction @InstantSlotChange => m_Wrapper.m_Player_InstantSlotChange;
+        public InputAction @RemoveBuilding => m_Wrapper.m_Player_RemoveBuilding;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -566,6 +608,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @InstantSlotChange.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
                 @InstantSlotChange.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
                 @InstantSlotChange.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInstantSlotChange;
+                @RemoveBuilding.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRemoveBuilding;
+                @RemoveBuilding.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRemoveBuilding;
+                @RemoveBuilding.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRemoveBuilding;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -603,6 +648,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @InstantSlotChange.started += instance.OnInstantSlotChange;
                 @InstantSlotChange.performed += instance.OnInstantSlotChange;
                 @InstantSlotChange.canceled += instance.OnInstantSlotChange;
+                @RemoveBuilding.started += instance.OnRemoveBuilding;
+                @RemoveBuilding.performed += instance.OnRemoveBuilding;
+                @RemoveBuilding.canceled += instance.OnRemoveBuilding;
             }
         }
     }
@@ -614,6 +662,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Testing_MousePosition;
     private readonly InputAction m_Testing_LeftClick;
     private readonly InputAction m_Testing_RightClick;
+    private readonly InputAction m_Testing_G;
     public struct TestingActions
     {
         private @InputMaster m_Wrapper;
@@ -621,6 +670,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Testing_MousePosition;
         public InputAction @LeftClick => m_Wrapper.m_Testing_LeftClick;
         public InputAction @RightClick => m_Wrapper.m_Testing_RightClick;
+        public InputAction @G => m_Wrapper.m_Testing_G;
         public InputActionMap Get() { return m_Wrapper.m_Testing; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -639,6 +689,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @RightClick.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
                 @RightClick.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
                 @RightClick.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnRightClick;
+                @G.started -= m_Wrapper.m_TestingActionsCallbackInterface.OnG;
+                @G.performed -= m_Wrapper.m_TestingActionsCallbackInterface.OnG;
+                @G.canceled -= m_Wrapper.m_TestingActionsCallbackInterface.OnG;
             }
             m_Wrapper.m_TestingActionsCallbackInterface = instance;
             if (instance != null)
@@ -652,6 +705,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
+                @G.started += instance.OnG;
+                @G.performed += instance.OnG;
+                @G.canceled += instance.OnG;
             }
         }
     }
@@ -669,11 +725,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnSlotChange(InputAction.CallbackContext context);
         void OnInstantSlotChange(InputAction.CallbackContext context);
+        void OnRemoveBuilding(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {
         void OnMousePosition(InputAction.CallbackContext context);
         void OnLeftClick(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnG(InputAction.CallbackContext context);
     }
 }

@@ -96,6 +96,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DiffusePower: 1
     - _DstBlend: 0
+    - _FadeThreshold: 1.68
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
