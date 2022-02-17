@@ -198,8 +198,13 @@ public class Chunk : MonoBehaviour
                 for (int z = 0; z < world.worldSettings.ChunkResolution; z++)
                 {
                     Voxel voxel = GetVoxel(new Vector3Int(x, y, z));
-                    if (OnlyShowGroundVoxels && voxel.value <= 0) continue;
-                    Gizmos.color = voxel.value <= 0 ? Color.white : Color.gray;
+                    if (OnlyShowGroundVoxels && voxel.value <= 0 && !voxel.isBuilding) continue;
+
+                    if (!voxel.isBuilding)
+                        Gizmos.color = voxel.value <= 0 ? Color.white : Color.gray;
+                    else
+                        Gizmos.color = Color.red;
+
                     Gizmos.DrawWireCube(VoxelUtils.ToWorldPosition(GetWorldVoxelPosition(x, y, z), world), Vector3.one * world.worldSettings.ChunkSize * world.worldSettings.InverseChunkResolution);
                 }
             }
