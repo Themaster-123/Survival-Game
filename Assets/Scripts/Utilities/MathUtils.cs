@@ -91,4 +91,34 @@ public static class MathUtils
 		a = number / 2;
 		b = number - a;
 	}
+
+	public static Vector3 GetNearestBasisAxis(Vector3 axis)
+	{
+		Vector3[] checkAxes = { Vector3.forward, Vector3.back, Vector3.up, Vector3.down, Vector3.right, Vector3.left };
+		Vector3 closestAxis = Vector3.forward;
+		float highestDot = -1;
+		foreach (Vector3 checkAxis in checkAxes)
+		{
+			float dot = Vector3.Dot(checkAxis, axis);
+			if (dot > highestDot)
+			{
+				closestAxis = checkAxis;
+				highestDot = dot;
+			}
+		}
+		return closestAxis;
+	}
+
+	public static Quaternion SnapToNearestBasisAxis(Quaternion rotation, Vector3 forward, Vector3 up)
+	{
+		//return Quaternion.LookRotation(GetNearestBasisAxis(rotation * axis), up);
+		Vector3 closestForward = GetNearestBasisAxis(rotation * forward);
+		Vector3 closestUp = GetNearestBasisAxis(rotation * up);
+		return Quaternion.LookRotation(closestForward, closestUp);
+	}
+
+	public static Quaternion SnapToNearestBasisAxis(Quaternion rotation)
+	{
+		return SnapToNearestBasisAxis(rotation, Vector3.forward, Vector3.up);
+	}
 }
