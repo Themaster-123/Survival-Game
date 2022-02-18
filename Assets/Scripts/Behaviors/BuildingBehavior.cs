@@ -11,7 +11,7 @@ public class BuildingBehavior : Behavior
 	protected InteractableBehavior interactableBehavior;
 	protected DirectionBehavior directionBehavior;
 
-	public void Place(Building building)
+	public void Place(BuildingType building)
 	{
 		RaycastHit hit = interactableBehavior.Raycast(~0);
 		entity.world.PlaceBuilding(hit.point + hit.normal * .1f, directionBehavior.GetHorizontalEntityRotation(), building);

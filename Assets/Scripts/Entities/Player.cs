@@ -19,7 +19,6 @@ public class Player : Entity
     public Voxel modifyVoxel;
     [HideInInspector]
     public bool stopInput = false;
-    public Building building;
 
     protected MovementBehavior movementBehavior;
     protected DirectionBehavior directionBehavior;
@@ -108,7 +107,7 @@ public class Player : Entity
         inputBehavior.inputMaster.Player.Interact.performed += context => itemHoldingBehavior.UseItem();
         inputBehavior.inputMaster.Player.StopInteract.performed += context => OnStopInteract();
         inputBehavior.inputMaster.Player.ToggleInventory.performed += context => ToggleInventory();
-        inputBehavior.inputMaster.Player.SecondaryInteract.performed += context => buildingBehavior.Place(building);
+        inputBehavior.inputMaster.Player.SecondaryInteract.performed += context => buildingBehavior.Place(BuildingType.Test);
         inputBehavior.inputMaster.Player.RemoveBuilding.performed += context => buildingBehavior.RemoveBuilding();
     }
 

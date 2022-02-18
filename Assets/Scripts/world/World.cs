@@ -261,11 +261,12 @@ public class World : MonoBehaviour
 		return noise.GenUniformGrid3D(voxelData, offset.x, offset.y, offset.z, resolution.x, resolution.y, resolution.z, noiseSettings.size.x, (int)noiseSettings.seed);
 	}
 
-	public virtual Building PlaceBuilding(Vector3 position, Quaternion rotation, Building building)
+	public virtual Building PlaceBuilding(Vector3 position, Quaternion rotation, BuildingType buildingType)
 	{
 		Quaternion snappedRotation = MathUtils.SnapToNearestBasisAxis(rotation);
 		Vector3Int voxelPos = VoxelUtils.ToVoxelPosition(position, this);
 
+		Building building = BuildingDatabase.GetBuilding(buildingType);
 
 		Vector3Int[] voxels = new Vector3Int[building.size.x * building.size.y * building.size.z];
 
