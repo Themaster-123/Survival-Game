@@ -50,10 +50,11 @@ public class ItemDatabase : MonoBehaviour
 	{
 		items = new Dictionary<ItemType, Item>
 		{
-			{ItemType.Sword, new Weapon(itemsSettings[ItemType.Sword], 10)},
-			{ItemType.Axe, new Item(itemsSettings[ItemType.Axe])},
-			{ItemType.Shovel, new Item(itemsSettings[ItemType.Shovel])},
-			{ItemType.Air, new Item(itemsSettings[ItemType.Air])},
+			{ ItemType.Sword, new Weapon(itemsSettings[ItemType.Sword], 10) },
+			{ ItemType.Axe, new Item(itemsSettings[ItemType.Axe]) },
+			{ ItemType.Shovel, new Item(itemsSettings[ItemType.Shovel]) },
+			{ ItemType.Air, new Item(itemsSettings[ItemType.Air]) },
+			{ ItemType.Wall, new BuildingItem(itemsSettings[ItemType.Wall], BuildingType.Test) }
 		};
 	}
 

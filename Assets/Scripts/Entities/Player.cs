@@ -62,7 +62,7 @@ public class Player : Entity
         RegisterInteractInput();
         inventoryBehavior.inventory[0, 0] = ItemDatabase.GetItem(ItemType.Axe, 1);
         inventoryBehavior.inventory[1, 0] = ItemDatabase.GetItem(ItemType.Axe, 1);
-        inventoryBehavior.inventory[2, 0] = ItemDatabase.GetItem(ItemType.Axe, 1);
+        inventoryBehavior.inventory[2, 0] = ItemDatabase.GetItem(ItemType.Wall, 3);
         inventoryBehavior.inventory[0, 1] = ItemDatabase.GetItem(ItemType.Sword);
         inventoryBehavior.inventory[0, 2] = ItemDatabase.GetItem(ItemType.Shovel, 64);
     }
@@ -107,7 +107,6 @@ public class Player : Entity
         inputBehavior.inputMaster.Player.Interact.performed += context => itemHoldingBehavior.UseItem();
         inputBehavior.inputMaster.Player.StopInteract.performed += context => OnStopInteract();
         inputBehavior.inputMaster.Player.ToggleInventory.performed += context => ToggleInventory();
-        inputBehavior.inputMaster.Player.SecondaryInteract.performed += context => buildingBehavior.Place(BuildingType.Test);
         inputBehavior.inputMaster.Player.RemoveBuilding.performed += context => buildingBehavior.RemoveBuilding();
     }
 

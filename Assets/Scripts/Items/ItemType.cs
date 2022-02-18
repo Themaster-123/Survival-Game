@@ -6,5 +6,6 @@ public enum ItemType
 	Air,
 	Sword,
 	Axe,
-	Shovel
+	Shovel,
+	Wall
 }
